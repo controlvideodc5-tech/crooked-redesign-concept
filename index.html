@@ -1058,7 +1058,7 @@ function tickClock(){
 tickClock(); setInterval(tickClock,1000);
 function sizeRoll(){ const r=document.getElementById("swRoll"); if(!r||!r.offsetHeight) return;
   r.style.setProperty("--roll-end", -(r.offsetHeight+40)+"px");
-  r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+r.parentNode.offsetHeight)/36)+"s"); }
+  r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+r.parentNode.offsetHeight)/22)+"s"); }
 sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && document.fonts.ready.then(sizeRoll);
 function setTakeover(open){
   con.dataset.state = open ? "open" : "closed";
