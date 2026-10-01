@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crooked Homepage Concept</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="An unofficial homepage redesign concept for Crooked Media. Not affiliated with Crooked Media.">
+<meta property="og:title" content="Crooked Homepage Concept (unofficial)">
+<meta property="og:description" content="An unofficial homepage redesign concept. Not affiliated with Crooked Media.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a "run of show" homepage. Today's lineup leads, a persistent player docks below, and the ways to act (join, attend, organize) form one clear band. */
+:root{
+  --ink:#0A1A44;        /* Crooked navy */
+  --ink-2:#1C2F66;
+  --signal:#FFD43B;     /* Crooked yellow */
+  --paper:#F2F4F9;      /* blue-biased off-white */
+  --card:#FFFFFF;
+  --line:#D5DBEA;
+  --muted:#56618A;
+  --fg:#0A1A44;
+  --live:#E5383B;
+  --on-ink:#F2F4F9;
+  --f-display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --f-body:"Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --gutter:clamp(16px,4vw,48px);
+  --max:1240px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#070F2A;--card:#0F1C45;--line:#24356E;--muted:#98A3C8;--fg:#EEF1F9;--ink:#0A1A44;--ink-2:#14255A;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#070F2A;--card:#0F1C45;--line:#24356E;--muted:#98A3C8;--fg:#EEF1F9;--ink:#0A1A44;--ink-2:#14255A;color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--fg);font:400 16px/1.55 var(--f-body);padding-bottom:128px}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.92;margin:0;text-wrap:balance;letter-spacing:.005em}
+
+
+/* header */
+header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.nav{display:flex;align-items:center;gap:24px;height:64px}
+.logo{font:900 30px/1 var(--f-display);letter-spacing:.02em;text-decoration:none;color:var(--signal)}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:600;font-size:15px}
+.nav ul a{text-decoration:none;opacity:.88}
+.nav ul a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.nav .spacer{flex:1}
+.search-btn{background:none;border:0;color:var(--on-ink);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;flex:none}
+.search-btn:hover,.search-btn[aria-expanded="true"]{background:var(--ink-2);color:var(--signal)}
+.search-btn .i-close,.search-btn[aria-expanded="true"] .i-search{display:none}
+.search-btn[aria-expanded="true"] .i-close{display:block}
+.search-panel{background:var(--ink-2);border-top:1px solid #2C4180;box-shadow:0 18px 40px rgba(5,10,30,.35)}
+.search-panel .wrap{padding-block:22px 26px;display:grid;gap:12px}
+.search-panel .eyebrow{color:#AEB8DC}
+.search-panel input{width:100%;background:transparent;border:0;border-bottom:2px solid var(--signal);color:#fff;font:900 clamp(30px,5vw,52px)/1.1 var(--f-display);text-transform:uppercase;padding:4px 0 8px}
+.search-panel input::placeholder{color:#5D6DA3}
+.search-panel input:focus{outline:none}
+.suggest{display:flex;gap:8px;flex-wrap:wrap}
+.suggest button{background:transparent;border:1px solid #3A4F8F;color:#D4DAF0;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
+.suggest button:hover{border-color:var(--signal);color:var(--signal)}
+.results{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.results li a{display:flex;gap:12px;align-items:baseline;padding:9px 0;text-decoration:none;color:#fff;border-bottom:1px solid #2C4180}
+.results li a:hover span:last-child{color:var(--signal)}
+.results .k{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;flex:none;width:9em}
+.results .none{color:#AEB8DC;padding:8px 0}
+.nav .join .long{display:inline}
+@media (max-width:520px){.nav .join .long{display:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:10px 18px;font-weight:700;font-size:15px;text-decoration:none;white-space:nowrap}
+.btn-signal{background:var(--signal);color:#0A1A44}
+.btn-signal:hover{background:#FFE278}
+.btn-ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.icon-btn{background:none;border:0;color:inherit;padding:6px;border-radius:8px;display:none}
+@media (max-width:960px){.nav ul{display:none}.icon-btn{display:inline-flex}}
+.nav{gap:20px}
+.nav ul{gap:clamp(14px,1.8vw,26px)}
+
+/* countdown strip */
+.strip{background:var(--ink-2);color:var(--on-ink)}
+.strip .wrap{display:flex;gap:28px;align-items:center;overflow-x:auto;padding-block:10px;font-size:14px;scrollbar-width:none}
+.strip b{font:900 22px/1 var(--f-display);color:var(--signal);margin-right:6px;font-variant-numeric:tabular-nums}
+.strip span{white-space:nowrap}
+.strip a{color:var(--signal);font-weight:600}
+.strip-con{background:none;border:0;color:inherit;font-size:14px;display:flex;align-items:center;white-space:nowrap;padding:0}
+.strip-con .pill{margin-left:10px;font:500 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--signal);color:var(--signal);border-radius:999px;padding:4px 8px}
+.strip-con:hover .pill{background:var(--signal);color:#0A1A44}
+.strip-con[aria-expanded="true"] .pill{display:none}
+
+/* Crooked Con takeover: yellow field, giant navy clock */
+.takeover{background:var(--signal);color:#0A1A44;position:relative;overflow:hidden;border-bottom:4px solid #0A1A44}
+.takeover::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(10,26,68,.06) 0 14px,transparent 14px 28px);pointer-events:none}
+.takeover .wrap{position:relative;padding-block:22px 0;display:grid;gap:18px}
+.takeover .eyebrow{color:#0A1A44}
+.to-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.to-close{display:inline-flex;align-items:center;gap:6px;background:#0A1A44;color:var(--signal);border:0;border-radius:999px;padding:6px 12px;font:500 12px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.to-grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,56px);align-items:end}
+@media (max-width:960px){.to-grid{grid-template-columns:1fr}}
+.to-left h2{font-size:clamp(26px,3vw,36px);margin-bottom:8px}
+.clock{display:flex;align-items:flex-start;gap:clamp(4px,1vw,12px);font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums;max-width:100%}
+.clock div{display:flex;flex-direction:column;align-items:center;gap:6px}
+.clock span{font-size:clamp(56px,11vw,148px);line-height:.82;background:#0A1A44;color:var(--signal);padding:.1em .12em .06em;border-radius:10px;min-width:1.25em;text-align:center}
+.clock small{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.clock i{font-style:normal;font-size:clamp(40px,8vw,104px);line-height:.95}
+.to-right{display:grid;gap:14px;max-width:34em;min-width:0}
+.to-lede{margin:0;font-size:17px;font-weight:500}
+.to-alert{background:#0A1A44;color:#fff;padding:10px 14px;border-radius:8px;font-size:14px}
+.to-alert b{color:var(--signal)}
+.btn-ink{background:#0A1A44;color:var(--signal)}
+.btn-ink:hover{background:#1C2F66}
+.marquee-names{border-top:2px solid #0A1A44;padding-block:12px 14px;font:700 15px/1.5 var(--f-body);text-wrap:balance}
+.takeover.closing{animation:fold .35s ease forwards}
+@keyframes fold{to{opacity:0;transform:translateY(-12px)}}
+@keyframes tick{from{transform:translateY(-6px);opacity:.4}}
+.clock span.t{animation:tick .3s ease}
+
+/* hero */
+.hero{background:var(--ink);color:var(--on-ink);padding-block:48px 56px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -60% auto;width:620px;height:620px;border-radius:50%;
+  background:repeating-radial-gradient(circle, rgba(255,212,59,.10) 0 2px, transparent 2px 22px);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:start;position:relative;z-index:1}
+.hero .eyebrow{color:#AEB8DC}
+.hero h1{font-size:clamp(52px,8vw,112px);margin-block:14px 18px}
+.hero h1 em{font-style:normal;color:var(--signal)}
+.hero p.lede{font-size:19px;max-width:34em;color:#D4DAF0;margin:0 0 26px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+.lineup{background:var(--ink-2);border:1px solid #2C4180;border-radius:14px;padding:18px 18px 8px}
+.lineup-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.lineup-head h2{font-size:28px;color:var(--signal)}
+.ep{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid #2C4180}
+.ep:first-of-type{border-top:0}
+.play{width:44px;height:44px;border-radius:50%;border:0;background:var(--signal);color:#0A1A44;display:grid;place-items:center;flex:none}
+.play:hover{transform:scale(1.06)}
+.play svg{width:16px;height:16px}
+.ep .show{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC}
+.ep .title{font-weight:700;font-size:16px;line-height:1.3;margin-top:5px;color:#fff}
+.ep .len{font:500 12px/1 var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums}
+.ep.playing .title{color:var(--signal)}
+
+/* sections */
+section.block{padding-block:64px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(40px,5vw,64px)}
+.sec-head a{font-weight:700;text-underline-offset:4px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--signal)}
+
+.shows{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+@media (max-width:1000px){.shows{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.shows{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.show-card{text-decoration:none;display:flex;flex-direction:column;gap:10px}
+.art{aspect-ratio:1;max-width:100%;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .2s}
+.show-card:hover .art{transform:translateY(-4px)}
+.art .mark{font:900 clamp(30px,4vw,48px)/.88 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
+.art .tag{font:500 10px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.show-card h3{font:700 16px/1.3 var(--f-body);text-transform:none}
+.show-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+.show-card[hidden]{display:none}
+
+/* act band */
+.act{background:var(--card);border-block:1px solid var(--line)}
+.act-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px}
+@media (max-width:960px){.act-grid{grid-template-columns:1fr}}
+.panel{border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.panel h3{font-size:clamp(34px,3.6vw,46px)}
+.panel p{margin:0;max-width:36em}
+.panel .btn{align-self:flex-start;margin-top:auto}
+.p-fotp{background:var(--signal);color:#0A1A44}
+.p-fotp ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-weight:600}
+.p-fotp li::before{content:"✓ ";font-weight:700}
+.p-fotp .btn{background:#0A1A44;color:var(--signal)}
+.p-con{background:var(--ink);color:var(--on-ink)}
+.p-con .when{font:500 13px/1.4 var(--f-mono);color:var(--signal)}
+.p-vsa{background:var(--paper);border:1px solid var(--line)}
+.p-vsa .eyebrow{color:var(--live)}
+
+/* latest list */
+.latest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+@media (max-width:900px){.latest{grid-template-columns:1fr}}
+.latest article{border-top:3px solid var(--fg);padding-top:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.latest h3{font:700 20px/1.25 var(--f-body);text-transform:none}
+.latest p{margin:0;color:var(--muted);font-size:15px}
+.latest .row{display:flex;align-items:center;gap:12px;margin-top:4px}
+.mini-play{width:34px;height:34px;border-radius:50%;border:2px solid var(--fg);background:transparent;color:var(--fg);display:grid;place-items:center}
+.mini-play svg{width:12px;height:12px}
+
+/* newsletter + store */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.news{background:var(--ink);color:var(--on-ink);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:14px}
+.news h3{font-size:44px}
+.news form{display:flex;gap:8px;flex-wrap:wrap}
+.news input{flex:1;min-width:0;border:0;border-radius:999px;padding:12px 18px;font:inherit;background:#fff;color:#0A1A44}
+.news .ok{font:500 13px var(--f-mono);color:var(--signal);min-height:1em}
+.store{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:14px}
+.store h3{font-size:44px}
+.store p{margin:0;color:var(--muted)}
+
+footer{background:var(--ink);color:#AEB8DC;padding-block:40px;font-size:14px;margin-top:64px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .logo{font-size:40px}
+
+/* player */
+.player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--ink);color:var(--on-ink);border-top:2px solid var(--signal);padding-bottom:env(safe-area-inset-bottom,0px)}
+.player .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;height:76px}
+.player .meta{min-width:0}
+.player .meta .t{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .meta .s{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;margin-bottom:5px}
+.bar{height:4px;background:#2C4180;border-radius:2px;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--signal)}
+.player .time{font:500 12px var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums}
+.speed{background:none;border:1px solid #3A4F8F;color:#fff;border-radius:6px;padding:4px 8px;font:500 12px var(--f-mono)}
+
+/* chyron (sits at the top of the docked player) */
+.chyron{display:flex;align-items:stretch;height:38px;background:var(--signal);color:#0A1A44;overflow:hidden;border-bottom:2px solid #0A1A44}
+.chyron .bug{flex:none;display:flex;align-items:center;gap:8px;background:var(--live);color:#fff;padding:0 14px 0 var(--gutter);font:900 18px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%);padding-right:26px}
+.chyron .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.crawl{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.crawl-track{display:flex;width:max-content;animation:crawl 70s linear infinite}
+.chyron:hover .crawl-track,.chyron:focus-within .crawl-track,.chyron.paused .crawl-track{animation-play-state:paused}
+.crawl-track a.on span:last-child{text-decoration:underline;text-underline-offset:3px}
+.chyron .bug .state{font:500 10px/1 var(--f-mono);letter-spacing:.08em;opacity:0;transition:opacity .15s}
+.chyron.paused .bug .state,.chyron:hover .bug .state{opacity:.9}
+
+/* chyron hover preview */
+.cpv{position:fixed;z-index:40;width:min(340px,calc(100vw - 32px));background:var(--card);color:var(--fg);border:2px solid #0A1A44;border-radius:12px;box-shadow:0 18px 40px rgba(5,10,30,.35);overflow:hidden;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .15s,transform .15s}
+.cpv.show{opacity:1;transform:none;pointer-events:auto}
+.cpv::after{content:"";position:absolute;bottom:-9px;left:var(--arrow,40px);width:14px;height:14px;background:var(--card);border-right:2px solid #0A1A44;border-bottom:2px solid #0A1A44;transform:rotate(45deg)}
+.cpv-top{display:flex;gap:12px;padding:14px}
+.cpv-art{width:72px;height:72px;flex:none;border-radius:8px;display:flex;align-items:flex-end;padding:7px;font:900 15px/.9 var(--f-display);text-transform:uppercase}
+.cpv-body{min-width:0;display:grid;gap:5px;align-content:start}
+.cpv-k{font:500 10px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cpv-t{font-weight:700;line-height:1.3}
+.cpv-d{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.cpv-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--paper);border-top:1px solid var(--line)}
+.cpv-meta{font:500 11px var(--f-mono);color:var(--muted)}
+.cpv-go{padding:8px 14px;font-size:14px}
+.crawl-track a{display:flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;font-weight:600;font-size:15px;padding-right:28px}
+.crawl-track a:hover span:last-child{text-decoration:underline;text-underline-offset:3px}
+.crawl-track .k{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;background:#0A1A44;color:var(--signal);padding:4px 7px;border-radius:3px}
+.crawl-track a::after{content:"★";margin-left:18px;font-size:12px;opacity:.6}
+@keyframes crawl{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.crawl{overflow-x:auto;mask-image:none}}
+
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .player .time{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="#top">CROOKED</a>
+    <ul>
+      <li><a href="#shows">Podcasts</a></li>
+      <li><a href="#latest">Daily News</a></li>
+      <li><a href="#newsletters">Newsletters</a></li>
+      <li><a href="#act">Events</a></li>
+      <li><a href="#act">Vote Save America</a></li>
+      <li><a href="#store">Shop</a></li>
+    </ul>
+    <span class="spacer"></span>
+    <button class="search-btn" id="searchBtn" aria-label="Search" aria-expanded="false" aria-controls="searchPanel">
+      <svg class="i-search" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <a class="btn btn-signal join" href="#act">Join <span class="long">Friends of the Pod</span></a>
+    <button class="icon-btn" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="search-panel" id="searchPanel" hidden>
+    <div class="wrap">
+      <label for="q" class="eyebrow">Search shows & episodes</label>
+      <input id="q" type="search" placeholder="Try “Strict Scrutiny” or “midterms”" autocomplete="off">
+      <div class="suggest" id="suggest"></div>
+      <ul class="results" id="results" aria-live="polite"></ul>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-label="Countdowns">
+  <div class="wrap">
+    <span><b id="days">33</b>days to the midterms · Nov 3</span>
+    <button class="strip-con" id="conToggle" aria-expanded="true" aria-controls="takeover"><b id="conDays">35</b>days to Crooked Con <span class="pill">Open countdown</span></button>
+    <span><a href="#act">Check your registration →</a></span>
+  </div>
+</div>
+
+<section class="takeover" id="takeover" aria-label="Crooked Con countdown">
+  <div class="wrap">
+    <div class="to-top">
+      <span class="eyebrow">Crooked Con 2026 · Washington, DC · Nov 5–7</span>
+      <button class="to-close" id="conClose" aria-label="Close Crooked Con countdown">Close <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="to-grid">
+      <div class="to-left">
+        <h2>The doors open in</h2>
+        <div class="clock" id="clock" role="timer" aria-label="Time until Crooked Con">
+          <div><span id="cd-d">00</span><small>Days</small></div>
+          <i>:</i>
+          <div><span id="cd-h">00</span><small>Hours</small></div>
+          <i>:</i>
+          <div><span id="cd-m">00</span><small>Min</small></div>
+          <i>:</i>
+          <div><span id="cd-s">00</span><small>Sec</small></div>
+        </div>
+      </div>
+      <div class="to-right">
+        <p class="to-lede">Two days after the midterms and heading into a presidential election. Bigger stages, more panels, more people who think a better America is worth fighting for.</p>
+        <div class="to-alert"><b>Early-bird pricing ends Oct 6.</b> Lock in your ticket before prices go up.</div>
+        <div class="ctas" style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-ink" href="#act">Get tickets</a>
+          <a class="btn btn-ghost" href="#act">See the lineup</a>
+        </div>
+      </div>
+    </div>
+    <div class="marquee-names" aria-label="Featured speakers">
+      Alex Wagner · Alyssa Mastromonaco · Ben Rhodes · Brian Tyler Cohen · Dan Pfeiffer · Erin Ryan · Jon Favreau · Jon Lovett · Leah Greenberg · Rep. Jamie Raskin · Sarah Longwell · Sen. Chris Van Hollen · Tommy Vietor · and more
+    </div>
+  </div>
+</section>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow" id="today">Wednesday, October 1, 2026</div>
+        <h1>Less doom.<br><em>More doing.</em></h1>
+        <p class="lede">Crooked makes podcasts, newsletters and events for people who want a better conversation about politics, and who want to do something about it. Start with today's episodes.</p>
+        <div class="ctas">
+          <button class="btn btn-signal" data-play="0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg>
+            Play today's lineup
+          </button>
+          <a class="btn btn-ghost" href="#shows">Browse all shows</a>
+        </div>
+      </div>
+
+      <div class="lineup" aria-label="Today's episodes">
+        <div class="lineup-head">
+          <h2>Today's lineup</h2>
+          <span class="eyebrow" style="color:#AEB8DC">3 new</span>
+        </div>
+        <div id="lineup"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="shows">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">The network</div>
+          <h2>Find your show</h2>
+        </div>
+        <a href="#shows">View all podcasts →</a>
+      </div>
+      <div class="chips" role="group" aria-label="Filter shows">
+        <button class="chip" aria-pressed="true" data-f="all">All</button>
+        <button class="chip" aria-pressed="false" data-f="daily">Daily news</button>
+        <button class="chip" aria-pressed="false" data-f="politics">Politics</button>
+        <button class="chip" aria-pressed="false" data-f="law">Law & courts</button>
+        <button class="chip" aria-pressed="false" data-f="culture">Culture & tech</button>
+      </div>
+      <div class="shows" id="showgrid"></div>
+    </div>
+  </section>
+
+  <section class="block act" id="act">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Three ways in</div>
+          <h2>Listen. Show up. Organize.</h2>
+        </div>
+      </div>
+      <div class="act-grid">
+        <div class="panel p-fotp">
+          <div class="eyebrow" style="color:#0A1A44">Friends of the Pod</div>
+          <h3>Keep Crooked independent</h3>
+          <p>Subscribe for the analysis you need heading into the midterms, and help keep Crooked out of Big Tech's pocket.</p>
+          <ul>
+            <li>Ad-free episodes of every show</li>
+            <li>Bonus and members-only content</li>
+            <li>Early access to event tickets</li>
+          </ul>
+          <a class="btn" href="#act">Become a Friend</a>
+        </div>
+        <div class="panel p-con">
+          <div class="eyebrow" style="color:#AEB8DC">Crooked Con 2026</div>
+          <h3>Crooked Con is back</h3>
+          <div class="when">NOV 5–7 · WASHINGTON, DC</div>
+          <p>Two days after the midterms and heading into a presidential election. Bigger stages, more panels and more people who think America is worth fighting for.</p>
+          <a class="btn btn-signal" href="#act">Get tickets</a>
+        </div>
+        <div class="panel p-vsa">
+          <div class="eyebrow">Vote Save America</div>
+          <h3>Down, not out</h3>
+          <p>Put your energy into the races that decide the next two years. Find a shift, a donation match or a phone bank that fits your week.</p>
+          <a class="btn btn-ghost" href="#act">Find an action near you</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="latest">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Fresh from the feed</div>
+          <h2>Latest episodes</h2>
+        </div>
+        <a href="#latest">See every episode →</a>
+      </div>
+      <div class="latest" id="latestlist"></div>
+    </div>
+  </section>
+
+  <section class="block" id="newsletters" style="padding-top:0">
+    <div class="wrap split">
+      <div class="news">
+        <div class="eyebrow" style="color:#AEB8DC">What A Day newsletter</div>
+        <h3>The news, minus the panic</h3>
+        <p style="margin:0;color:#D4DAF0">One email each weekday evening with what happened and what you can do about it.</p>
+        <form id="nl">
+          <label for="email" class="eyebrow" style="position:absolute;left:-9999px">Email address</label>
+          <input id="email" type="email" placeholder="you@example.com" required>
+          <button class="btn btn-signal" type="submit">Sign up</button>
+        </form>
+        <div class="ok" id="nlok" aria-live="polite"></div>
+      </div>
+      <div class="store" id="store">
+        <div class="eyebrow">Crooked Store</div>
+        <h3>Progressive values look good on you</h3>
+        <p>Merch for your favorite pods and the causes you care about. Find a tee for the next protest or a gift for the Hysteria fan in your life.</p>
+        <a class="btn btn-ghost" href="#store" style="align-self:flex-start">Shop the store</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo">CROOKED</div>
+      <p style="max-width:32em">A media network for stories, voices and activism that inform, entertain and inspire action.</p>
+    </div>
+    <div style="display:grid;gap:6px">
+      <span>Podcasts · Newsletters · Events</span>
+      <span>Vote Save America · Store · Careers</span>
+      <span>Privacy · Accessibility · Contact</span>
+      <span style="font:500 11px/1.5 var(--f-mono);opacity:.7">Redesign concept, not affiliated with Crooked Media. Audio player is a demo.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cpv" id="cpv" role="tooltip">
+  <div class="cpv-top">
+    <div class="cpv-art" id="cpvArt"></div>
+    <div class="cpv-body">
+      <div class="cpv-k" id="cpvK"></div>
+      <div class="cpv-t" id="cpvT"></div>
+      <p class="cpv-d" id="cpvD"></p>
+    </div>
+  </div>
+  <div class="cpv-foot">
+    <span class="cpv-meta" id="cpvM"></span>
+    <a class="btn btn-signal cpv-go" id="cpvGo" href="#top"></a>
+  </div>
+</div>
+
+<div class="player" role="region" aria-label="Audio player">
+  <div class="chyron" aria-label="Crooked headlines">
+    <div class="bug"><span class="dot"></span>On Crooked <span class="state">Paused</span></div>
+    <div class="crawl"><div class="crawl-track" id="crawl"></div></div>
+  </div>
+  <div class="wrap">
+    <button class="play" id="pp" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></button>
+    <div class="meta">
+      <div class="s" id="ps">What A Day</div>
+      <div class="t" id="pt">Are Democrats Saying The Right Things To Win?</div>
+      <div class="bar"><i id="pb"></i></div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <span class="time" id="ptime">0:00 / 24:00</span>
+      <button class="speed" id="spd" aria-label="Playback speed">1×</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg>';
+const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+
+// Episode titles are from crooked.com on Oct 1, 2026; running times are placeholders.
+const episodes = [
+  {show:"What A Day", title:"Are Democrats Saying The Right Things To Win?", min:24, blurb:"The daily news podcast checks the party's closing message with five weeks to go."},
+  {show:"Strict Scrutiny", title:"We Need to Talk About Ethics Reform", min:58, blurb:"The hosts make the case for binding ethics rules at the Supreme Court."},
+  {show:"Runaway Country with Alex Wagner", title:"Trump's Crisis of Dignity", min:41, blurb:"Alex Wagner on what the presidency has lost, and who notices."}
+];
+
+const shows = [
+  {name:"Pod Save America", f:"politics", bg:"#0A1A44", fg:"#FFD43B", tag:"Twice weekly", d:"Jon, Jon, Tommy and Dan on the news, the campaigns and the fight ahead.", n:"1,176 episodes"},
+  {name:"What A Day", f:"daily", bg:"#FFD43B", fg:"#0A1A44", tag:"Weekdays", d:"The news you need in about 20 minutes, every weekday.", n:"1,695 episodes"},
+  {name:"Strict Scrutiny", f:"law", bg:"#7A1F3D", fg:"#FFE7EE", tag:"Weekly", d:"The Supreme Court and the legal culture around it, from three law professors."},
+  {name:"Offline", f:"culture", bg:"#1F6F5C", fg:"#E2FFF6", tag:"Weekly", d:"Jon Favreau on how the internet is changing politics and our lives.", n:"243 episodes"},
+  {name:"Runaway Country", f:"politics", bg:"#E5383B", fg:"#FFF3F3", tag:"Weekly", d:"Alex Wagner on a country moving faster than anyone can track.", n:"47 episodes"},
+  {name:"Pod Save the World", f:"politics", bg:"#2E5AAC", fg:"#EAF1FF", tag:"Weekly", d:"Foreign policy and global news, from former Obama officials."},
+  {name:"Lovett or Leave It", f:"culture", bg:"#F28C28", fg:"#2A1300", tag:"Weekly", d:"A live comedy show about the week's news, hosted by Jon Lovett."},
+  {name:"Hysteria", f:"culture", bg:"#6B3FA0", fg:"#F4ECFF", tag:"Weekly", d:"Politics and culture through a feminist lens, with zero apologies."}
+];
+
+const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
+
+document.getElementById("lineup").innerHTML = episodes.map((e,i)=>`
+  <div class="ep" data-i="${i}">
+    <button class="play" data-play="${i}" aria-label="Play ${e.title}">${PLAY}</button>
+    <div style="min-width:0"><div class="show">${e.show}</div><div class="title">${e.title}</div></div>
+    <span class="len">${e.min} min</span>
+  </div>`).join("");
+
+document.getElementById("latestlist").innerHTML = episodes.map((e,i)=>`
+  <article>
+    <div class="eyebrow">${e.show} · Oct 1</div>
+    <h3>${e.title}</h3>
+    <p>${e.blurb}</p>
+    <div class="row"><button class="mini-play" data-play="${i}" aria-label="Play ${e.title}">${PLAY}</button><span class="eyebrow">${e.min} min</span></div>
+  </article>`).join("");
+
+document.getElementById("showgrid").innerHTML = shows.map(s=>`
+  <a class="show-card" href="#shows" data-f="${s.f}">
+    <div class="art" style="background:${s.bg};color:${s.fg}">
+      <span class="tag">${s.tag}</span>
+      <span class="mark">${s.name}</span>
+    </div>
+    <h3>${s.name}</h3>
+    <p>${s.d}${s.n ? ` · ${s.n}` : ""}</p>
+  </a>`).join("");
+
+// chyron: episodes are playable, the rest jump to their section. Duplicated once for a seamless loop.
+const artFor = name => shows.find(s=>name.startsWith(s.name)) || {bg:"#0A1A44",fg:"#FFD43B"};
+const crawlItems = [
+  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, meta:`New today · ${e.min} min`, cta:"Play episode", art:artFor(e.show), mark:e.show})),
+  {k:"Midterms", t:`${Math.max(0,Math.ceil((new Date(2026,10,3)-new Date().setHours(0,0,0,0))/864e5))} days to Election Day: check your registration`, d:"Make sure you're registered, find your polling place and make a plan to vote on Nov 3.", href:"#act", meta:"Vote Save America", cta:"Check registration", art:{bg:"#E5383B",fg:"#FFF3F3"}, mark:"Nov 3"},
+  {k:"Crooked Con", t:"Nov 5–7 in Washington, DC. Tickets on sale now", d:"Two days after the midterms. Bigger stages, more panels and more people who think America is worth fighting for.", href:"#takeover", con:true, meta:"Early-bird ends Oct 6", cta:"Open countdown", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"Crooked Con"},
+  {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"#act", meta:"Membership", cta:"Become a Friend", art:{bg:"#0A1A44",fg:"#FFD43B"}, mark:"Friends of the Pod"},
+  {k:"Vote Save America", t:"Find a phone bank or canvass shift near you", d:"Put your energy into the races that decide the next two years.", href:"#act", meta:"Take action", cta:"Find an action", art:{bg:"#2E5AAC",fg:"#EAF1FF"}, mark:"VSA"},
+  {k:"Newsletter", t:"What A Day lands in your inbox every weekday evening", d:"What happened today and what you can do about it, in one email.", href:"#newsletters", meta:"Free · weekdays", cta:"Sign up", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"What A Day"},
+  {k:"Store", t:"New fall merch for your favorite pods", d:"Tees, hats and gifts for every Crooked fan.", href:"#store", meta:"Crooked Store", cta:"Shop now", art:{bg:"#F28C28",fg:"#2A1300"}, mark:"Shop"}
+];
+const crawlHTML = crawlItems.map((c,i)=>`<a href="${c.href||"#top"}" data-ci="${i}"${c.play!==undefined?` data-play="${c.play}"`:""}><span class="k">${c.k}</span><span>${c.t}</span></a>`).join("");
+document.getElementById("crawl").innerHTML = crawlHTML + crawlHTML.replace(/<a /g,'<a tabindex="-1" aria-hidden="true" ');
+document.getElementById("crawl").addEventListener("click",e=>{ if(e.target.closest("[data-play]")) e.preventDefault(); });
+
+// chyron preview: hover or focus an item to pause the crawl and preview it; the card stays while the pointer is on it
+const chyron=document.querySelector(".chyron"), cpv=document.getElementById("cpv"), cpvGo=document.getElementById("cpvGo");
+let hideT=null, activeA=null, activeItem=null;
+function showPreview(a){
+  clearTimeout(hideT);
+  const c=crawlItems[+a.dataset.ci]; activeItem=c;
+  if(activeA) activeA.classList.remove("on");
+  activeA=a; a.classList.add("on");
+  chyron.classList.add("paused");
+  const art=document.getElementById("cpvArt");
+  art.style.background=c.art.bg; art.style.color=c.art.fg; art.textContent=c.mark;
+  document.getElementById("cpvK").textContent=c.k;
+  document.getElementById("cpvT").textContent=c.t;
+  document.getElementById("cpvD").textContent=c.d;
+  document.getElementById("cpvM").textContent=c.meta;
+  cpvGo.textContent=c.cta; cpvGo.href=c.href||"#top";
+  const r=a.getBoundingClientRect(), w=cpv.offsetWidth, chyTop=chyron.getBoundingClientRect().top;
+  const left=Math.min(Math.max(16, r.left + 20 - 40), window.innerWidth - w - 16);
+  cpv.style.left=left+"px";
+  cpv.style.bottom=(window.innerHeight - chyTop + 12)+"px";
+  cpv.style.setProperty("--arrow", Math.min(Math.max(16, r.left + 20 - left), w - 30)+"px");
+  cpv.classList.add("show");
+}
+function hidePreviewSoon(){
+  clearTimeout(hideT);
+  hideT=setTimeout(()=>{ cpv.classList.remove("show"); chyron.classList.remove("paused"); if(activeA) activeA.classList.remove("on"); activeA=null; },220);
+}
+const crawlEl=document.getElementById("crawl");
+crawlEl.addEventListener("mouseover",e=>{ const a=e.target.closest("a[data-ci]"); if(a && a!==activeA) showPreview(a); else clearTimeout(hideT); });
+crawlEl.addEventListener("focusin",e=>{ const a=e.target.closest("a[data-ci]"); if(a) showPreview(a); });
+chyron.addEventListener("mouseleave",hidePreviewSoon);
+crawlEl.addEventListener("focusout",hidePreviewSoon);
+cpv.addEventListener("mouseenter",()=>clearTimeout(hideT));
+cpv.addEventListener("mouseleave",hidePreviewSoon);
+cpvGo.addEventListener("click",e=>{
+  const c=activeItem; if(!c) return;
+  if(c.play!==undefined){ e.preventDefault(); if(c.play!==cur){cur=c.play;t=0;} setPlaying(true); }
+  else if(c.con){ e.preventDefault(); setTakeover(true); }
+  cpv.classList.remove("show"); chyron.classList.remove("paused");
+});
+
+// filters
+document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+  document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", x===c));
+  const f=c.dataset.f;
+  document.querySelectorAll(".show-card").forEach(card=>card.hidden = f!=="all" && card.dataset.f!==f);
+}));
+
+// demo player
+let cur=0, playing=false, t=0, speed=1, timer=null;
+const pp=document.getElementById("pp"), pb=document.getElementById("pb");
+function render(){
+  const e=episodes[cur], dur=e.min*60;
+  document.getElementById("ps").textContent=e.show;
+  document.getElementById("pt").textContent=e.title;
+  document.getElementById("ptime").textContent=`${fmt(t)} / ${fmt(dur)}`;
+  pb.style.width=(t/dur*100)+"%";
+  pp.innerHTML=playing?PAUSE:PLAY; pp.setAttribute("aria-label",playing?"Pause":"Play");
+  document.querySelectorAll(".ep").forEach(el=>el.classList.toggle("playing", playing && +el.dataset.i===cur));
+  document.querySelectorAll("[data-play]").forEach(b=>{ if(b.classList.contains("btn")) return;
+    b.innerHTML = playing && +b.dataset.play===cur ? PAUSE : PLAY; });
+}
+function setPlaying(p){
+  playing=p; clearInterval(timer);
+  if(p) timer=setInterval(()=>{ t+=speed*4; if(t>=episodes[cur].min*60){ t=0; cur=(cur+1)%episodes.length; } render(); },250);
+  render();
+}
+pp.addEventListener("click",()=>setPlaying(!playing));
+document.addEventListener("click",ev=>{
+  const b=ev.target.closest("[data-play]"); if(!b) return;
+  const i=+b.dataset.play;
+  if(i===cur && playing && !b.classList.contains("btn")) return setPlaying(false);
+  if(i!==cur){cur=i;t=0;}
+  setPlaying(true);
+});
+document.getElementById("spd").addEventListener("click",e=>{
+  speed = speed>=2 ? 1 : speed+0.5; e.target.textContent=speed+"×";
+});
+
+// countdown + date
+const now=new Date(), elec=new Date(2026,10,3);
+const days=Math.max(0,Math.ceil((elec-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5));
+document.getElementById("days").textContent=days;
+document.getElementById("today").textContent=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+
+// search: icon opens a panel under the header
+const sBtn=document.getElementById("searchBtn"), sPanel=document.getElementById("searchPanel"), q=document.getElementById("q"), res=document.getElementById("results");
+const index=[
+  ...shows.map(s=>({k:"Show", t:s.name, d:s.d, href:"#shows"})),
+  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i})),
+  {k:"Event", t:"Crooked Con 2026", d:"Washington DC, Nov 5–7 midterms", href:"#takeover"},
+  {k:"Membership", t:"Friends of the Pod", d:"ad-free bonus subscribe", href:"#act"},
+  {k:"Action", t:"Vote Save America", d:"volunteer phone bank canvass midterms", href:"#act"},
+  {k:"Newsletter", t:"What A Day newsletter", d:"daily email", href:"#newsletters"}
+];
+document.getElementById("suggest").innerHTML=["Pod Save America","Strict Scrutiny","Midterms","Crooked Con"].map(s=>`<button type="button">${s}</button>`).join("");
+document.getElementById("suggest").addEventListener("click",e=>{const b=e.target.closest("button"); if(b){q.value=b.textContent; runSearch();}});
+function runSearch(){
+  const v=q.value.trim().toLowerCase();
+  if(!v){res.innerHTML="";return;}
+  const hits=index.filter(x=>(x.t+" "+x.d+" "+x.k).toLowerCase().includes(v)).slice(0,6);
+  res.innerHTML=hits.length?hits.map(h=>`<li><a href="${h.href||"#top"}"${h.play!==undefined?` data-play="${h.play}"`:""}><span class="k">${h.k}</span><span>${h.t}</span></a></li>`).join("")
+    :`<li class="none">Nothing matches “${q.value.replace(/</g,"&lt;")}”. Try a show name or topic.</li>`;
+}
+function setSearch(open){
+  sPanel.hidden=!open; sBtn.setAttribute("aria-expanded",open); sBtn.setAttribute("aria-label",open?"Close search":"Search");
+  if(open) q.focus();
+}
+sBtn.addEventListener("click",()=>setSearch(sPanel.hidden));
+q.addEventListener("input",runSearch);
+res.addEventListener("click",e=>{ const a=e.target.closest("a"); if(!a) return; if(a.dataset.play!==undefined) e.preventDefault(); setSearch(false); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !sPanel.hidden){ setSearch(false); sBtn.focus(); }});
+
+// Crooked Con takeover with live countdown; closing remembers the choice for this browser
+const conStart=new Date("2026-11-05T00:00:00-05:00");
+const to=document.getElementById("takeover"), conToggle=document.getElementById("conToggle");
+const pad=n=>String(n).padStart(2,"0");
+function tickClock(){
+  const ms=Math.max(0,conStart-Date.now());
+  const vals={d:Math.floor(ms/864e5),h:Math.floor(ms/36e5)%24,m:Math.floor(ms/6e4)%60,s:Math.floor(ms/1e3)%60};
+  for(const k in vals){ const el=document.getElementById("cd-"+k), nv=pad(vals[k]);
+    if(el.textContent!==nv){ el.textContent=nv; el.classList.remove("t"); void el.offsetWidth; el.classList.add("t"); } }
+  document.getElementById("conDays").textContent=Math.ceil(ms/864e5);
+}
+tickClock(); setInterval(tickClock,1000);
+function setTakeover(open, save=true){
+  conToggle.setAttribute("aria-expanded",open);
+  if(open){ to.hidden=false; to.classList.remove("closing"); to.scrollIntoView({behavior:"smooth",block:"start"}); }
+  else if(!to.hidden){ to.classList.add("closing"); setTimeout(()=>{ to.hidden=true; to.classList.remove("closing"); },340); }
+  if(save){ try{ localStorage.setItem("conTakeover", open?"open":"closed"); }catch(e){} }
+}
+try{ if(localStorage.getItem("conTakeover")==="closed"){ to.hidden=true; conToggle.setAttribute("aria-expanded","false"); } }catch(e){}
+document.getElementById("conClose").addEventListener("click",()=>setTakeover(false));
+conToggle.addEventListener("click",()=>setTakeover(to.hidden));
+
+document.getElementById("nl").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("nlok").textContent="Demo only: no email was sent or stored.";
+});
+render();
+</script>
+</body>
+</html>
