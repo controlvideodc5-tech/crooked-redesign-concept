@@ -90,15 +90,15 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .strip b{font:900 22px/1 var(--f-display);color:var(--signal);margin-right:6px;font-variant-numeric:tabular-nums}
 .strip span{white-space:nowrap}
 .strip a{color:var(--signal);font-weight:600}
-.strip-con{background:none;border:0;color:inherit;font-size:14px;display:flex;align-items:center;white-space:nowrap;padding:0}
-.strip-con .pill{margin-left:10px;font:500 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--signal);color:var(--signal);border-radius:999px;padding:4px 8px}
-.strip-con:hover .pill{background:var(--signal);color:#0A1A44}
-.strip-con[aria-expanded="true"] .pill{display:none}
+.strip-btn{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--signal);color:var(--signal);border-radius:999px;padding:6px 12px;font:500 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.strip-btn:hover{background:var(--signal);color:#0A1A44}
+.strip-btn[aria-expanded="false"]{background:var(--signal);color:#0A1A44}
+.strip-btn[aria-expanded="false"] svg{transform:rotate(180deg)}
 
 /* Crooked Con takeover: yellow field, giant navy clock */
-.takeover{--sky:#4C8DEB;background:var(--sky) url("https://res.cloudinary.com/crooked-media/images/w_0.55,c_crop,g_east/w_1400/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png") right center/auto 100% no-repeat;color:#0A1A44;position:relative;overflow:hidden;border-bottom:4px solid #0A1A44}
+.takeover{--sky:#4C8DEB;background:var(--sky) url("https://res.cloudinary.com/crooked-media/images/w_0.34,c_crop,g_east/w_1000/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png") right center/auto 100% no-repeat;color:#0A1A44;position:relative;overflow:hidden;border-bottom:4px solid #0A1A44}
 .takeover::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--sky) 0%,var(--sky) 42%,rgba(76,141,235,.85) 58%,rgba(76,141,235,0) 78%);pointer-events:none}
-@media (max-width:1100px){.takeover::before{background:linear-gradient(180deg,rgba(76,141,235,.55),var(--sky) 55%)}}
+@media (max-width:1100px){.takeover{background-image:none}.takeover::before{display:none}}
 .takeover .wrap{position:relative;padding-block:22px 0;display:grid;gap:18px}
 .takeover .eyebrow{color:#0A1A44}
 .to-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -349,8 +349,10 @@ footer .logo{font-size:40px}
 <div class="strip" aria-label="Countdowns">
   <div class="wrap">
     <span><b id="days">33</b>days to the midterms · Nov 3</span>
-    <button class="strip-con" id="conToggle" aria-expanded="true" aria-controls="takeover"><b id="conDays">35</b>days to Crooked Con <span class="pill">Open countdown</span></button>
+    <span><b id="conDays">35</b>days to Crooked Con</span>
     <span><a href="#act">Check your registration →</a></span>
+    <button class="strip-btn" id="conToggle" aria-expanded="true" aria-controls="takeover"><span id="conToggleTxt">Hide countdown</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
   </div>
 </div>
 
@@ -747,6 +749,7 @@ function tickClock(){
 tickClock(); setInterval(tickClock,1000);
 function setTakeover(open){
   conToggle.setAttribute("aria-expanded",open);
+  document.getElementById("conToggleTxt").textContent = open ? "Hide countdown" : "Open countdown";
   if(open){ to.hidden=false; to.classList.remove("closing"); to.scrollIntoView({behavior:"smooth",block:"start"}); }
   else if(!to.hidden){ to.classList.add("closing"); setTimeout(()=>{ to.hidden=true; to.classList.remove("closing"); },340); }
 }
