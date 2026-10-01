@@ -95,37 +95,42 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .strip-btn[aria-expanded="false"]{background:var(--signal);color:#0A1A44}
 .strip-btn[aria-expanded="false"] svg{transform:rotate(180deg)}
 
-/* Crooked Con takeover: yellow field, giant navy clock */
-.takeover{--sky:#4C8DEB;background:var(--sky);color:#0A1A44;position:relative;overflow:hidden;border-bottom:4px solid #0A1A44}
-.takeover .wrap{position:relative;padding-block:22px 0;display:grid;gap:18px}
-.takeover .eyebrow{color:#0A1A44}
-.to-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.to-close{display:inline-flex;align-items:center;gap:6px;background:#0A1A44;color:var(--signal);border:0;border-radius:999px;padding:6px 12px;font:500 12px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
-.to-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
-.to-art{display:none}
-@media (min-width:1101px){.clock span{font-size:clamp(56px,6.4vw,124px)}.clock i{font-size:clamp(40px,4.6vw,88px)}}
-@media (min-width:1101px){
-  .takeover .wrap{grid-template-columns:minmax(0,1fr) minmax(0,38%);column-gap:40px}
-  .takeover .wrap > :not(.to-art){grid-column:1}
-  .to-art{display:block;grid-column:2;grid-row:1/4;align-self:stretch;position:relative;overflow:hidden;min-height:360px}
-  .to-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
-  .to-close{position:absolute;top:22px;right:var(--gutter);z-index:2}
-}
-.to-left h2{font-size:clamp(26px,3vw,36px);margin-bottom:8px}
-.clock{display:flex;align-items:flex-start;gap:clamp(4px,1vw,12px);font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums;max-width:100%}
-.clock div{display:flex;flex-direction:column;align-items:center;gap:6px}
-.clock span{font-size:clamp(48px,10vw,148px);line-height:.82;background:#0A1A44;color:var(--signal);padding:.1em .12em .06em;border-radius:10px;min-width:1.25em;text-align:center}
-.clock small{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
-.clock i{font-style:normal;font-size:clamp(34px,7vw,104px);line-height:.95}
-.to-right{display:grid;gap:14px;max-width:40em;min-width:0}
-.to-lede{margin:0;font-size:17px;font-weight:500}
-.to-alert{background:#0A1A44;color:#fff;max-width:30em;padding:10px 14px;border-radius:8px;font-size:14px}
-.to-alert b{color:var(--signal)}
+/* Crooked Con countdown: one component, two states. Closed = slim bar with mini clock; open = bar + art + big clock */
+.con{--sky:#4C8DEB;background:var(--sky);color:#0A1A44;border-bottom:3px solid #0A1A44}
+.con-bar{display:flex;align-items:center;gap:clamp(12px,2vw,24px);min-height:56px;padding-block:8px}
+.con-logo{font:900 22px/.9 var(--f-display);text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
+.con-logo span{font-weight:700;opacity:.85}
+.con-when{font:500 12px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.mini{display:flex;gap:6px;font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums}
+.mini span{background:#0A1A44;color:var(--signal);border-radius:6px;padding:4px 7px 3px;font-size:20px;line-height:1}
+.mini small{font:500 10px var(--f-mono);margin-left:2px;opacity:.8}
+.con-actions{margin-left:auto;display:flex;gap:10px;align-items:center;flex:none}
+.con-toggle{display:inline-flex;align-items:center;gap:8px;background:#0A1A44;color:var(--signal);border:0;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.con-toggle svg{transition:transform .2s}
+.con[data-state="closed"] .con-toggle svg{transform:rotate(180deg)}
 .btn-ink{background:#0A1A44;color:var(--signal)}
 .btn-ink:hover{background:#1C2F66}
-.marquee-names{border-top:2px solid #0A1A44;max-width:52em;padding-block:12px 14px;font:700 15px/1.5 var(--f-body);text-wrap:balance}
-.takeover.closing{animation:fold .35s ease forwards}
-@keyframes fold{to{opacity:0;transform:translateY(-12px)}}
+.con .btn-sm{padding:8px 14px;font-size:14px}
+/* state switches */
+.con[data-state="open"] .mini,.con[data-state="open"] .con-bar .btn-ink{display:none}
+.con[data-state="closed"] .con-body{display:none}
+.con-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,40%);gap:32px;align-items:center;padding-block:4px 28px}
+.con-body h2{font-size:clamp(30px,3.4vw,46px);margin-bottom:16px}
+.clock{display:flex;align-items:flex-start;gap:clamp(4px,1vw,12px);font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums;max-width:100%}
+.clock div{display:flex;flex-direction:column;align-items:center;gap:6px}
+.clock span{font-size:clamp(48px,7.4vw,128px);line-height:.82;background:#0A1A44;color:var(--signal);padding:.1em .12em .06em;border-radius:10px;min-width:1.25em;text-align:center}
+.clock small{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.clock i{font-style:normal;font-size:clamp(34px,5.2vw,92px);line-height:.95}
+.con-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}
+.con-note{font-size:14px;font-weight:600}
+.con-note b{background:#0A1A44;color:var(--signal);padding:2px 6px;border-radius:4px}
+.con-art{align-self:stretch;position:relative;min-height:300px}
+.con-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+@media (max-width:900px){
+  .con-body{grid-template-columns:1fr}.con-art{display:none}
+  .con-when{display:none}
+}
+@media (max-width:560px){.con-logo span{display:none}.con[data-state="closed"] .con-bar .btn-ink{display:none}.mini span{font-size:17px}}
 @keyframes tick{from{transform:translateY(-6px);opacity:.4}}
 .clock span.t{animation:tick .3s ease}
 
@@ -355,44 +360,40 @@ footer .logo{font-size:40px}
 <div class="strip" aria-label="Countdowns">
   <div class="wrap">
     <span><b id="days">33</b>days to the midterms · Nov 3</span>
-    <span><b id="conDays">35</b>days to Crooked Con</span>
     <span><a href="#act">Check your registration →</a></span>
-    <button class="strip-btn" id="conToggle" aria-expanded="true" aria-controls="takeover"><span id="conToggleTxt">Hide countdown</span>
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
   </div>
 </div>
 
-<section class="takeover" id="takeover" aria-label="Crooked Con countdown">
+<section class="con" id="takeover" data-state="open" aria-label="Crooked Con countdown">
   <div class="wrap">
-    <div class="to-top">
-      <span class="eyebrow">Crooked Con 2026 · Washington, DC · Nov 5–7</span>
-      <button class="to-close" id="conClose" aria-label="Close Crooked Con countdown">Close <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="con-bar">
+      <div class="con-logo">Crooked Con <span>2026</span></div>
+      <div class="mini" role="timer" aria-label="Time until Crooked Con">
+        <span id="mc-d">00<small>d</small></span><span id="mc-h">00<small>h</small></span><span id="mc-m">00<small>m</small></span><span id="mc-s">00<small>s</small></span>
+      </div>
+      <div class="con-when">Nov 5–7 · Washington, DC</div>
+      <div class="con-actions">
+        <a class="btn btn-ink btn-sm" href="#act">Get tickets</a>
+        <button class="con-toggle" id="conToggle" aria-expanded="true" aria-controls="conBody"><span id="conToggleTxt">Collapse</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
+      </div>
     </div>
-    <div class="to-grid">
-      <div class="to-left">
-        <h2>The doors open in</h2>
-        <div class="clock" id="clock" role="timer" aria-label="Time until Crooked Con">
-          <div><span id="cd-d">00</span><small>Days</small></div>
-          <i>:</i>
-          <div><span id="cd-h">00</span><small>Hours</small></div>
-          <i>:</i>
-          <div><span id="cd-m">00</span><small>Min</small></div>
-          <i>:</i>
+    <div class="con-body" id="conBody">
+      <div>
+        <h2>Freedom &amp; Content for All</h2>
+        <div class="clock" role="timer" aria-label="Time until Crooked Con">
+          <div><span id="cd-d">00</span><small>Days</small></div><i>:</i>
+          <div><span id="cd-h">00</span><small>Hours</small></div><i>:</i>
+          <div><span id="cd-m">00</span><small>Min</small></div><i>:</i>
           <div><span id="cd-s">00</span><small>Sec</small></div>
         </div>
-      </div>
-      <div class="to-right">
-        <p class="to-lede">Two days after the midterms and heading into a presidential election. Bigger stages, more panels, more people who think a better America is worth fighting for.</p>
-        <div class="to-alert"><b>Early-bird pricing ends Oct 6.</b> Lock in your ticket before prices go up.</div>
-        <div class="ctas" style="display:flex;gap:10px;flex-wrap:wrap">
+        <div class="con-cta">
           <a class="btn btn-ink" href="#act">Get tickets</a>
           <a class="btn btn-ghost" href="#act">See the lineup</a>
+          <span class="con-note"><b>Early-bird ends Oct 6</b></span>
         </div>
       </div>
-    </div>
-    <div class="to-art"><img src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork: an eagle beside the Crooked Con 2026 logo in a blue sky" onerror="this.parentNode.remove()"></div>
-    <div class="marquee-names" aria-label="Featured speakers">
-      Alex Wagner · Alyssa Mastromonaco · Ben Rhodes · Brian Tyler Cohen · Dan Pfeiffer · Erin Ryan · Jon Favreau · Jon Lovett · Leah Greenberg · Rep. Jamie Raskin · Sarah Longwell · Sen. Chris Van Hollen · Tommy Vietor · and more
+      <div class="con-art"><img src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork: an eagle beside the Crooked Con 2026 logo, Freedom &amp; Content for All" onerror="this.parentNode.remove()"></div>
     </div>
   </div>
 </section>
@@ -742,27 +743,27 @@ q.addEventListener("input",runSearch);
 res.addEventListener("click",e=>{ const a=e.target.closest("a"); if(!a) return; if(a.dataset.play!==undefined) e.preventDefault(); setSearch(false); });
 document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !sPanel.hidden){ setSearch(false); sBtn.focus(); }});
 
-// Crooked Con takeover with live countdown
+// Crooked Con countdown: opens expanded on every load; collapses to a slim bar with a mini clock
 const conStart=new Date("2026-11-05T00:00:00-05:00");
-const to=document.getElementById("takeover"), conToggle=document.getElementById("conToggle");
+const con=document.getElementById("takeover"), conToggle=document.getElementById("conToggle");
 const pad=n=>String(n).padStart(2,"0");
 function tickClock(){
   const ms=Math.max(0,conStart-Date.now());
   const vals={d:Math.floor(ms/864e5),h:Math.floor(ms/36e5)%24,m:Math.floor(ms/6e4)%60,s:Math.floor(ms/1e3)%60};
-  for(const k in vals){ const el=document.getElementById("cd-"+k), nv=pad(vals[k]);
-    if(el.textContent!==nv){ el.textContent=nv; el.classList.remove("t"); void el.offsetWidth; el.classList.add("t"); } }
-  document.getElementById("conDays").textContent=Math.ceil(ms/864e5);
+  for(const k in vals){
+    const nv=pad(vals[k]), el=document.getElementById("cd-"+k), mc=document.getElementById("mc-"+k);
+    mc.firstChild.nodeValue=nv;
+    if(el.textContent!==nv){ el.textContent=nv; el.classList.remove("t"); void el.offsetWidth; el.classList.add("t"); }
+  }
 }
 tickClock(); setInterval(tickClock,1000);
 function setTakeover(open){
+  con.dataset.state = open ? "open" : "closed";
   conToggle.setAttribute("aria-expanded",open);
-  document.getElementById("conToggleTxt").textContent = open ? "Hide countdown" : "Open countdown";
-  if(open){ to.hidden=false; to.classList.remove("closing"); to.scrollIntoView({behavior:"smooth",block:"start"}); }
-  else if(!to.hidden){ to.classList.add("closing"); setTimeout(()=>{ to.hidden=true; to.classList.remove("closing"); },340); }
+  document.getElementById("conToggleTxt").textContent = open ? "Collapse" : "Expand";
+  if(open) con.scrollIntoView({behavior:"smooth",block:"start"});
 }
-// The takeover always opens expanded on page load.
-document.getElementById("conClose").addEventListener("click",()=>setTakeover(false));
-conToggle.addEventListener("click",()=>setTakeover(to.hidden));
+conToggle.addEventListener("click",()=>setTakeover(con.dataset.state!=="open"));
 
 document.getElementById("nl").addEventListener("submit",e=>{
   e.preventDefault();
