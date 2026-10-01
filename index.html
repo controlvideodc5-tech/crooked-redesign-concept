@@ -96,8 +96,9 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .strip-con[aria-expanded="true"] .pill{display:none}
 
 /* Crooked Con takeover: yellow field, giant navy clock */
-.takeover{background:var(--signal);color:#0A1A44;position:relative;overflow:hidden;border-bottom:4px solid #0A1A44}
-.takeover::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(10,26,68,.06) 0 14px,transparent 14px 28px);pointer-events:none}
+.takeover{--sky:#4C8DEB;background:var(--sky) url("https://res.cloudinary.com/crooked-media/images/w_0.55,c_crop,g_east/w_1400/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png") right center/auto 100% no-repeat;color:#0A1A44;position:relative;overflow:hidden;border-bottom:4px solid #0A1A44}
+.takeover::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--sky) 0%,var(--sky) 42%,rgba(76,141,235,.85) 58%,rgba(76,141,235,0) 78%);pointer-events:none}
+@media (max-width:1100px){.takeover::before{background:linear-gradient(180deg,rgba(76,141,235,.55),var(--sky) 55%)}}
 .takeover .wrap{position:relative;padding-block:22px 0;display:grid;gap:18px}
 .takeover .eyebrow{color:#0A1A44}
 .to-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -112,11 +113,11 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .clock i{font-style:normal;font-size:clamp(40px,8vw,104px);line-height:.95}
 .to-right{display:grid;gap:14px;max-width:34em;min-width:0}
 .to-lede{margin:0;font-size:17px;font-weight:500}
-.to-alert{background:#0A1A44;color:#fff;padding:10px 14px;border-radius:8px;font-size:14px}
+.to-alert{background:#0A1A44;color:#fff;max-width:30em;padding:10px 14px;border-radius:8px;font-size:14px}
 .to-alert b{color:var(--signal)}
 .btn-ink{background:#0A1A44;color:var(--signal)}
 .btn-ink:hover{background:#1C2F66}
-.marquee-names{border-top:2px solid #0A1A44;padding-block:12px 14px;font:700 15px/1.5 var(--f-body);text-wrap:balance}
+.marquee-names{border-top:2px solid #0A1A44;max-width:52em;padding-block:12px 14px;font:700 15px/1.5 var(--f-body);text-wrap:balance}
 .takeover.closing{animation:fold .35s ease forwards}
 @keyframes fold{to{opacity:0;transform:translateY(-12px)}}
 @keyframes tick{from{transform:translateY(-6px);opacity:.4}}
@@ -136,7 +137,7 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .lineup{background:var(--ink-2);border:1px solid #2C4180;border-radius:14px;padding:18px 18px 8px}
 .lineup-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
 .lineup-head h2{font-size:28px;color:var(--signal)}
-.ep{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid #2C4180}
+.ep{display:grid;grid-template-columns:auto auto 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid #2C4180}
 .ep:first-of-type{border-top:0}
 .play{width:44px;height:44px;border-radius:50%;border:0;background:var(--signal);color:#0A1A44;display:grid;place-items:center;flex:none}
 .play:hover{transform:scale(1.06)}
@@ -167,6 +168,25 @@ section.block{padding-block:64px}
 .show-card h3{font:700 16px/1.3 var(--f-body);text-transform:none}
 .show-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
 .show-card[hidden]{display:none}
+
+/* real show / brand artwork */
+.art .keyart{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ep-art,.lt-art,.p-art{display:block;border-radius:6px;overflow:hidden;flex:none}
+.ep-art img,.lt-art img,.p-art img{width:100%;height:100%;object-fit:cover;display:block}
+.ep-art{width:44px;height:44px}
+.lt-art{width:44px;height:44px}
+.lt-head{display:flex;align-items:center;gap:12px}
+.p-art{width:34px;height:34px}
+.cpv-art{position:relative;overflow:hidden}
+.cpv-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel-img{width:100%;height:170px;object-fit:cover;border-radius:10px;display:block}
+.con-img{object-position:right top;background:#4C8DEB}
+.vsa-logo{background:#E8E8E8;border-radius:10px;display:grid;place-items:center;height:170px}
+.vsa-logo img{max-height:130px;max-width:80%;object-fit:contain}
+.news{position:relative;overflow:hidden}
+.news-art{position:absolute;right:-30px;bottom:-20px;width:46%;max-width:300px;border-radius:12px;opacity:.95;transform:rotate(-3deg)}
+.news > :not(.news-art){position:relative;max-width:62%}
+@media (max-width:560px){.news-art{display:none}.news > :not(.news-art){max-width:none}}
 
 /* act band */
 .act{background:var(--card);border-block:1px solid var(--line)}
@@ -214,7 +234,7 @@ footer .logo{font-size:40px}
 /* player: a header row under the brand bar. "Featured" at rest, "Now playing" while playing */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--signal)}
 .player{background:var(--ink);color:var(--on-ink);padding-bottom:10px}
-.player .wrap{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:14px;align-items:center}
+.player .wrap{display:grid;grid-template-columns:auto auto auto minmax(0,1fr) auto;gap:14px;align-items:center}
 .player .well{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center;height:50px;padding-inline:8px 10px;border-radius:999px;background:rgba(255,255,255,.06);transition:background .2s}
 .player.on .well{background:rgba(255,255,255,.1)}
 .player .play{width:36px;height:36px}
@@ -304,6 +324,7 @@ footer .logo{font-size:40px}
     <div class="wrap"><div class="well">
       <span class="pstate" id="pstate"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="pstateTxt">Featured</span></span>
       <button class="play" id="pp" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></button>
+      <span class="p-art" id="pArt"></span>
       <div class="meta">
         <div class="line"><span class="s" id="ps">What A Day</span><span class="t" id="pt">Are Democrats Saying The Right Things To Win?</span></div>
         <div class="bar"><i id="pb"></i></div>
@@ -423,6 +444,7 @@ footer .logo{font-size:40px}
       </div>
       <div class="act-grid">
         <div class="panel p-fotp">
+          <img class="panel-img" src="https://res.cloudinary.com/crooked-media/images/w_900/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png" alt="Statue of Liberty artwork for Friends of the Pod" loading="lazy" onerror="this.remove()">
           <div class="eyebrow" style="color:#0A1A44">Friends of the Pod</div>
           <h3>Keep Crooked independent</h3>
           <p>Subscribe for the analysis you need heading into the midterms, and help keep Crooked out of Big Tech's pocket.</p>
@@ -434,6 +456,7 @@ footer .logo{font-size:40px}
           <a class="btn" href="#act">Become a Friend</a>
         </div>
         <div class="panel p-con">
+          <img class="panel-img con-img" src="https://res.cloudinary.com/crooked-media/images/w_0.3,h_0.75,c_crop,g_north_east/w_700/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork" loading="lazy" onerror="this.remove()">
           <div class="eyebrow" style="color:#AEB8DC">Crooked Con 2026</div>
           <h3>Crooked Con is back</h3>
           <div class="when">NOV 5–7 · WASHINGTON, DC</div>
@@ -441,6 +464,7 @@ footer .logo{font-size:40px}
           <a class="btn btn-signal" href="#act">Get tickets</a>
         </div>
         <div class="panel p-vsa">
+          <div class="vsa-logo"><img src="https://res.cloudinary.com/crooked-media/images/w_500/f_auto,q_auto/v1776896890/crooked/VSA-Logo-1480x1040-2_410566532f/VSA-Logo-1480x1040-2_410566532f.png" alt="Vote Save America" loading="lazy" onerror="this.parentNode.remove()"></div>
           <div class="eyebrow">Vote Save America</div>
           <h3>Down, not out</h3>
           <p>Put your energy into the races that decide the next two years. Find a shift, a donation match or a phone bank that fits your week.</p>
@@ -466,6 +490,7 @@ footer .logo{font-size:40px}
   <section class="block" id="newsletters" style="padding-top:0">
     <div class="wrap split">
       <div class="news">
+        <img class="news-art" src="https://res.cloudinary.com/crooked-media/images/w_700/f_auto,q_auto/v1772720271/crooked/subscription-footer-statue-of-liberty-pad-btm_40389ee551/subscription-footer-statue-of-liberty-pad-btm_40389ee551.png" alt="" loading="lazy" onerror="this.remove()">
         <div class="eyebrow" style="color:#AEB8DC">What A Day newsletter</div>
         <h3>The news, minus the panic</h3>
         <p style="margin:0;color:#D4DAF0">One email each weekday evening with what happened and what you can do about it.</p>
@@ -535,28 +560,31 @@ const episodes = [
 ];
 
 const shows = [
-  {name:"Pod Save America", f:"politics", bg:"#0A1A44", fg:"#FFD43B", tag:"Twice weekly", d:"Jon, Jon, Tommy and Dan on the news, the campaigns and the fight ahead.", n:"1,176 episodes"},
-  {name:"What A Day", f:"daily", bg:"#FFD43B", fg:"#0A1A44", tag:"Weekdays", d:"The news you need in about 20 minutes, every weekday.", n:"1,695 episodes"},
-  {name:"Strict Scrutiny", f:"law", bg:"#7A1F3D", fg:"#FFE7EE", tag:"Weekly", d:"The Supreme Court and the legal culture around it, from three law professors."},
-  {name:"Offline", f:"culture", bg:"#1F6F5C", fg:"#E2FFF6", tag:"Weekly", d:"Jon Favreau on how the internet is changing politics and our lives.", n:"243 episodes"},
-  {name:"Runaway Country", f:"politics", bg:"#E5383B", fg:"#FFF3F3", tag:"Weekly", d:"Alex Wagner on a country moving faster than anyone can track.", n:"47 episodes"},
-  {name:"Pod Save the World", f:"politics", bg:"#2E5AAC", fg:"#EAF1FF", tag:"Weekly", d:"Foreign policy and global news, from former Obama officials."},
-  {name:"Lovett or Leave It", f:"culture", bg:"#F28C28", fg:"#2A1300", tag:"Weekly", d:"A live comedy show about the week's news, hosted by Jon Lovett."},
-  {name:"Hysteria", f:"culture", bg:"#6B3FA0", fg:"#F4ECFF", tag:"Weekly", d:"Politics and culture through a feminist lens, with zero apologies."}
+  {name:"Pod Save America", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1596222459/crooked/pod-save-america-100-days-pod-logo-220312-IxpLePOF/pod-save-america-100-days-pod-logo-220312-IxpLePOF.png", f:"politics", bg:"#0A1A44", fg:"#FFD43B", tag:"Twice weekly", d:"Jon, Jon, Tommy and Dan on the news, the campaigns and the fight ahead.", n:"1,176 episodes"},
+  {name:"What A Day", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1725731596/crooked/WAD_KeyArt/WAD_KeyArt.png", f:"daily", bg:"#FFD43B", fg:"#0A1A44", tag:"Weekdays", d:"The news you need in about 20 minutes, every weekday.", n:"1,695 episodes"},
+  {name:"Strict Scrutiny", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1649286621/crooked/final-pod-logo-strict-scrutiny-302020-TdZ5dVMo/final-pod-logo-strict-scrutiny-302020-TdZ5dVMo.png", f:"law", bg:"#7A1F3D", fg:"#FFE7EE", tag:"Weekly", d:"The Supreme Court and the legal culture around it, from three law professors."},
+  {name:"Offline", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1789769967/crooked/Offline-Key-Art-1_42541c31d6/Offline-Key-Art-1_42541c31d6.png", f:"culture", bg:"#1F6F5C", fg:"#E2FFF6", tag:"Weekly", d:"Jon Favreau on how the internet is changing politics and our lives.", n:"243 episodes"},
+  {name:"Runaway Country", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1760474576/crooked/Runaway-Country_11500px_38917ef8c4/Runaway-Country_11500px_38917ef8c4.png", f:"politics", bg:"#E5383B", fg:"#FFF3F3", tag:"Weekly", d:"Alex Wagner on a country moving faster than anyone can track.", n:"47 episodes"},
+  {name:"Pod Save the World", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1596222771/crooked/pod-save-the-world-pod-logo-575518-PPkGvOKI/pod-save-the-world-pod-logo-575518-PPkGvOKI.jpg", f:"politics", bg:"#2E5AAC", fg:"#EAF1FF", tag:"Weekly", d:"Foreign policy and global news, from former Obama officials."},
+  {name:"Lovett or Leave It", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1737483792/crooked/LOLI-Key-Art-2/LOLI-Key-Art-2.png", f:"culture", bg:"#F28C28", fg:"#2A1300", tag:"Weekly", d:"A live comedy show about the week's news, hosted by Jon Lovett."},
+  {name:"Hysteria", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1647997081/crooked/hysteria-cover-art-030822-web-172537-EK63BzSg/hysteria-cover-art-030822-web-172537-EK63BzSg.jpg", f:"culture", bg:"#6B3FA0", fg:"#F4ECFF", tag:"Weekly", d:"Politics and culture through a feminist lens, with zero apologies."}
 ];
 
+const artFor = name => shows.find(s=>name.startsWith(s.name)) || {bg:"#0A1A44",fg:"#FFD43B"};
+const thumb = (name,cls) => { const a=artFor(name); return `<span class="${cls}" style="background:${a.bg}">${a.img?`<img src="${a.img}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>`; };
 const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
 
 document.getElementById("lineup").innerHTML = episodes.map((e,i)=>`
   <div class="ep" data-i="${i}">
     <button class="play" data-play="${i}" aria-label="Play ${e.title}">${PLAY}</button>
+    ${thumb(e.show,"ep-art")}
     <div style="min-width:0"><div class="show">${e.show}</div><div class="title">${e.title}</div></div>
     <span class="len">${e.min} min</span>
   </div>`).join("");
 
 document.getElementById("latestlist").innerHTML = episodes.map((e,i)=>`
   <article>
-    <div class="eyebrow">${e.show} · Oct 1</div>
+    <div class="lt-head">${thumb(e.show,"lt-art")}<div class="eyebrow">${e.show} · Oct 1</div></div>
     <h3>${e.title}</h3>
     <p>${e.blurb}</p>
     <div class="row"><button class="mini-play" data-play="${i}" aria-label="Play ${e.title}">${PLAY}</button><span class="eyebrow">${e.min} min</span></div>
@@ -567,19 +595,19 @@ document.getElementById("showgrid").innerHTML = shows.map(s=>`
     <div class="art" style="background:${s.bg};color:${s.fg}">
       <span class="tag">${s.tag}</span>
       <span class="mark">${s.name}</span>
+      ${s.img?`<img class="keyart" src="${s.img}" alt="${s.name} artwork" loading="lazy" onerror="this.remove()">`:""}
     </div>
     <h3>${s.name}</h3>
     <p>${s.d}${s.n ? ` · ${s.n}` : ""}</p>
   </a>`).join("");
 
 // chyron: episodes are playable, the rest jump to their section. Duplicated once for a seamless loop.
-const artFor = name => shows.find(s=>name.startsWith(s.name)) || {bg:"#0A1A44",fg:"#FFD43B"};
 const crawlItems = [
   ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, meta:`New today · ${e.min} min`, cta:"Play episode", art:artFor(e.show), mark:e.show})),
   {k:"Midterms", t:`${Math.max(0,Math.ceil((new Date(2026,10,3)-new Date().setHours(0,0,0,0))/864e5))} days to Election Day: check your registration`, d:"Make sure you're registered, find your polling place and make a plan to vote on Nov 3.", href:"#act", meta:"Vote Save America", cta:"Check registration", art:{bg:"#E5383B",fg:"#FFF3F3"}, mark:"Nov 3"},
-  {k:"Crooked Con", t:"Nov 5–7 in Washington, DC. Tickets on sale now", d:"Two days after the midterms. Bigger stages, more panels and more people who think America is worth fighting for.", href:"#takeover", con:true, meta:"Early-bird ends Oct 6", cta:"Open countdown", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"Crooked Con"},
-  {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"#act", meta:"Membership", cta:"Become a Friend", art:{bg:"#0A1A44",fg:"#FFD43B"}, mark:"Friends of the Pod"},
-  {k:"Vote Save America", t:"Find a phone bank or canvass shift near you", d:"Put your energy into the races that decide the next two years.", href:"#act", meta:"Take action", cta:"Find an action", art:{bg:"#2E5AAC",fg:"#EAF1FF"}, mark:"VSA"},
+  {k:"Crooked Con", t:"Nov 5–7 in Washington, DC. Tickets on sale now", d:"Two days after the midterms. Bigger stages, more panels and more people who think America is worth fighting for.", href:"#takeover", con:true, meta:"Early-bird ends Oct 6", cta:"Open countdown", art:{bg:"#4C8DEB",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_0.3,h_0.7,c_crop,g_north_east/w_300,h_300,c_fill/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png"}, mark:"Crooked Con"},
+  {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"#act", meta:"Membership", cta:"Become a Friend", art:{bg:"#FFD43B",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_fill,g_auto/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png"}, mark:"Friends of the Pod"},
+  {k:"Vote Save America", t:"Find a phone bank or canvass shift near you", d:"Put your energy into the races that decide the next two years.", href:"#act", meta:"Take action", cta:"Find an action", art:{bg:"#E8E8E8",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_pad,b_rgb:e8e8e8/f_auto,q_auto/v1776896890/crooked/VSA-Logo-1480x1040-2_410566532f/VSA-Logo-1480x1040-2_410566532f.png"}, mark:"VSA"},
   {k:"Newsletter", t:"What A Day lands in your inbox every weekday evening", d:"What happened today and what you can do about it, in one email.", href:"#newsletters", meta:"Free · weekdays", cta:"Sign up", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"What A Day"},
   {k:"Store", t:"New fall merch for your favorite pods", d:"Tees, hats and gifts for every Crooked fan.", href:"#store", meta:"Crooked Store", cta:"Shop now", art:{bg:"#F28C28",fg:"#2A1300"}, mark:"Shop"}
 ];
@@ -598,6 +626,7 @@ function showPreview(a){
   chyron.classList.add("paused");
   const art=document.getElementById("cpvArt");
   art.style.background=c.art.bg; art.style.color=c.art.fg; art.textContent=c.mark;
+  if(c.art.img){ const im=new Image(); im.src=c.art.img; im.alt=""; im.onerror=()=>im.remove(); art.appendChild(im); }
   document.getElementById("cpvK").textContent=c.k;
   document.getElementById("cpvT").textContent=c.t;
   document.getElementById("cpvD").textContent=c.d;
@@ -641,6 +670,7 @@ const pp=document.getElementById("pp"), pb=document.getElementById("pb");
 function render(){
   const e=episodes[cur], dur=e.min*60;
   document.getElementById("ps").textContent=e.show;
+  const pa=document.getElementById("pArt"); if(pa.dataset.show!==e.show){ pa.dataset.show=e.show; pa.outerHTML=thumb(e.show,"p-art").replace('<span class="p-art"','<span class="p-art" id="pArt" data-show="'+e.show+'"'); }
   document.getElementById("pt").textContent=e.title;
   document.getElementById("ptime").textContent=`${fmt(t)} / ${fmt(dur)}`;
   pb.style.width=(t/dur*100)+"%";
@@ -703,7 +733,7 @@ q.addEventListener("input",runSearch);
 res.addEventListener("click",e=>{ const a=e.target.closest("a"); if(!a) return; if(a.dataset.play!==undefined) e.preventDefault(); setSearch(false); });
 document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !sPanel.hidden){ setSearch(false); sBtn.focus(); }});
 
-// Crooked Con takeover with live countdown; closing remembers the choice for this browser
+// Crooked Con takeover with live countdown
 const conStart=new Date("2026-11-05T00:00:00-05:00");
 const to=document.getElementById("takeover"), conToggle=document.getElementById("conToggle");
 const pad=n=>String(n).padStart(2,"0");
@@ -715,13 +745,12 @@ function tickClock(){
   document.getElementById("conDays").textContent=Math.ceil(ms/864e5);
 }
 tickClock(); setInterval(tickClock,1000);
-function setTakeover(open, save=true){
+function setTakeover(open){
   conToggle.setAttribute("aria-expanded",open);
   if(open){ to.hidden=false; to.classList.remove("closing"); to.scrollIntoView({behavior:"smooth",block:"start"}); }
   else if(!to.hidden){ to.classList.add("closing"); setTimeout(()=>{ to.hidden=true; to.classList.remove("closing"); },340); }
-  if(save){ try{ localStorage.setItem("conTakeover", open?"open":"closed"); }catch(e){} }
 }
-try{ if(localStorage.getItem("conTakeover")==="closed"){ to.hidden=true; conToggle.setAttribute("aria-expanded","false"); } }catch(e){}
+// The takeover always opens expanded on page load.
 document.getElementById("conClose").addEventListener("click",()=>setTakeover(false));
 conToggle.addEventListener("click",()=>setTakeover(to.hidden));
 
