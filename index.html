@@ -37,7 +37,7 @@
 
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--paper);color:var(--fg);font:400 16px/1.55 var(--f-body);padding-bottom:128px}
+body{background:var(--paper);color:var(--fg);font:400 16px/1.55 var(--f-body);padding-bottom:52px}
 a{color:inherit}
 button{font:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--signal);outline-offset:2px}
@@ -210,19 +210,34 @@ footer{background:var(--ink);color:#AEB8DC;padding-block:40px;font-size:14px;mar
 footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 footer .logo{font-size:40px}
 
-/* player */
-.player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--ink);color:var(--on-ink);border-top:2px solid var(--signal);padding-bottom:env(safe-area-inset-bottom,0px)}
-.player .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;height:76px}
+/* player: a header row under the brand bar. "Featured" at rest, "Now playing" while playing */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--signal)}
+.player{background:var(--ink-2);color:var(--on-ink);border-top:1px solid #2C4180;border-bottom:2px solid var(--signal)}
+.player .wrap{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:14px;align-items:center;height:56px}
+.player .play{width:36px;height:36px}
+.player .play svg{width:13px;height:13px}
+.pstate{display:inline-flex;align-items:center;gap:7px;font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#0A1A44;background:var(--signal);border-radius:4px;padding:6px 8px;white-space:nowrap}
+.player.on .pstate{background:var(--live);color:#fff}
+.eq{display:none;align-items:flex-end;gap:2px;height:10px}
+.player.on .eq{display:inline-flex}
+.eq i{width:2px;background:currentColor;height:40%;animation:eq .9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{50%{height:100%}}
 .player .meta{min-width:0}
-.player .meta .t{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.player .meta .s{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;margin-bottom:5px}
-.bar{height:4px;background:#2C4180;border-radius:2px;margin-top:8px;overflow:hidden}
+.player .line{display:flex;gap:10px;align-items:baseline;min-width:0}
+.player .s{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;white-space:nowrap;flex:none}
+.player .t{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.bar{height:3px;background:#2C4180;border-radius:2px;margin-top:7px;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--signal)}
+.pctl{display:flex;gap:10px;align-items:center}
 .player .time{font:500 12px var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums}
+.next{background:none;border:0;color:#fff;padding:6px;border-radius:6px;display:grid;place-items:center}
+.next:hover{color:var(--signal)}
+@media (max-width:700px){.player .s,.player .time,.pstate #pstateTxt{display:none}.pstate{padding:6px}.player:not(.on) .pstate::before{content:"★"}}
 .speed{background:none;border:1px solid #3A4F8F;color:#fff;border-radius:6px;padding:4px 8px;font:500 12px var(--f-mono)}
 
 /* chyron (sits at the top of the docked player) */
-.chyron{display:flex;align-items:stretch;height:38px;background:var(--signal);color:#0A1A44;overflow:hidden;border-bottom:2px solid #0A1A44}
+.chyron{display:flex;align-items:stretch;height:40px;background:var(--signal);color:#0A1A44;overflow:hidden;border-top:2px solid #0A1A44}
 .chyron .bug{flex:none;display:flex;align-items:center;gap:8px;background:var(--live);color:#fff;padding:0 14px 0 var(--gutter);font:900 18px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%);padding-right:26px}
 .chyron .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.4s infinite}
 @keyframes blink{50%{opacity:.25}}
@@ -281,6 +296,21 @@ footer .logo{font-size:40px}
     </button>
     <a class="btn btn-signal join" href="#act">Join <span class="long">Friends of the Pod</span></a>
     <button class="icon-btn" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="player" role="region" aria-label="Audio player">
+    <div class="wrap">
+      <span class="pstate" id="pstate"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="pstateTxt">Featured</span></span>
+      <button class="play" id="pp" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></button>
+      <div class="meta">
+        <div class="line"><span class="s" id="ps">What A Day</span><span class="t" id="pt">Are Democrats Saying The Right Things To Win?</span></div>
+        <div class="bar"><i id="pb"></i></div>
+      </div>
+      <div class="pctl">
+        <span class="time" id="ptime">0:00 / 24:00</span>
+        <button class="speed" id="spd" aria-label="Playback speed">1×</button>
+        <button class="next" id="pnext" aria-label="Next episode"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4l11 8-11 8zM17 4h3v16h-3z"/></svg></button>
+      </div>
+    </div>
   </div>
   <div class="search-panel" id="searchPanel" hidden>
     <div class="wrap">
@@ -483,22 +513,10 @@ footer .logo{font-size:40px}
   </div>
 </div>
 
-<div class="player" role="region" aria-label="Audio player">
+<div class="dock">
   <div class="chyron" aria-label="Crooked headlines">
     <div class="bug"><span class="dot"></span>On Crooked <span class="state">Paused</span></div>
     <div class="crawl"><div class="crawl-track" id="crawl"></div></div>
-  </div>
-  <div class="wrap">
-    <button class="play" id="pp" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></button>
-    <div class="meta">
-      <div class="s" id="ps">What A Day</div>
-      <div class="t" id="pt">Are Democrats Saying The Right Things To Win?</div>
-      <div class="bar"><i id="pb"></i></div>
-    </div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <span class="time" id="ptime">0:00 / 24:00</span>
-      <button class="speed" id="spd" aria-label="Playback speed">1×</button>
-    </div>
   </div>
 </div>
 
@@ -624,6 +642,8 @@ function render(){
   document.getElementById("ptime").textContent=`${fmt(t)} / ${fmt(dur)}`;
   pb.style.width=(t/dur*100)+"%";
   pp.innerHTML=playing?PAUSE:PLAY; pp.setAttribute("aria-label",playing?"Pause":"Play");
+  document.querySelector(".player").classList.toggle("on", playing);
+  document.getElementById("pstateTxt").textContent = playing ? "Now playing" : (t>0 ? "Paused" : "Featured");
   document.querySelectorAll(".ep").forEach(el=>el.classList.toggle("playing", playing && +el.dataset.i===cur));
   document.querySelectorAll("[data-play]").forEach(b=>{ if(b.classList.contains("btn")) return;
     b.innerHTML = playing && +b.dataset.play===cur ? PAUSE : PLAY; });
@@ -634,6 +654,7 @@ function setPlaying(p){
   render();
 }
 pp.addEventListener("click",()=>setPlaying(!playing));
+document.getElementById("pnext").addEventListener("click",()=>{ cur=(cur+1)%episodes.length; t=0; setPlaying(true); });
 document.addEventListener("click",ev=>{
   const b=ev.target.closest("[data-play]"); if(!b) return;
   const i=+b.dataset.play;

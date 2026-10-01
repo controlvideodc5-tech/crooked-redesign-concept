@@ -7,7 +7,7 @@ It is not affiliated with, endorsed by or connected to Crooked Media. All names 
 
 ## What's in the concept
 - **Today's lineup hero**: the newest episodes, each playable from the homepage
-- **Docked player** with playback speed (simulated; no real audio)
+- **Header player** under the logo bar, labeled "Featured" at rest and "Now playing" while playing (simulated; no real audio)
 - **News-style chyron** of Crooked content that pauses on hover and shows a preview card
 - **Crooked Con takeover** with a live countdown that visitors can close or reopen
 - **Midterms countdown strip**, show browser with category filters, and one "Listen. Show up. Organize." section for Friends of the Pod, Crooked Con and Vote Save America
