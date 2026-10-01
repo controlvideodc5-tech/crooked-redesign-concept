@@ -213,11 +213,13 @@ footer .logo{font-size:40px}
 
 /* player: a header row under the brand bar. "Featured" at rest, "Now playing" while playing */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--signal)}
-.player{background:var(--ink-2);color:var(--on-ink);border-top:1px solid #2C4180;border-bottom:2px solid var(--signal)}
-.player .wrap{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:14px;align-items:center;height:56px}
+.player{background:var(--ink);color:var(--on-ink);padding-bottom:10px}
+.player .wrap{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:14px;align-items:center}
+.player .well{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center;height:50px;padding-inline:8px 10px;border-radius:999px;background:rgba(255,255,255,.06);transition:background .2s}
+.player.on .well{background:rgba(255,255,255,.1)}
 .player .play{width:36px;height:36px}
 .player .play svg{width:13px;height:13px}
-.pstate{display:inline-flex;align-items:center;gap:7px;font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#0A1A44;background:var(--signal);border-radius:4px;padding:6px 8px;white-space:nowrap}
+.pstate{display:inline-flex;align-items:center;gap:7px;border-radius:999px !important;font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#0A1A44;background:var(--signal);border-radius:4px;padding:6px 8px;white-space:nowrap}
 .player.on .pstate{background:var(--live);color:#fff}
 .eq{display:none;align-items:flex-end;gap:2px;height:10px}
 .player.on .eq{display:inline-flex}
@@ -228,7 +230,7 @@ footer .logo{font-size:40px}
 .player .line{display:flex;gap:10px;align-items:baseline;min-width:0}
 .player .s{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;white-space:nowrap;flex:none}
 .player .t{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.bar{height:3px;background:#2C4180;border-radius:2px;margin-top:7px;overflow:hidden}
+.bar{height:3px;background:rgba(255,255,255,.14);border-radius:2px;margin-top:7px;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--signal)}
 .pctl{display:flex;gap:10px;align-items:center}
 .player .time{font:500 12px var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums}
@@ -299,7 +301,7 @@ footer .logo{font-size:40px}
     <button class="icon-btn" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   <div class="player" role="region" aria-label="Audio player">
-    <div class="wrap">
+    <div class="wrap"><div class="well">
       <span class="pstate" id="pstate"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="pstateTxt">Featured</span></span>
       <button class="play" id="pp" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></button>
       <div class="meta">
@@ -311,7 +313,7 @@ footer .logo{font-size:40px}
         <button class="speed" id="spd" aria-label="Playback speed">1×</button>
         <button class="next" id="pnext" aria-label="Next episode"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4l11 8-11 8zM17 4h3v16h-3z"/></svg></button>
       </div>
-    </div>
+    </div></div>
   </div>
   <div class="search-panel" id="searchPanel" hidden>
     <div class="wrap">
