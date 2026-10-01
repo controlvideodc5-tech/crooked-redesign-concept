@@ -7,7 +7,7 @@ It is not affiliated with, endorsed by or connected to Crooked Media. All names 
 
 ## What's in the concept
 - **Hero carousel**: Today's lineup, then Friends of the Pod (ad-free), then Lovett or Leave It live, with auto-advance, progress tabs and pause
-- **Player docked at the bottom** so you can keep listening while you browse
+- **Mini player**: a small floating card that starts bottom-left and can be dragged by its grip (double-click the grip to reset); parked along the bottom on phones
 - **On Crooked strip** under today's lineup: art cards drift slowly; hovering pauses and previews with Play now, Up next, Save and Follow; an Up next & Saved panel lives in the player
 - **Crooked Con countdown** with two states: expanded (Crooked Con 2026 art and a big live clock) on every visit, and a collapsed bar with a mini clock, with a Star Wars-style credits roll of the 2026 panelists
 - Show browser with category filters, and one "Listen. Show up. Organize." section for Friends of the Pod, Crooked Con and Vote Save America
