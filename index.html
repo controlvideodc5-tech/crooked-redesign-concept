@@ -119,15 +119,23 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .con-note{font-size:14px;font-weight:600}
 .con-note b{background:#0A1A44;color:var(--signal);padding:2px 6px;border-radius:4px}
 .con-art{align-self:stretch;position:relative;min-height:360px}
-.con-eagle{position:absolute;top:-14px;right:-10px;width:120px;border-radius:10px;z-index:3;box-shadow:0 10px 24px rgba(5,10,30,.35);transform:rotate(4deg)}
 /* credits roll: names recede into the distance, Star Wars style */
 .sw{position:absolute;inset:0;border-radius:14px;overflow:hidden;perspective:360px;background:
   radial-gradient(1px 1px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 72% 34%,#fff6 50%,transparent 51%),
   radial-gradient(1.5px 1.5px at 38% 72%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 88% 82%,#fff5 50%,transparent 51%),
   radial-gradient(1px 1px at 55% 12%,#fff6 50%,transparent 51%),radial-gradient(ellipse at 50% 120%,#1C2F66,#060E2B 70%)}
 .sw-tilt{position:absolute;left:0;right:0;bottom:0;top:-120%;transform-origin:50% 100%;transform:rotateX(28deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 22%);mask-image:linear-gradient(to bottom,transparent 0%,#000 22%)}
-.sw-roll{position:absolute;left:10%;right:10%;top:100%;text-align:center;color:var(--signal);animation:roll var(--roll-dur,70s) linear infinite}
+.sw-roll{position:absolute;left:10%;right:10%;top:100%;text-align:center;color:var(--signal);animation:roll var(--roll-dur,70s) linear 1 forwards}
 .sw:hover .sw-roll{animation-play-state:paused}
+/* finale: the eagle swoops in and lands where it sits on the poster, then sky + poster resolve around it */
+.sw-sky{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,#145FF4 0%,#2F78F2 55%,#6FA3EE 100%);opacity:0;transition:opacity 1.4s ease}
+.sw-poster{position:absolute;top:0;right:0;height:100%;aspect-ratio:742/924;z-index:4;pointer-events:none}
+.sw-poster-img{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.4s ease}
+.sw-eagle{position:absolute;left:31.03%;top:0;width:68.97%;height:78.79%;opacity:0;transform:translate(75%,-90%) rotate(-20deg) scale(.5);transform-origin:70% 35%}
+.sw.swoop .sw-eagle{opacity:1;transform:none;transition:transform 2.4s cubic-bezier(.16,.8,.24,1),opacity .3s}
+.sw.poster .sw-sky,.sw.poster .sw-poster-img{opacity:1}
+.sw.depart .sw-eagle{opacity:0;transform:translate(-110%,-120%) rotate(14deg) scale(.55);transition:transform 2s cubic-bezier(.5,0,.8,.4),opacity .5s 1.5s}
+.sw-tilt{z-index:3}
 @keyframes roll{from{top:100%}to{top:var(--roll-end,-1600px)}}
 .sw-ep{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
 .sw-title{font:900 clamp(40px,4.4vw,64px)/.9 var(--f-display);text-transform:uppercase;margin:0}
@@ -140,9 +148,9 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .sw-sched dd{margin:4px 0 0;font:900 24px/1 var(--f-display);text-transform:uppercase}
 .sw-sched dd span{display:block;font:600 13px/1.3 var(--f-body);text-transform:none;color:#F3E7B0;margin-top:4px}
 .sw-end{font:900 30px/1 var(--f-display);text-transform:uppercase;margin:40px 0 0}
-@media (prefers-reduced-motion:reduce){.sw-tilt{transform:none;-webkit-mask-image:none;mask-image:none;overflow:auto}.sw-roll{position:static;animation:none;padding:24px 0}}
+@media (prefers-reduced-motion:reduce){.sw-poster,.sw-sky{display:none}.sw-tilt{transform:none;-webkit-mask-image:none;mask-image:none;overflow:auto}.sw-roll{position:static;animation:none;padding:24px 0}}
 @media (max-width:900px){
-  .con-body{grid-template-columns:1fr}.con-art{min-height:320px}.con-eagle{width:90px}
+  .con-body{grid-template-columns:1fr}.con-art{min-height:320px}
   .con-when{display:none}
 }
 @media (max-width:560px){.con-logo span{display:none}.con[data-state="closed"] .con-bar .btn-ink{display:none}.mini span{font-size:17px}}
@@ -458,8 +466,12 @@ footer .logo{font-size:40px}
         </div>
       </div>
       <div class="con-art">
-        <img class="con-eagle" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_320/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 logo with an eagle" onerror="this.remove()">
         <div class="sw" id="sw" aria-label="Crooked Con 2026 schedule and lineup">
+          <div class="sw-sky" aria-hidden="true"></div>
+          <div class="sw-poster">
+            <img class="sw-poster-img" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 poster: an eagle swoops beside the Crooked Con 2026 logo in a blue sky with clouds" onerror="this.remove()">
+            <canvas class="sw-eagle" id="swEagle" data-src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.8,y_0.04,w_0.2,h_0.52/w_600/f_png/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" aria-hidden="true"></canvas>
+          </div>
           <div class="sw-tilt">
             <div class="sw-roll" id="swRoll">
               <p class="sw-ep">Washington, DC · November 5–7, 2026</p>
@@ -1058,8 +1070,43 @@ function tickClock(){
 tickClock(); setInterval(tickClock,1000);
 function sizeRoll(){ const r=document.getElementById("swRoll"); if(!r||!r.offsetHeight) return;
   r.style.setProperty("--roll-end", -(r.offsetHeight+40)+"px");
-  r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+r.parentNode.offsetHeight)/12)+"s"); }
+  r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+r.parentNode.offsetHeight)/16)+"s"); }
 sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && document.fonts.ready.then(sizeRoll);
+
+// eagle cut-out: key out the blue sky (and the pale logo letters beside it), keep the bird and its talons
+{
+  const cv=document.getElementById("swEagle"), img=new Image();
+  img.crossOrigin="anonymous";
+  img.onload=()=>{
+    cv.width=img.naturalWidth; cv.height=img.naturalHeight;
+    const ctx=cv.getContext("2d"); ctx.drawImage(img,0,0);
+    let data; try{ data=ctx.getImageData(0,0,cv.width,cv.height); }catch(e){ cv.remove(); return; }
+    const d=data.data, W=cv.width, k=W/500;            // rules below are in 500px-wide reference units
+    for(let y=0;y<cv.height;y++) for(let x=0;x<W;x++){
+      const i=(y*W+x)*4, r=d[i], g=d[i+1], b=d[i+2], rx=x/k, ry=y/k;
+      const blue=b-Math.max(r,g);
+      if(blue>40){ d[i+3]=0; continue; }
+      if(blue>8){ d[i+3]=Math.round(255*(1-(blue-8)/32)); d[i+2]=Math.max(r,g); }
+      const textZone=(rx<218&&ry>381)||(rx<185&&ry>350);
+      if(textZone && (r>170&&g>160 || blue>-25)) d[i+3]=0;   // logo letters + their blue fringe; dark talons stay
+    }
+    ctx.putImageData(data,0,0);
+  };
+  img.src=cv.dataset.src;
+}
+{
+  const sw=document.getElementById("sw"), roll=document.getElementById("swRoll");
+  const still=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  roll.addEventListener("animationend",async e=>{
+    if(e.animationName!=="roll"||still) return;
+    sw.classList.add("swoop"); await wait(2500);       // eagle lands on its spot
+    sw.classList.add("poster"); await wait(1500+9000); // sky + poster resolve, then hold
+    sw.classList.remove("poster"); sw.classList.add("depart"); await wait(1200);
+    roll.style.animation="none"; void roll.offsetWidth; roll.style.animation="";   // roll starts again as the eagle leaves
+    await wait(1400); sw.classList.remove("swoop","depart");
+  });
+}
 function setTakeover(open){
   con.dataset.state = open ? "open" : "closed";
   conToggle.setAttribute("aria-expanded",open);
