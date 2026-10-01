@@ -103,19 +103,20 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .to-close{display:inline-flex;align-items:center;gap:6px;background:#0A1A44;color:var(--signal);border:0;border-radius:999px;padding:6px 12px;font:500 12px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
 .to-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
 .to-art{display:none}
+@media (min-width:1101px){.clock span{font-size:clamp(56px,6.4vw,124px)}.clock i{font-size:clamp(40px,4.6vw,88px)}}
 @media (min-width:1101px){
   .takeover .wrap{grid-template-columns:minmax(0,1fr) minmax(0,38%);column-gap:40px}
   .takeover .wrap > :not(.to-art){grid-column:1}
-  .to-art{display:block;grid-column:2;grid-row:1/4;align-self:stretch;position:relative;margin-block:-22px 0;overflow:hidden}
-  .to-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left 30%}
+  .to-art{display:block;grid-column:2;grid-row:1/4;align-self:stretch;position:relative;overflow:hidden;min-height:360px}
+  .to-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
   .to-close{position:absolute;top:22px;right:var(--gutter);z-index:2}
 }
 .to-left h2{font-size:clamp(26px,3vw,36px);margin-bottom:8px}
 .clock{display:flex;align-items:flex-start;gap:clamp(4px,1vw,12px);font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums;max-width:100%}
 .clock div{display:flex;flex-direction:column;align-items:center;gap:6px}
-.clock span{font-size:clamp(56px,11vw,148px);line-height:.82;background:#0A1A44;color:var(--signal);padding:.1em .12em .06em;border-radius:10px;min-width:1.25em;text-align:center}
+.clock span{font-size:clamp(48px,10vw,148px);line-height:.82;background:#0A1A44;color:var(--signal);padding:.1em .12em .06em;border-radius:10px;min-width:1.25em;text-align:center}
 .clock small{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
-.clock i{font-style:normal;font-size:clamp(40px,8vw,104px);line-height:.95}
+.clock i{font-style:normal;font-size:clamp(34px,7vw,104px);line-height:.95}
 .to-right{display:grid;gap:14px;max-width:40em;min-width:0}
 .to-lede{margin:0;font-size:17px;font-weight:500}
 .to-alert{background:#0A1A44;color:#fff;max-width:30em;padding:10px 14px;border-radius:8px;font-size:14px}
@@ -185,7 +186,7 @@ section.block{padding-block:64px}
 .cpv-art{position:relative;overflow:hidden}
 .cpv-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .panel-img{width:100%;height:170px;object-fit:cover;border-radius:10px;display:block}
-.con-img{object-position:right top;background:#4C8DEB}
+.con-img{object-fit:contain;background:#4C8DEB}
 .vsa-logo{background:#E8E8E8;border-radius:10px;display:grid;place-items:center;height:170px}
 .vsa-logo img{max-height:130px;max-width:80%;object-fit:contain}
 .news{position:relative;overflow:hidden}
@@ -389,7 +390,7 @@ footer .logo{font-size:40px}
         </div>
       </div>
     </div>
-    <div class="to-art"><img src="https://res.cloudinary.com/crooked-media/images/w_0.33,c_crop,g_east/w_1000/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork: an eagle beside the Crooked Con 2026 logo in a blue sky" onerror="this.parentNode.remove()"></div>
+    <div class="to-art"><img src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork: an eagle beside the Crooked Con 2026 logo in a blue sky" onerror="this.parentNode.remove()"></div>
     <div class="marquee-names" aria-label="Featured speakers">
       Alex Wagner · Alyssa Mastromonaco · Ben Rhodes · Brian Tyler Cohen · Dan Pfeiffer · Erin Ryan · Jon Favreau · Jon Lovett · Leah Greenberg · Rep. Jamie Raskin · Sarah Longwell · Sen. Chris Van Hollen · Tommy Vietor · and more
     </div>
@@ -464,7 +465,7 @@ footer .logo{font-size:40px}
           <a class="btn" href="#act">Become a Friend</a>
         </div>
         <div class="panel p-con">
-          <img class="panel-img con-img" src="https://res.cloudinary.com/crooked-media/images/w_0.3,h_0.75,c_crop,g_north_east/w_700/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork" loading="lazy" onerror="this.remove()">
+          <img class="panel-img con-img" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_700/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork" loading="lazy" onerror="this.remove()">
           <div class="eyebrow" style="color:#AEB8DC">Crooked Con 2026</div>
           <h3>Crooked Con is back</h3>
           <div class="when">NOV 5–7 · WASHINGTON, DC</div>
