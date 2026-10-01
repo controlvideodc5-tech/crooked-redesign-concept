@@ -115,10 +115,26 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .con-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}
 .con-note{font-size:14px;font-weight:600}
 .con-note b{background:#0A1A44;color:var(--signal);padding:2px 6px;border-radius:4px}
-.con-art{align-self:stretch;position:relative;min-height:300px}
-.con-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.con-art{align-self:stretch;position:relative;min-height:360px}
+.con-eagle{position:absolute;top:-14px;right:-10px;width:120px;border-radius:10px;z-index:3;box-shadow:0 10px 24px rgba(5,10,30,.35);transform:rotate(4deg)}
+/* credits roll: names recede into the distance, Star Wars style */
+.sw{position:absolute;inset:0;border-radius:14px;overflow:hidden;perspective:360px;background:
+  radial-gradient(1px 1px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 72% 34%,#fff6 50%,transparent 51%),
+  radial-gradient(1.5px 1.5px at 38% 72%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 88% 82%,#fff5 50%,transparent 51%),
+  radial-gradient(1px 1px at 55% 12%,#fff6 50%,transparent 51%),radial-gradient(ellipse at 50% 120%,#1C2F66,#060E2B 70%)}
+.sw-tilt{position:absolute;inset:0;transform-origin:50% 100%;transform:rotateX(28deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 38%);mask-image:linear-gradient(to bottom,transparent 0%,#000 38%)}
+.sw-roll{position:absolute;left:10%;right:10%;top:100%;text-align:center;color:var(--signal);animation:roll var(--roll-dur,70s) linear infinite}
+.sw:hover .sw-roll{animation-play-state:paused}
+@keyframes roll{from{top:100%}to{top:var(--roll-end,-1600px)}}
+.sw-ep{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+.sw-title{font:900 clamp(40px,4.4vw,64px)/.9 var(--f-display);text-transform:uppercase;margin:0}
+.sw-sub{font:700 16px/1.3 var(--f-body);margin:10px 0 28px}
+.sw h4{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:28px 0 10px;color:#fff}
+.sw ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font:900 22px/1.05 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
+.sw-end{font:900 30px/1 var(--f-display);text-transform:uppercase;margin:40px 0 0}
+@media (prefers-reduced-motion:reduce){.sw-tilt{transform:none;-webkit-mask-image:none;mask-image:none;overflow:auto}.sw-roll{position:static;animation:none;padding:24px 0}}
 @media (max-width:900px){
-  .con-body{grid-template-columns:1fr}.con-art{display:none}
+  .con-body{grid-template-columns:1fr}.con-art{min-height:320px}.con-eagle{width:90px}
   .con-when{display:none}
 }
 @media (max-width:560px){.con-logo span{display:none}.con[data-state="closed"] .con-bar .btn-ink{display:none}.mini span{font-size:17px}}
@@ -135,6 +151,35 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .hero h1 em{font-style:normal;color:var(--signal)}
 .hero p.lede{font-size:19px;max-width:34em;color:#D4DAF0;margin:0 0 26px}
 .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero{padding-block:48px 24px}
+.slides{display:grid;position:relative;z-index:1}
+.slide{grid-area:1/1;opacity:0;visibility:hidden;transform:translateX(24px);transition:opacity .5s ease,transform .5s ease,visibility 0s .5s}
+.slide.is-active{opacity:1;visibility:visible;transform:none;transition:opacity .5s ease,transform .5s ease}
+.hero-nav{display:flex;align-items:center;gap:16px;margin-top:32px;position:relative;z-index:1}
+.tabs{display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.tab{flex:1;min-width:110px;max-width:220px;background:none;border:0;color:#AEB8DC;text-align:left;padding:0;display:grid;gap:8px;font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
+.tab i{display:block;height:3px;background:rgba(255,255,255,.18);border-radius:2px;position:relative;overflow:hidden}
+.tab i::after{content:"";position:absolute;inset:0;background:var(--signal);transform:scaleX(0);transform-origin:left}
+.tab.is-active{color:#fff}
+.tab.is-active i::after{animation:fill var(--dur,8s) linear forwards}
+.tab.done i::after{transform:scaleX(1)}
+.hero.paused .tab.is-active i::after{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.hero-pause{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid #3A4F8F;background:none;color:#fff;display:grid;place-items:center}
+.hero-pause .ic-play{display:none}.hero.paused .hero-pause .ic-play{display:block}.hero.paused .hero-pause .ic-pause{display:none}
+/* slide 2: fanned show art */
+.fan{position:relative;height:clamp(240px,26vw,340px)}
+.fan-card{position:absolute;top:50%;left:calc(var(--i) * 15%);width:clamp(150px,17vw,230px);aspect-ratio:1;max-width:100%;margin:0;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4);transform:translateY(-50%) rotate(calc((var(--i) - 2) * 4deg)) translateY(calc(var(--i) * 6px));z-index:calc(10 - var(--i));transition:transform .3s}
+.fan-card img{width:100%;height:100%;object-fit:cover;display:block}
+.fan:hover .fan-card{transform:translateY(-50%) rotate(calc((var(--i) - 2) * 6deg)) translateX(calc((var(--i) - 2) * 12px))}
+.adfree{position:absolute;top:10px;right:-28px;transform:rotate(45deg);background:var(--signal);color:#0A1A44;font:700 10px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 30px}
+/* slide 3: Lovett live */
+.loli{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;max-width:100%;background:#7A2E12}
+.loli img{width:100%;height:100%;object-fit:cover;display:block}
+.burst{position:absolute;top:14px;left:14px;width:110px;height:110px;display:grid;place-items:center;background:#F7B6D2;color:#0A1A44;clip-path:polygon(50% 0,61% 22%,85% 10%,78% 36%,100% 45%,79% 58%,90% 84%,63% 76%,50% 100%,38% 76%,12% 88%,22% 60%,0 48%,22% 36%,14% 10%,39% 22%);transform:rotate(-12deg)}
+.burst span{font:900 19px/.9 var(--f-display);text-transform:uppercase;text-align:center}
+.loli-tag{position:absolute;left:14px;bottom:14px;background:#fff;color:#0A1A44;font:700 13px/1 var(--f-body);padding:8px 12px;border-radius:999px}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
 
 .lineup{background:var(--ink-2);border:1px solid #2C4180;border-radius:14px;padding:18px 18px 8px}
 .lineup-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
@@ -321,6 +366,7 @@ footer .logo{font-size:40px}
 
 @media (max-width:860px){
   .hero-grid{grid-template-columns:1fr;gap:32px}
+  .fan{height:230px}.fan-card{width:150px}
   .player .time{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -387,14 +433,38 @@ footer .logo{font-size:40px}
           <span class="con-note"><b>Early-bird ends Oct 6</b></span>
         </div>
       </div>
-      <div class="con-art"><img src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork: an eagle beside the Crooked Con 2026 logo, Freedom &amp; Content for All" onerror="this.parentNode.remove()"></div>
+      <div class="con-art">
+        <img class="con-eagle" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_320/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 logo with an eagle" onerror="this.remove()">
+        <div class="sw" id="sw" aria-label="Crooked Con 2026 lineup">
+          <div class="sw-tilt">
+            <div class="sw-roll" id="swRoll">
+              <p class="sw-ep">Washington, DC · Nov 5–7</p>
+              <h3 class="sw-title">Crooked Con 2026</h3>
+              <p class="sw-sub">Introducing the 2026 lineup</p>
+              <h4>Featured panelists</h4>
+              <ul><li>Addisu Demissie</li><li>Alex Wagner</li><li>Alyssa Mastromonaco</li><li>Ben Rhodes</li><li>Ben Wikler</li><li>Brad Lander</li><li>Brian Tyler Cohen</li><li>Carlos Odio</li><li>Carter Sherman</li><li>Sen. Chris Van Hollen</li><li>Clare Malone</li><li>Dan Pfeiffer</li><li>Erin Ryan</li><li>Errin Haines</li><li>Faiz Shakir</li><li>Galen Druke</li><li>Greta Carnes</li><li>Rep. Jamie Raskin</li><li>Janai Nelson</li><li>Jane Coaston</li><li>Jennifer Palmieri</li><li>Jennifer Welch</li><li>Jon Favreau</li><li>Jon Lovett</li><li>Kai Wright</li><li>Kate Shaw</li><li>Kyle Tharp</li><li>Leah Greenberg</li><li>Leah Litman</li><li>Louis Virtel</li><li>Marc Elias</li><li>Maurice Mitchell</li><li>Melissa Murray</li><li>Nate Silver</li><li>Nina Parker</li><li>Norm Eisen</li><li>Rebecca Katz</li><li>Regina Wallace-Jones</li><li>Sarah Longwell</li><li>Rep. Sarah McBride</li><li>Shaniqua McClendon</li><li>Tommy Vietor</li></ul>
+              <h4>Pod Save America Live</h4>
+              <ul><li>Sold out</li></ul>
+              <h4>Strict Scrutiny live guest</h4>
+              <ul><li>Prof. Sherrilyn Ifill</li></ul>
+              <h4>Lovett or Leave It live guests</h4>
+              <ul><li>Chi Ossé</li><li>Tressie McMillan</li></ul>
+              <h4>News &amp; culture creators</h4>
+              <ul><li>Barrett Adair</li><li>Charlie Goldensohn</li><li>David Pakman</li><li>Jess Britvich</li><li>Jolly Good Ginger</li><li>Katey Parham</li><li>Kevin Ortega-Rojas</li><li>Nikita Redkar</li><li>and more to be announced</li></ul>
+              <p class="sw-end">Freedom &amp; Content for All</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <main id="top">
-  <section class="hero">
-    <div class="wrap hero-grid">
+  <section class="hero" id="hero" aria-roledescription="carousel" aria-label="Featured on Crooked">
+    <div class="slides">
+    <div class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3: Today on Crooked">
+      <div class="wrap hero-grid">
       <div>
         <div class="eyebrow" id="today">Wednesday, October 1, 2026</div>
         <h1>Less doom.<br><em>More doing.</em></h1>
@@ -415,6 +485,57 @@ footer .logo{font-size:40px}
         </div>
         <div id="lineup"></div>
       </div>
+    </div>
+    </div>
+
+    <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3: Friends of the Pod" aria-hidden="true">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Friends of the Pod</div>
+          <h1>Your favorite pods.<br><em>Ad-free.</em></h1>
+          <p class="lede">Subscribe for ad-free episodes of every Crooked show, bonus content and early access to event tickets. Your membership keeps Crooked independent and out of Big Tech's pocket.</p>
+          <div class="ctas">
+            <a class="btn btn-signal" href="#act">Join Friends of the Pod</a>
+            <a class="btn btn-ghost" href="#act">See what's included</a>
+          </div>
+        </div>
+        <div class="fan" aria-label="Ad-free shows">
+          <figure class="fan-card" style="--i:0"><img src="https://res.cloudinary.com/crooked-media/images/w_360,h_360,c_fill,g_auto/f_auto,q_auto/v1760474576/crooked/Runaway-Country_11500px_38917ef8c4/Runaway-Country_11500px_38917ef8c4.png" alt="Runaway Country" loading="lazy" onerror="this.remove()"><span class="adfree">Ad-free</span></figure>
+          <figure class="fan-card" style="--i:1"><img src="https://res.cloudinary.com/crooked-media/images/w_360,h_360,c_fill,g_auto/f_auto,q_auto/v1596222459/crooked/pod-save-america-100-days-pod-logo-220312-IxpLePOF/pod-save-america-100-days-pod-logo-220312-IxpLePOF.png" alt="Pod Save America" loading="lazy" onerror="this.remove()"><span class="adfree">Ad-free</span></figure>
+          <figure class="fan-card" style="--i:2"><img src="https://res.cloudinary.com/crooked-media/images/w_360,h_360,c_fill,g_auto/f_auto,q_auto/v1737483792/crooked/LOLI-Key-Art-2/LOLI-Key-Art-2.png" alt="Lovett or Leave It" loading="lazy" onerror="this.remove()"><span class="adfree">Ad-free</span></figure>
+          <figure class="fan-card" style="--i:3"><img src="https://res.cloudinary.com/crooked-media/images/w_360,h_360,c_fill,g_auto/f_auto,q_auto/v1596222771/crooked/pod-save-the-world-pod-logo-575518-PPkGvOKI/pod-save-the-world-pod-logo-575518-PPkGvOKI.jpg" alt="Pod Save the World" loading="lazy" onerror="this.remove()"><span class="adfree">Ad-free</span></figure>
+          <figure class="fan-card" style="--i:4"><img src="https://res.cloudinary.com/crooked-media/images/w_360,h_360,c_fill,g_auto/f_auto,q_auto/v1789769967/crooked/Offline-Key-Art-1_42541c31d6/Offline-Key-Art-1_42541c31d6.png" alt="Offline" loading="lazy" onerror="this.remove()"><span class="adfree">Ad-free</span></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3: Lovett or Leave It live" aria-hidden="true">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Lovett or Leave It · Live in LA</div>
+          <h1>Late-night politics.<br><em>Live in LA.</em></h1>
+          <p class="lede">Watch Jon Lovett tape America's number one late-night political gay live comedy podcast. Shows every Tuesday and Thursday at 5pm.</p>
+          <div class="ctas">
+            <a class="btn btn-signal" href="#act">Get tickets</a>
+            <button class="btn btn-ghost" data-play="5"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg> Play the latest episode</button>
+          </div>
+        </div>
+        <div class="loli">
+          <img src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.5,y_0,w_0.5,h_1/w_900/f_auto,q_auto/v1780078979/crooked/LOLI-hero-web-banner_desktop/LOLI-hero-web-banner_desktop.png" alt="Jon Lovett on stage with a microphone" loading="lazy" onerror="this.remove()">
+          <span class="loli-tag">Every Tue &amp; Thu · 5pm</span>
+          <span class="burst" aria-hidden="true"><span>Live<br>in LA!</span></span>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="wrap hero-nav">
+      <div class="tabs" role="tablist" aria-label="Choose a featured story">
+        <button class="tab is-active" role="tab" aria-selected="true" data-go="0"><span>Today</span><i></i></button>
+        <button class="tab" role="tab" aria-selected="false" data-go="1"><span>Friends of the Pod</span><i></i></button>
+        <button class="tab" role="tab" aria-selected="false" data-go="2"><span>Lovett Live</span><i></i></button>
+      </div>
+      <button class="hero-pause" id="heroPause" aria-label="Pause slideshow"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path class="ic-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/><path class="ic-play" d="M6 4l14 8-14 8z"/></svg></button>
     </div>
   </section>
 
@@ -797,6 +918,24 @@ document.getElementById("spd").addEventListener("click",e=>{
   speed = speed>=2 ? 1 : speed+0.5; e.target.textContent=speed+"×";
 });
 
+// hero carousel: Today → Friends of the Pod → Lovett Live. Auto-advances; pauses on hover, focus or the pause button
+{
+  const hero=document.getElementById("hero"), slides=[...hero.querySelectorAll(".slide")], tabs=[...hero.querySelectorAll(".tab")];
+  let idx=0, userPaused=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const sync=()=>hero.classList.toggle("paused", userPaused || hero.matches(":hover") || hero.contains(document.activeElement));
+  function go(n){
+    idx=(n+slides.length)%slides.length;
+    slides.forEach((sl,i)=>{ sl.classList.toggle("is-active",i===idx); sl.setAttribute("aria-hidden",i!==idx); sl.inert = i!==idx; });
+    tabs.forEach((t,i)=>{ t.classList.remove("is-active","done"); if(i<idx) t.classList.add("done"); t.setAttribute("aria-selected",i===idx); });
+    void tabs[idx].offsetWidth; tabs[idx].classList.add("is-active");
+  }
+  tabs.forEach((t,i)=>{ t.addEventListener("click",()=>go(i)); t.querySelector("i").addEventListener("animationend",()=>go(idx+1)); });
+  hero.addEventListener("mouseenter",sync); hero.addEventListener("mouseleave",sync);
+  hero.addEventListener("focusin",sync); hero.addEventListener("focusout",()=>setTimeout(sync));
+  document.getElementById("heroPause").addEventListener("click",e=>{ userPaused=!userPaused; e.currentTarget.setAttribute("aria-label",userPaused?"Play slideshow":"Pause slideshow"); sync(); });
+  go(0); sync();
+}
+
 // date
 const now=new Date();
 document.getElementById("today").textContent=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
@@ -843,11 +982,15 @@ function tickClock(){
   }
 }
 tickClock(); setInterval(tickClock,1000);
+function sizeRoll(){ const r=document.getElementById("swRoll"); if(!r||!r.offsetHeight) return;
+  r.style.setProperty("--roll-end", -(r.offsetHeight+40)+"px");
+  r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+document.getElementById("sw").offsetHeight)/40)+"s"); }
+sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && document.fonts.ready.then(sizeRoll);
 function setTakeover(open){
   con.dataset.state = open ? "open" : "closed";
   conToggle.setAttribute("aria-expanded",open);
   document.getElementById("conToggleTxt").textContent = open ? "Collapse" : "Expand";
-  if(open) con.scrollIntoView({behavior:"smooth",block:"start"});
+  if(open){ con.scrollIntoView({behavior:"smooth",block:"start"}); requestAnimationFrame(sizeRoll); }
 }
 conToggle.addEventListener("click",()=>setTakeover(con.dataset.state!=="open"));
 
