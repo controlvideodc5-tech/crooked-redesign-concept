@@ -125,7 +125,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
   radial-gradient(1px 1px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 72% 34%,#fff6 50%,transparent 51%),
   radial-gradient(1.5px 1.5px at 38% 72%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 88% 82%,#fff5 50%,transparent 51%),
   radial-gradient(1px 1px at 55% 12%,#fff6 50%,transparent 51%),radial-gradient(ellipse at 50% 120%,#1C2F66,#060E2B 70%)}
-.sw-tilt{position:absolute;inset:0;transform-origin:50% 100%;transform:rotateX(28deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 38%);mask-image:linear-gradient(to bottom,transparent 0%,#000 38%)}
+.sw-tilt{position:absolute;left:0;right:0;bottom:0;top:-120%;transform-origin:50% 100%;transform:rotateX(28deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 22%);mask-image:linear-gradient(to bottom,transparent 0%,#000 22%)}
 .sw-roll{position:absolute;left:10%;right:10%;top:100%;text-align:center;color:var(--signal);animation:roll var(--roll-dur,70s) linear infinite}
 .sw:hover .sw-roll{animation-play-state:paused}
 @keyframes roll{from{top:100%}to{top:var(--roll-end,-1600px)}}
@@ -993,7 +993,7 @@ function tickClock(){
 tickClock(); setInterval(tickClock,1000);
 function sizeRoll(){ const r=document.getElementById("swRoll"); if(!r||!r.offsetHeight) return;
   r.style.setProperty("--roll-end", -(r.offsetHeight+40)+"px");
-  r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+document.getElementById("sw").offsetHeight)/40)+"s"); }
+  r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+r.parentNode.offsetHeight)/55)+"s"); }
 sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && document.fonts.ready.then(sizeRoll);
 function setTakeover(open){
   con.dataset.state = open ? "open" : "closed";
