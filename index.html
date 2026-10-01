@@ -38,7 +38,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0}
-body{background:var(--paper);color:var(--fg);font:400 16px/1.55 var(--f-body);padding-bottom:104px}
+body{background:var(--paper);color:var(--fg);font:400 16px/1.55 var(--f-body);padding-bottom:64px}
 a{color:inherit}
 button{font:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--signal);outline-offset:2px}
@@ -301,11 +301,6 @@ footer .logo{font-size:40px}
 .ibtn:hover,.ibtn[aria-expanded="true"]{color:var(--signal);background:rgba(255,255,255,.08)}
 .badge{position:absolute;top:2px;right:0;min-width:16px;height:16px;border-radius:8px;background:var(--signal);color:#0A1A44;font:700 10px/16px var(--f-body);text-align:center;padding:0 4px}
 .badge:empty{display:none}
-@media (min-width:1100px){
-  .dock{grid-template-columns:minmax(540px,44%) minmax(0,1fr)}
-  .dock .chyron{height:auto;border-top:0;border-left:3px solid #0A1A44}
-  body{padding-bottom:64px !important}
-}
 @media (max-width:700px){.player .time,.pstate #pstateTxt{display:none}.pstate{padding:6px}.player:not(.on) .pstate::before{content:"★"}.player{gap:8px}}
 
 /* up next + saved panel */
@@ -323,23 +318,33 @@ footer .logo{font-size:40px}
 .qempty{padding:2px 14px 12px;color:var(--muted);font-size:14px;margin:0}
 
 /* toast */
-.toast{position:fixed;z-index:50;left:50%;bottom:120px;transform:translate(-50%,10px);background:#0A1A44;color:#fff;border:1px solid var(--signal);padding:10px 16px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.toast{position:fixed;z-index:50;left:50%;bottom:84px;transform:translate(-50%,10px);background:#0A1A44;color:#fff;border:1px solid var(--signal);padding:10px 16px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .speed{background:none;border:1px solid #3A4F8F;color:#fff;border-radius:6px;padding:4px 8px;font:500 12px var(--f-mono)}
 
-/* chyron (sits at the top of the docked player) */
-.chyron{display:flex;align-items:stretch;height:40px;background:var(--signal);color:#0A1A44;overflow:hidden;border-top:2px solid #0A1A44}
-.chyron .bug{flex:none;display:flex;align-items:center;gap:8px;background:var(--live);color:#fff;padding:0 14px 0 var(--gutter);font:900 18px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%);padding-right:26px}
-.chyron .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.4s infinite}
+/* On Crooked: slow drift of cards under today's lineup */
+.hero-side{display:grid;gap:14px;min-width:0}
+.oncrooked{background:var(--ink-2);border:1px solid #2C4180;border-radius:14px;padding-block:12px 14px;min-width:0}
+.oc-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 16px 10px}
+.oc-bug{display:inline-flex;gap:8px;align-items:center;font:900 20px/1 var(--f-display);text-transform:uppercase;color:var(--signal)}
+.oc-bug .dot{width:8px;height:8px;border-radius:50%;background:var(--live);animation:blink 1.4s infinite}
 @keyframes blink{50%{opacity:.25}}
-.crawl{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
-.crawl-track{display:flex;width:max-content;animation:crawl 70s linear infinite}
-.chyron:hover .crawl-track,.chyron:focus-within .crawl-track,.chyron.paused .crawl-track{animation-play-state:paused}
-.crawl-track a.on span:last-child{text-decoration:underline;text-underline-offset:3px}
-.chyron .bug .state{font:500 10px/1 var(--f-mono);letter-spacing:.08em;opacity:0;transition:opacity .15s}
-.chyron.paused .bug .state,.chyron:hover .bug .state{opacity:.9}
+.oc-hint{font:500 10px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC}
+.oc-viewport{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
+.oc-track{display:flex;width:max-content;padding-block:2px;animation:drift 150s linear infinite}
+.oncrooked:hover .oc-track,.oncrooked:focus-within .oc-track,.oncrooked.paused .oc-track{animation-play-state:paused}
+@keyframes drift{to{transform:translateX(-50%)}}
+.oc-card{display:grid;grid-template-columns:52px 200px;gap:10px;align-items:center;margin-right:10px;text-decoration:none;color:#fff;background:rgba(255,255,255,.04);border:1px solid #2C4180;border-radius:10px;padding:8px 10px 8px 8px;transition:border-color .15s,transform .15s}
+.oc-card:hover,.oc-card.on{border-color:var(--signal);transform:translateY(-2px)}
+.oc-art{width:52px;height:52px;border-radius:7px;overflow:hidden;display:grid;place-items:center;text-align:center;font:900 11px/.9 var(--f-display);text-transform:uppercase;padding:3px;position:relative}
+.oc-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.oc-k{display:block;font:500 10px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.oc-t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:700;font-size:14px;line-height:1.3;margin-top:4px}
+.oc-card.playing .oc-k{color:var(--signal)}
+@media (prefers-reduced-motion:reduce){.oc-viewport{overflow-x:auto}.oc-track{animation:none}}
+.cpv.below::after{bottom:auto;top:-9px;transform:rotate(225deg)}
 
-/* chyron hover preview */
+/* hover preview */
 .cpv{position:fixed;z-index:40;width:min(340px,calc(100vw - 32px));background:var(--card);color:var(--fg);border:2px solid #0A1A44;border-radius:12px;box-shadow:0 18px 40px rgba(5,10,30,.35);overflow:hidden;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .15s,transform .15s}
 .cpv.show{opacity:1;transform:none;pointer-events:auto}
 .cpv::after{content:"";position:absolute;bottom:-9px;left:var(--arrow,40px);width:14px;height:14px;background:var(--card);border-right:2px solid #0A1A44;border-bottom:2px solid #0A1A44;transform:rotate(45deg)}
@@ -357,12 +362,6 @@ footer .logo{font-size:40px}
 .cpv-act[aria-pressed="true"]{background:#0A1A44;border-color:#0A1A44;color:var(--signal)}
 .cpv-act[aria-pressed="true"] svg{fill:currentColor}
 .cpv-go{padding:7px 12px;font-size:13px}
-.crawl-track a{display:flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;font-weight:600;font-size:15px;padding-right:28px}
-.crawl-track a:hover span:last-child{text-decoration:underline;text-underline-offset:3px}
-.crawl-track .k{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;background:#0A1A44;color:var(--signal);padding:4px 7px;border-radius:3px}
-.crawl-track a::after{content:"★";margin-left:18px;font-size:12px;opacity:.6}
-@keyframes crawl{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.crawl{overflow-x:auto;mask-image:none}}
 
 @media (max-width:860px){
   .hero-grid{grid-template-columns:1fr;gap:32px}
@@ -478,12 +477,18 @@ footer .logo{font-size:40px}
         </div>
       </div>
 
+      <div class="hero-side">
       <div class="lineup" aria-label="Today's episodes">
         <div class="lineup-head">
           <h2>Today's lineup</h2>
           <span class="eyebrow" style="color:#AEB8DC">3 new</span>
         </div>
         <div id="lineup"></div>
+      </div>
+      <div class="oncrooked" aria-label="More on Crooked">
+        <div class="oc-head"><span class="oc-bug"><span class="dot"></span>On Crooked</span><span class="oc-hint">Hover a card to preview</span></div>
+        <div class="oc-viewport"><div class="oc-track" id="crawl"></div></div>
+      </div>
       </div>
     </div>
     </div>
@@ -695,10 +700,6 @@ footer .logo{font-size:40px}
       <button class="ibtn" id="pnext" aria-label="Next episode"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4l11 8-11 8zM17 4h3v16h-3z"/></svg></button>
     </div>
   </div>
-  <div class="chyron" aria-label="Crooked headlines">
-    <div class="bug"><span class="dot"></span>On Crooked <span class="state">Paused</span></div>
-    <div class="crawl"><div class="crawl-track" id="crawl"></div></div>
-  </div>
 </div>
 
 <script>
@@ -731,6 +732,7 @@ const shows = [
 
 const artFor = name => shows.find(s=>name.startsWith(s.name)) || {bg:"#0A1A44",fg:"#FFD43B"};
 const thumb = (name,cls) => { const a=artFor(name); return `<span class="${cls}" style="background:${a.bg}">${a.img?`<img src="${a.img}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>`; };
+const esc=t=>String(t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
 
 document.getElementById("lineup").innerHTML = episodes.slice(0,3).map((e,i)=>`
@@ -774,12 +776,12 @@ const crawlItems = [
 { const eps=crawlItems.filter(c=>c.play!==undefined), promos=crawlItems.filter(c=>c.play===undefined), mixed=[];
   while(eps.length||promos.length){ mixed.push(...eps.splice(0,2)); if(promos.length) mixed.push(promos.shift()); }
   crawlItems.splice(0,crawlItems.length,...mixed); }
-const crawlHTML = crawlItems.map((c,i)=>`<a href="${c.href||"#top"}" data-ci="${i}"${c.play!==undefined?` data-play="${c.play}"`:""}><span class="k">${c.k}</span><span>${c.t}</span></a>`).join("");
+const crawlHTML = crawlItems.map((c,i)=>`<a class="oc-card" href="${c.href||"#top"}" data-ci="${i}"${c.play!==undefined?` data-play="${c.play}"`:""}><span class="oc-art" style="background:${c.art.bg};color:${c.art.fg}">${esc(c.mark)}${c.art.img?`<img src="${c.art.img}" alt="" loading="lazy" onerror="this.remove()">`:""}</span><span style="min-width:0"><span class="oc-k">${esc(c.k)}</span><span class="oc-t">${esc(c.t)}</span></span></a>`).join("");
 document.getElementById("crawl").innerHTML = crawlHTML + crawlHTML.replace(/<a /g,'<a tabindex="-1" aria-hidden="true" ');
 document.getElementById("crawl").addEventListener("click",e=>{ if(e.target.closest("[data-play]")) e.preventDefault(); });
 
 // chyron preview: hover or focus an item to pause the crawl and preview it; the card stays while the pointer is on it
-const chyron=document.querySelector(".chyron"), cpv=document.getElementById("cpv"), cpvGo=document.getElementById("cpvGo");
+const chyron=document.querySelector(".oncrooked"), cpv=document.getElementById("cpv"), cpvGo=document.getElementById("cpvGo");
 let hideT=null, activeA=null, activeItem=null;
 function showPreview(a){
   clearTimeout(hideT);
@@ -796,10 +798,13 @@ function showPreview(a){
   document.getElementById("cpvM").textContent=c.meta;
   cpvGo.textContent=c.cta; cpvGo.href=c.href||"#top";
   syncActs();
-  const r=a.getBoundingClientRect(), w=cpv.offsetWidth, chyTop=chyron.getBoundingClientRect().top;
+  const r=a.getBoundingClientRect(), w=cpv.offsetWidth, h=cpv.offsetHeight;
   const left=Math.min(Math.max(16, r.left + 20 - 40), window.innerWidth - w - 16);
   cpv.style.left=left+"px";
-  cpv.style.bottom=(window.innerHeight - chyTop + 12)+"px";
+  const below = r.top - h - 12 < 72;
+  cpv.classList.toggle("below", below);
+  if(below){ cpv.style.bottom="auto"; cpv.style.top=(r.bottom+12)+"px"; }
+  else { cpv.style.top="auto"; cpv.style.bottom=(window.innerHeight - r.top + 12)+"px"; }
   cpv.style.setProperty("--arrow", Math.min(Math.max(16, r.left + 20 - left), w - 30)+"px");
   cpv.classList.add("show");
 }
@@ -813,6 +818,7 @@ crawlEl.addEventListener("focusin",e=>{ const a=e.target.closest("a[data-ci]"); 
 chyron.addEventListener("mouseleave",hidePreviewSoon);
 crawlEl.addEventListener("focusout",hidePreviewSoon);
 cpv.addEventListener("mouseenter",()=>clearTimeout(hideT));
+window.addEventListener("scroll",()=>{ if(cpv.classList.contains("show")){ cpv.classList.remove("show"); chyron.classList.remove("paused"); if(activeA) activeA.classList.remove("on"); activeA=null; } },{passive:true});
 cpv.addEventListener("mouseleave",hidePreviewSoon);
 cpvGo.addEventListener("click",e=>{
   const c=activeItem; if(!c) return;
@@ -841,7 +847,6 @@ function syncActs(){
   cpvSave.setAttribute("aria-pressed",saved); cpvSave.querySelector("span").textContent=saved?"Saved":"Save";
   if(isEp){ const f=lib.follow.includes(showOf(c)); cpvFollow.setAttribute("aria-pressed",f); cpvFollow.querySelector("span").textContent=f?"Following":"Follow"; }
 }
-const esc=t=>String(t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 function row(name,label,title,btns){ return `<li>${thumb(name,"qa")}<div style="min-width:0"><div class="qs">${esc(label)}</div><div class="qt">${esc(title)}</div></div><div>${btns}</div></li>`; }
 function renderLib(){
   document.getElementById("qBadge").textContent=lib.up.length||"";
@@ -897,6 +902,7 @@ function render(){
   document.getElementById("player").classList.toggle("on", playing);
   document.getElementById("pstateTxt").textContent = playing ? "Now playing" : (t>0 ? "Paused" : "Featured");
   document.querySelectorAll(".ep").forEach(el=>el.classList.toggle("playing", playing && +el.dataset.i===cur));
+  document.querySelectorAll(".oc-card[data-play]").forEach(el=>el.classList.toggle("playing", playing && +el.dataset.play===cur));
   document.querySelectorAll("button[data-play]").forEach(b=>{ if(b.classList.contains("btn")) return;
     b.innerHTML = playing && +b.dataset.play===cur ? PAUSE : PLAY; });
 }
