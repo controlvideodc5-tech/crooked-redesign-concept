@@ -90,11 +90,23 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 
 
 /* Crooked Con countdown: one component, two states. Closed = slim bar with mini clock; open = bar + art + big clock */
-.con{--sky:#4C8DEB;background:var(--sky);color:#0A1A44;border-bottom:3px solid #0A1A44}
+.con{--sky:#2A6FF3;--cream:#FFF5D6;--butter:#F6EC8E;position:relative;overflow:hidden;background:linear-gradient(180deg,#1A5EF3 0%,#2C70F3 50%,#5C97F1 100%);color:#fff;border-bottom:3px solid #0A1A44}
+.con > .wrap{position:relative;z-index:1}
+/* poster sky: real clouds and the eagle from the Crooked Con 2026 art */
+.con-sky{position:absolute;inset:0;pointer-events:none}
+.con[data-state="closed"] .con-sky{display:none}
+.cloud{position:absolute;max-width:none;-webkit-mask-image:radial-gradient(closest-side,#000 55%,transparent);mask-image:radial-gradient(closest-side,#000 55%,transparent);opacity:.95;animation:drift-cloud 40s ease-in-out infinite alternate}
+.c1{left:-4%;top:-8%;width:30%}
+.c2{left:44%;top:-6%;width:20%;animation-duration:52s}
+.c3{left:18%;bottom:-18%;width:30%;animation-duration:46s}
+.c4{right:-2%;bottom:-22%;width:34%;animation-duration:58s}
+@keyframes drift-cloud{to{transform:translateX(3%)}}
+.con-eagle{position:absolute;right:0;top:-6%;height:118%;width:auto;aspect-ratio:600/853;max-width:none;animation:hover-eagle 6s ease-in-out infinite alternate;transform-origin:80% 20%}
+@keyframes hover-eagle{to{transform:translateY(10px) rotate(-1.5deg)}}
 .con-bar{display:flex;align-items:center;gap:clamp(12px,2vw,24px);min-height:56px;padding-block:8px}
-.con-logo{font:900 22px/.9 var(--f-display);text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
+.con-logo{color:var(--butter);font:900 22px/.9 var(--f-display);text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
 .con-logo span{font-weight:700;opacity:.85}
-.con-when{font:500 12px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.con-when{color:var(--cream);font:500 12px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .mini{display:flex;gap:6px;font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums}
 .mini span{background:#0A1A44;color:var(--signal);border-radius:6px;padding:4px 7px 3px;font-size:20px;line-height:1}
 .mini small{font:500 10px var(--f-mono);margin-left:2px;opacity:.8}
@@ -108,50 +120,46 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 /* state switches */
 .con[data-state="open"] .mini,.con[data-state="open"] .con-bar .btn-ink{display:none}
 .con[data-state="closed"] .con-body{display:none}
-.con-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,40%);gap:32px;align-items:center;padding-block:4px 28px}
-.con-body h2{font-size:clamp(30px,3.4vw,46px);margin-bottom:16px}
+.con-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,38%);gap:32px;align-items:center;padding-right:clamp(0px,17vw,300px);padding-block:4px 28px}
+.con-body h2{font-size:clamp(30px,3.4vw,46px);margin-bottom:16px;color:var(--cream)}
 .clock{display:flex;align-items:flex-start;gap:clamp(4px,1vw,12px);font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums;max-width:100%}
 .clock div{display:flex;flex-direction:column;align-items:center;gap:6px}
 .clock span{font-size:clamp(48px,7.4vw,128px);line-height:.82;background:#0A1A44;color:var(--signal);padding:.1em .12em .06em;border-radius:10px;min-width:1.25em;text-align:center}
-.clock small{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
-.clock i{font-style:normal;font-size:clamp(34px,5.2vw,92px);line-height:.95}
+.clock small{color:var(--cream);font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.clock i{color:#0A1A44;font-style:normal;font-size:clamp(34px,5.2vw,92px);line-height:.95}
 .con-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}
 .con-note{font-size:14px;font-weight:600}
+.con .btn-ghost{color:var(--cream)}
 .con-note b{background:#0A1A44;color:var(--signal);padding:2px 6px;border-radius:4px}
-.con-art{align-self:stretch;position:relative;min-height:360px}
+.con-art{align-self:stretch;position:relative;min-height:380px;display:grid}
 /* credits roll: names recede into the distance, Star Wars style */
-.sw{position:absolute;inset:0;border-radius:14px;overflow:hidden;perspective:360px;background:
-  radial-gradient(1px 1px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 72% 34%,#fff6 50%,transparent 51%),
-  radial-gradient(1.5px 1.5px at 38% 72%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 88% 82%,#fff5 50%,transparent 51%),
-  radial-gradient(1px 1px at 55% 12%,#fff6 50%,transparent 51%),radial-gradient(ellipse at 50% 120%,#1C2F66,#060E2B 70%)}
+.sw{position:absolute;inset:0;overflow:hidden;perspective:360px}
 .sw-tilt{position:absolute;left:0;right:0;bottom:0;top:-120%;transform-origin:50% 100%;transform:rotateX(28deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 22%);mask-image:linear-gradient(to bottom,transparent 0%,#000 22%)}
-.sw-roll{position:absolute;left:10%;right:10%;top:100%;text-align:center;color:var(--signal);animation:roll var(--roll-dur,70s) linear 1 forwards}
+.sw-roll{position:absolute;left:4%;right:4%;top:100%;text-align:center;color:var(--butter);text-shadow:0 1px 0 rgba(10,26,68,.25);animation:roll var(--roll-dur,70s) linear 1 forwards}
 .sw:hover .sw-roll{animation-play-state:paused}
-/* finale: the eagle swoops in and lands where it sits on the poster, then sky + poster resolve around it */
-.sw-sky{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,#145FF4 0%,#2F78F2 55%,#6FA3EE 100%);opacity:0;transition:opacity 1.4s ease}
-.sw-poster{position:absolute;top:0;right:0;height:100%;aspect-ratio:742/924;z-index:4;pointer-events:none}
-.sw-poster-img{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.4s ease}
-.sw-eagle{position:absolute;left:31.03%;top:0;width:68.97%;height:78.79%;opacity:0;transform:translate(75%,-90%) rotate(-20deg) scale(.5);transform-origin:70% 35%}
-.sw.swoop .sw-eagle{opacity:1;transform:none;transition:transform 2.4s cubic-bezier(.16,.8,.24,1),opacity .3s}
-.sw.poster .sw-sky,.sw.poster .sw-poster-img{opacity:1}
-.sw.depart .sw-eagle{opacity:0;transform:translate(-110%,-120%) rotate(14deg) scale(.55);transition:transform 2s cubic-bezier(.5,0,.8,.4),opacity .5s 1.5s}
-.sw-tilt{z-index:3;transition:opacity 1s}
-.sw.swoop .sw-tilt{opacity:0}
+.sw-tilt{z-index:3}
 @keyframes roll{from{top:100%}to{top:var(--roll-end,-1600px)}}
 .sw-ep{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
 .sw-title{font:900 clamp(40px,4.4vw,64px)/.9 var(--f-display);text-transform:uppercase;margin:0}
 .sw-sub{font:700 16px/1.3 var(--f-body);margin:10px 0 28px}
-.sw h4{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:28px 0 10px;color:#fff}
-.sw ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font:900 22px/1.05 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
-.sw-para{font:600 15px/1.45 var(--f-body);color:#F3E7B0;margin:0 0 6px;text-wrap:balance}
+.sw h4{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:28px 0 10px;color:var(--butter)}
+.sw ul{color:var(--cream);list-style:none;margin:0;padding:0;display:grid;gap:6px;font:900 22px/1.05 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
+.sw-para{font:600 15px/1.45 var(--f-body);color:var(--cream);margin:0 0 6px;text-wrap:balance}
 .sw-sched{margin:0;display:grid;gap:14px}
-.sw-sched dt{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.sw-sched dt{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cream)}
 .sw-sched dd{margin:4px 0 0;font:900 24px/1 var(--f-display);text-transform:uppercase}
-.sw-sched dd span{display:block;font:600 13px/1.3 var(--f-body);text-transform:none;color:#F3E7B0;margin-top:4px}
-.sw-end{font:900 30px/1 var(--f-display);text-transform:uppercase;margin:40px 0 0}
-@media (prefers-reduced-motion:reduce){.sw-poster,.sw-sky{display:none}.sw-tilt{transform:none;-webkit-mask-image:none;mask-image:none;overflow:auto}.sw-roll{position:static;animation:none;padding:24px 0}}
+.sw-sched dd span{display:block;font:600 13px/1.3 var(--f-body);text-transform:none;color:var(--cream);margin-top:4px}
+.sw-end{font:900 clamp(40px,4.6vw,64px)/.92 var(--f-display);text-transform:uppercase;margin:60px 0 0;color:var(--butter)}
+.sw-roll > *{transition:opacity 1.2s ease}
+.sw.ended .sw-roll > :not(.sw-end){opacity:0}
+.sw-replay{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);z-index:5;display:inline-flex;align-items:center;gap:8px;background:#0A1A44;color:var(--butter);border:0;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14px;box-shadow:0 8px 20px rgba(5,10,30,.3);animation:pop .4s ease}
+.sw-replay:hover{background:#1C2F66}
+@keyframes pop{from{opacity:0;transform:translate(-50%,8px)}}
+@media (prefers-reduced-motion:reduce){.cloud,.con-eagle{animation:none}.sw-tilt{transform:none;-webkit-mask-image:none;mask-image:none;overflow:auto}.sw-roll{position:static;animation:none;padding:24px 0}}
 @media (max-width:900px){
-  .con-body{grid-template-columns:1fr}.con-art{min-height:320px}
+  .con-body{grid-template-columns:1fr;padding-right:0}.con-art{min-height:340px}
+  .con-eagle{height:300px;top:-30px;right:-40px;opacity:.9}
+  .c4{width:70%}.c1{width:60%}
   .con-when{display:none}
 }
 @media (max-width:560px){.con-logo span{display:none}.con[data-state="closed"] .con-bar .btn-ink{display:none}.mini span{font-size:17px}}
@@ -438,6 +446,13 @@ footer .logo{font-size:40px}
 </header>
 
 <section class="con" id="takeover" data-state="open" aria-label="Crooked Con countdown">
+  <div class="con-sky" aria-hidden="true">
+    <img class="cloud c1" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0,y_0,w_0.24,h_0.27/w_700/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="">
+    <img class="cloud c2" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.5,y_0.02,w_0.2,h_0.13/w_600/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="">
+    <img class="cloud c3" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.2,y_0.76,w_0.27,h_0.24/w_800/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="">
+    <img class="cloud c4" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.7,y_0.62,w_0.3,h_0.38/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="">
+    <canvas class="con-eagle" id="swEagle" data-src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.8,y_0.04,w_0.2,h_0.52/w_600/f_png/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png"></canvas>
+  </div>
   <div class="wrap">
     <div class="con-bar">
       <div class="con-logo">Crooked Con <span>2026</span></div>
@@ -468,11 +483,6 @@ footer .logo{font-size:40px}
       </div>
       <div class="con-art">
         <div class="sw" id="sw" aria-label="Crooked Con 2026 schedule and lineup">
-          <div class="sw-sky" aria-hidden="true"></div>
-          <div class="sw-poster">
-            <img class="sw-poster-img" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 poster: an eagle swoops beside the Crooked Con 2026 logo in a blue sky with clouds" onerror="this.remove()">
-            <canvas class="sw-eagle" id="swEagle" data-src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.8,y_0.04,w_0.2,h_0.52/w_600/f_png/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" aria-hidden="true"></canvas>
-          </div>
           <div class="sw-tilt">
             <div class="sw-roll" id="swRoll">
               <p class="sw-ep">Washington, DC · November 5–7, 2026</p>
@@ -496,10 +506,12 @@ footer .logo{font-size:40px}
               <ul><li>Barrett Adair</li><li>Charlie Goldensohn</li><li>David Pakman</li><li>Jess Britvich</li><li>Jolly Good Ginger</li><li>Katey Parham</li><li>Kevin Ortega-Rojas</li><li>Nikita Redkar</li><li>and more to be announced</li></ul>
               <h4>Tickets</h4>
               <p class="sw-para">Prices go up October 6.<br>More names to be announced.</p>
-              <p class="sw-end">See you in DC</p>
+              <p class="sw-para sw-cta">November 5–7 · Washington, DC</p>
+              <p class="sw-end" id="swEnd">See you in Washington</p>
             </div>
           </div>
         </div>
+        <button class="sw-replay" id="swReplay" hidden><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Replay the lineup</button>
       </div>
     </div>
   </div>
@@ -1096,25 +1108,23 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
   img.src=cv.dataset.src;
 }
 {
-  const sw=document.getElementById("sw"), roll=document.getElementById("swRoll");
-  const still=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const wait=ms=>new Promise(r=>setTimeout(r,ms));
-  // start the finale as soon as the last line rises into the upper half of the stage (not when the roll fully ends)
-  const endLine=roll.querySelector(".sw-end"); let busy=false;
-  setInterval(()=>{
-    if(busy||still||!endLine) return;
+  // the roll stops when "See you in Washington" reaches the middle of the stage; then the rest fades and Replay appears
+  const sw=document.getElementById("sw"), roll=document.getElementById("swRoll"), endLine=document.getElementById("swEnd"), replay=document.getElementById("swReplay");
+  let raf=0;
+  function watch(){
     const a=sw.getBoundingClientRect(), b=endLine.getBoundingClientRect();
-    if(a.height && b.bottom < a.top + a.height*0.5) finale();
-  },200);
-  async function finale(){
-    busy=true;
-    sw.classList.add("swoop"); await wait(2500);       // eagle lands on its spot; leftover credits fade
-    sw.classList.add("poster"); await wait(1500+9000); // sky + poster resolve, then hold
-    sw.classList.remove("poster"); sw.classList.add("depart"); await wait(1200);
-    roll.style.animation="none"; void roll.offsetWidth; roll.style.animation="";   // roll starts again as the eagle leaves
-    sw.classList.remove("swoop");
-    await wait(1400); sw.classList.remove("depart"); busy=false;
+    if(a.height && (b.top+b.bottom)/2 <= a.top + a.height*0.5){
+      roll.style.animationPlayState="paused"; sw.classList.add("ended"); replay.hidden=false; return;
+    }
+    raf=requestAnimationFrame(watch);
   }
+  function start(){
+    cancelAnimationFrame(raf); sw.classList.remove("ended"); replay.hidden=true;
+    roll.style.animation="none"; void roll.offsetWidth; roll.style.animation=""; roll.style.animationPlayState="";
+    raf=requestAnimationFrame(watch);
+  }
+  replay.addEventListener("click",start);
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) start();
 }
 function setTakeover(open){
   con.dataset.state = open ? "open" : "closed";
