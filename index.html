@@ -137,7 +137,6 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .sw.depart .sw-eagle{opacity:0;transform:translate(-110%,-120%) rotate(14deg) scale(.55);transition:transform 2s cubic-bezier(.5,0,.8,.4),opacity .5s 1.5s}
 .sw-tilt{z-index:3;transition:opacity 1s}
 .sw.swoop .sw-tilt{opacity:0}
-.sw.depart .sw-tilt{opacity:1}
 @keyframes roll{from{top:100%}to{top:var(--roll-end,-1600px)}}
 .sw-ep{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
 .sw-title{font:900 clamp(40px,4.4vw,64px)/.9 var(--f-display);text-transform:uppercase;margin:0}
@@ -1113,7 +1112,8 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
     sw.classList.add("poster"); await wait(1500+9000); // sky + poster resolve, then hold
     sw.classList.remove("poster"); sw.classList.add("depart"); await wait(1200);
     roll.style.animation="none"; void roll.offsetWidth; roll.style.animation="";   // roll starts again as the eagle leaves
-    await wait(1400); sw.classList.remove("swoop","depart"); busy=false;
+    sw.classList.remove("swoop");
+    await wait(1400); sw.classList.remove("depart"); busy=false;
   }
 }
 function setTakeover(open){
