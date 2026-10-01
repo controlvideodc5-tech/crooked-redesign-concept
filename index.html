@@ -36,8 +36,9 @@
 :root[data-theme="dark"]{--paper:#070F2A;--card:#0F1C45;--line:#24356E;--muted:#98A3C8;--fg:#EEF1F9;--ink:#0A1A44;--ink-2:#14255A;color-scheme:dark}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0}
-body{background:var(--paper);color:var(--fg);font:400 16px/1.55 var(--f-body);padding-bottom:52px}
+body{background:var(--paper);color:var(--fg);font:400 16px/1.55 var(--f-body);padding-bottom:104px}
 a{color:inherit}
 button{font:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--signal);outline-offset:2px}
@@ -84,16 +85,6 @@ header.site{background:var(--ink);color:var(--on-ink);position:sticky;top:env(sa
 .nav{gap:20px}
 .nav ul{gap:clamp(14px,1.8vw,26px)}
 
-/* countdown strip */
-.strip{background:var(--ink-2);color:var(--on-ink)}
-.strip .wrap{display:flex;gap:28px;align-items:center;overflow-x:auto;padding-block:10px;font-size:14px;scrollbar-width:none}
-.strip b{font:900 22px/1 var(--f-display);color:var(--signal);margin-right:6px;font-variant-numeric:tabular-nums}
-.strip span{white-space:nowrap}
-.strip a{color:var(--signal);font-weight:600}
-.strip-btn{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--signal);color:var(--signal);border-radius:999px;padding:6px 12px;font:500 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.strip-btn:hover{background:var(--signal);color:#0A1A44}
-.strip-btn[aria-expanded="false"]{background:var(--signal);color:#0A1A44}
-.strip-btn[aria-expanded="false"] svg{transform:rotate(180deg)}
 
 /* Crooked Con countdown: one component, two states. Closed = slim bar with mini clock; open = bar + art + big clock */
 .con{--sky:#4C8DEB;background:var(--sky);color:#0A1A44;border-bottom:3px solid #0A1A44}
@@ -242,15 +233,12 @@ footer{background:var(--ink);color:#AEB8DC;padding-block:40px;font-size:14px;mar
 footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 footer .logo{font-size:40px}
 
-/* player: a header row under the brand bar. "Featured" at rest, "Now playing" while playing */
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--signal)}
-.player{background:var(--ink);color:var(--on-ink);padding-bottom:10px}
-.player .wrap{display:grid;grid-template-columns:auto auto auto minmax(0,1fr) auto;gap:14px;align-items:center}
-.player .well{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center;height:50px;padding-inline:8px 10px;border-radius:999px;background:rgba(255,255,255,.06);transition:background .2s}
-.player.on .well{background:rgba(255,255,255,.1)}
-.player .play{width:36px;height:36px}
+/* dock: player + chyron share the bottom of the screen. Side by side on desktop, stacked on phones */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:minmax(0,1fr);background:var(--ink);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -10px 30px rgba(5,10,30,.25)}
+.player{color:var(--on-ink);display:grid;grid-template-columns:auto auto auto minmax(0,1fr) auto;gap:12px;align-items:center;height:60px;padding-inline:var(--gutter) 14px}
+.player .play{width:38px;height:38px}
 .player .play svg{width:13px;height:13px}
-.pstate{display:inline-flex;align-items:center;gap:7px;border-radius:999px !important;font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#0A1A44;background:var(--signal);border-radius:4px;padding:6px 8px;white-space:nowrap}
+.pstate{display:inline-flex;align-items:center;gap:7px;font:500 10px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#0A1A44;background:var(--signal);border-radius:999px;padding:6px 8px;white-space:nowrap}
 .player.on .pstate{background:var(--live);color:#fff}
 .eq{display:none;align-items:flex-end;gap:2px;height:10px}
 .player.on .eq{display:inline-flex}
@@ -258,16 +246,40 @@ footer .logo{font-size:40px}
 .eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}
 @keyframes eq{50%{height:100%}}
 .player .meta{min-width:0}
-.player .line{display:flex;gap:10px;align-items:baseline;min-width:0}
-.player .s{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;white-space:nowrap;flex:none}
-.player .t{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.bar{height:3px;background:rgba(255,255,255,.14);border-radius:2px;margin-top:7px;overflow:hidden}
+.player .s{font:500 10px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.player .t{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;margin-top:3px}
+.bar{height:3px;background:rgba(255,255,255,.14);border-radius:2px;margin-top:6px;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--signal)}
-.pctl{display:flex;gap:10px;align-items:center}
-.player .time{font:500 12px var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums}
-.next{background:none;border:0;color:#fff;padding:6px;border-radius:6px;display:grid;place-items:center}
-.next:hover{color:var(--signal)}
-@media (max-width:700px){.player .s,.player .time,.pstate #pstateTxt{display:none}.pstate{padding:6px}.player:not(.on) .pstate::before{content:"★"}}
+.pctl{display:flex;gap:6px;align-items:center}
+.player .time{font:500 11px var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums;margin-right:4px}
+.ibtn{position:relative;background:none;border:0;color:#fff;width:34px;height:34px;border-radius:8px;display:grid;place-items:center}
+.ibtn:hover,.ibtn[aria-expanded="true"]{color:var(--signal);background:rgba(255,255,255,.08)}
+.badge{position:absolute;top:2px;right:0;min-width:16px;height:16px;border-radius:8px;background:var(--signal);color:#0A1A44;font:700 10px/16px var(--f-body);text-align:center;padding:0 4px}
+.badge:empty{display:none}
+@media (min-width:1100px){
+  .dock{grid-template-columns:minmax(540px,44%) minmax(0,1fr)}
+  .dock .chyron{height:auto;border-top:0;border-left:3px solid #0A1A44}
+  body{padding-bottom:64px !important}
+}
+@media (max-width:700px){.player .time,.pstate #pstateTxt{display:none}.pstate{padding:6px}.player:not(.on) .pstate::before{content:"★"}.player{gap:8px}}
+
+/* up next + saved panel */
+.qpanel{position:fixed;z-index:41;left:var(--gutter);width:min(380px,calc(100vw - 32px));max-height:min(60vh,460px);overflow:auto;background:var(--card);color:var(--fg);border:2px solid #0A1A44;border-radius:12px;box-shadow:0 18px 40px rgba(5,10,30,.35)}
+.qpanel h4{margin:0;padding:12px 14px 6px;font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.qlist{list-style:none;margin:0;padding:0 6px 8px}
+.qlist li{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 8px;border-radius:8px}
+.qlist li:hover{background:var(--paper)}
+.qlist .qa{width:36px;height:36px;border-radius:6px;overflow:hidden;display:block}
+.qlist .qa img{width:100%;height:100%;object-fit:cover}
+.qlist .qs{font:500 10px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.qlist .qt{font-weight:600;font-size:14px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qlist button{background:none;border:0;color:var(--muted);padding:4px 6px;border-radius:6px;font-size:13px;font-weight:600}
+.qlist button:hover{color:var(--fg);background:var(--line)}
+.qempty{padding:2px 14px 12px;color:var(--muted);font-size:14px;margin:0}
+
+/* toast */
+.toast{position:fixed;z-index:50;left:50%;bottom:120px;transform:translate(-50%,10px);background:#0A1A44;color:#fff;border:1px solid var(--signal);padding:10px 16px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 .speed{background:none;border:1px solid #3A4F8F;color:#fff;border-radius:6px;padding:4px 8px;font:500 12px var(--f-mono)}
 
 /* chyron (sits at the top of the docked player) */
@@ -292,9 +304,14 @@ footer .logo{font-size:40px}
 .cpv-k{font:500 10px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .cpv-t{font-weight:700;line-height:1.3}
 .cpv-d{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
-.cpv-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--paper);border-top:1px solid var(--line)}
-.cpv-meta{font:500 11px var(--f-mono);color:var(--muted)}
-.cpv-go{padding:8px 14px;font-size:14px}
+.cpv-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 14px 8px;background:var(--paper);border-top:1px solid var(--line)}
+.cpv-meta{font:500 11px var(--f-mono);color:var(--muted);padding:0 14px 10px;background:var(--paper)}
+.cpv-acts{display:flex;gap:4px}
+.cpv-act{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:600}
+.cpv-act:hover{border-color:var(--fg)}
+.cpv-act[aria-pressed="true"]{background:#0A1A44;border-color:#0A1A44;color:var(--signal)}
+.cpv-act[aria-pressed="true"] svg{fill:currentColor}
+.cpv-go{padding:7px 12px;font-size:13px}
 .crawl-track a{display:flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;font-weight:600;font-size:15px;padding-right:28px}
 .crawl-track a:hover span:last-child{text-decoration:underline;text-underline-offset:3px}
 .crawl-track .k{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;background:#0A1A44;color:var(--signal);padding:4px 7px;border-radius:3px}
@@ -331,23 +348,7 @@ footer .logo{font-size:40px}
     <a class="btn btn-signal join" href="#act">Join <span class="long">Friends of the Pod</span></a>
     <button class="icon-btn" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
-  <div class="player" role="region" aria-label="Audio player">
-    <div class="wrap"><div class="well">
-      <span class="pstate" id="pstate"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="pstateTxt">Featured</span></span>
-      <button class="play" id="pp" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></button>
-      <span class="p-art" id="pArt"></span>
-      <div class="meta">
-        <div class="line"><span class="s" id="ps">What A Day</span><span class="t" id="pt">Are Democrats Saying The Right Things To Win?</span></div>
-        <div class="bar"><i id="pb"></i></div>
-      </div>
-      <div class="pctl">
-        <span class="time" id="ptime">0:00 / 24:00</span>
-        <button class="speed" id="spd" aria-label="Playback speed">1×</button>
-        <button class="next" id="pnext" aria-label="Next episode"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4l11 8-11 8zM17 4h3v16h-3z"/></svg></button>
-      </div>
-    </div></div>
-  </div>
-  <div class="search-panel" id="searchPanel" hidden>
+  <div class="search-panel"  <div class="search-panel" id="searchPanel" hidden>
     <div class="wrap">
       <label for="q" class="eyebrow">Search shows & episodes</label>
       <input id="q" type="search" placeholder="Try “Strict Scrutiny” or “midterms”" autocomplete="off">
@@ -356,13 +357,6 @@ footer .logo{font-size:40px}
     </div>
   </div>
 </header>
-
-<div class="strip" aria-label="Countdowns">
-  <div class="wrap">
-    <span><b id="days">33</b>days to the midterms · Nov 3</span>
-    <span><a href="#act">Check your registration →</a></span>
-  </div>
-</div>
 
 <section class="con" id="takeover" data-state="open" aria-label="Crooked Con countdown">
   <div class="wrap">
@@ -546,12 +540,40 @@ footer .logo{font-size:40px}
     </div>
   </div>
   <div class="cpv-foot">
-    <span class="cpv-meta" id="cpvM"></span>
     <a class="btn btn-signal cpv-go" id="cpvGo" href="#top"></a>
+    <div class="cpv-acts">
+      <button class="cpv-act" id="cpvQueue" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 6h11M4 12h11M4 18h7M18 15v6M15 18h6"/></svg><span>Up next</span></button>
+      <button class="cpv-act" id="cpvSave" type="button" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>Save</span></button>
+      <button class="cpv-act" id="cpvFollow" type="button" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Follow</span></button>
+    </div>
   </div>
+  <div class="cpv-meta" id="cpvM"></div>
 </div>
 
+<div class="qpanel" id="qpanel" hidden>
+  <h4>Up next</h4><ul class="qlist" id="qUp"></ul>
+  <h4>Saved</h4><ul class="qlist" id="qSaved"></ul>
+  <h4>Following</h4><ul class="qlist" id="qFollow"></ul>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <div class="dock">
+  <div class="player" id="player" role="region" aria-label="Audio player">
+    <span class="pstate"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="pstateTxt">Featured</span></span>
+    <button class="play" id="pp" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></button>
+    <span class="p-art" id="pArt"></span>
+    <div class="meta">
+      <span class="s" id="ps">What A Day</span>
+      <span class="t" id="pt">Are Democrats Saying The Right Things To Win?</span>
+      <div class="bar"><i id="pb"></i></div>
+    </div>
+    <div class="pctl">
+      <span class="time" id="ptime">0:00 / 24:00</span>
+      <button class="speed" id="spd" aria-label="Playback speed">1×</button>
+      <button class="ibtn" id="qBtn" aria-label="Up next and saved" aria-expanded="false" aria-controls="qpanel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span class="badge" id="qBadge"></span></button>
+      <button class="ibtn" id="pnext" aria-label="Next episode"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4l11 8-11 8zM17 4h3v16h-3z"/></svg></button>
+    </div>
+  </div>
   <div class="chyron" aria-label="Crooked headlines">
     <div class="bug"><span class="dot"></span>On Crooked <span class="state">Paused</span></div>
     <div class="crawl"><div class="crawl-track" id="crawl"></div></div>
@@ -562,11 +584,17 @@ footer .logo{font-size:40px}
 const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg>';
 const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
 
-// Episode titles are from crooked.com on Oct 1, 2026; running times are placeholders.
+// Episode titles and dates are from crooked.com on Oct 1, 2026; running times are placeholders.
+// The first three are today's lineup.
 const episodes = [
-  {show:"What A Day", title:"Are Democrats Saying The Right Things To Win?", min:24, blurb:"The daily news podcast checks the party's closing message with five weeks to go."},
-  {show:"Strict Scrutiny", title:"We Need to Talk About Ethics Reform", min:58, blurb:"The hosts make the case for binding ethics rules at the Supreme Court."},
-  {show:"Runaway Country with Alex Wagner", title:"Trump's Crisis of Dignity", min:41, blurb:"Alex Wagner on what the presidency has lost, and who notices."}
+  {show:"What A Day", date:"Oct 1", title:"Are Democrats Saying The Right Things To Win?", min:24, blurb:"The daily news podcast checks the party's closing message with five weeks to go."},
+  {show:"Strict Scrutiny", date:"Oct 1", title:"We Need to Talk About Ethics Reform", min:58, blurb:"The hosts make the case for binding ethics rules at the Supreme Court."},
+  {show:"Runaway Country with Alex Wagner", date:"Oct 1", title:"Trump's Crisis of Dignity", min:41, blurb:"Alex Wagner on what the presidency has lost, and who notices."},
+  {show:"Hysteria", date:"Oct 1", title:"The Cornell 57 w. Marisa Lagos & Kathryn Anne Edwards", min:52, blurb:"The newest episode of Hysteria, with guests Marisa Lagos and Kathryn Anne Edwards."},
+  {show:"Pod Save the World", date:"Sep 30", title:"Soccer Scandal & Idiot Ambassadors", min:47, blurb:"The newest episode of Pod Save the World."},
+  {show:"Lovett or Leave It", date:"Sep 30", title:"Schmitt for Brains", min:63, blurb:"The newest episode of Lovett or Leave It."},
+  {show:"Pod Save America", date:"Sep 29", title:"Impeach Pete Hegseth?", min:71, blurb:"The newest episode of Pod Save America."},
+  {show:"Offline", date:"Sep 26", title:"Bunkers Won't Save the Billionaires", min:55, blurb:"The newest episode of Offline with Jon Favreau."}
 ];
 
 const shows = [
@@ -584,7 +612,7 @@ const artFor = name => shows.find(s=>name.startsWith(s.name)) || {bg:"#0A1A44",f
 const thumb = (name,cls) => { const a=artFor(name); return `<span class="${cls}" style="background:${a.bg}">${a.img?`<img src="${a.img}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>`; };
 const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
 
-document.getElementById("lineup").innerHTML = episodes.map((e,i)=>`
+document.getElementById("lineup").innerHTML = episodes.slice(0,3).map((e,i)=>`
   <div class="ep" data-i="${i}">
     <button class="play" data-play="${i}" aria-label="Play ${e.title}">${PLAY}</button>
     ${thumb(e.show,"ep-art")}
@@ -592,7 +620,7 @@ document.getElementById("lineup").innerHTML = episodes.map((e,i)=>`
     <span class="len">${e.min} min</span>
   </div>`).join("");
 
-document.getElementById("latestlist").innerHTML = episodes.map((e,i)=>`
+document.getElementById("latestlist").innerHTML = episodes.slice(0,3).map((e,i)=>`
   <article>
     <div class="lt-head">${thumb(e.show,"lt-art")}<div class="eyebrow">${e.show} · Oct 1</div></div>
     <h3>${e.title}</h3>
@@ -613,7 +641,7 @@ document.getElementById("showgrid").innerHTML = shows.map(s=>`
 
 // chyron: episodes are playable, the rest jump to their section. Duplicated once for a seamless loop.
 const crawlItems = [
-  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, meta:`New today · ${e.min} min`, cta:"Play episode", art:artFor(e.show), mark:e.show})),
+  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, meta:`${e.date} · ${e.min} min`, cta:"Play now", art:artFor(e.show), mark:e.show})),
   {k:"Midterms", t:`${Math.max(0,Math.ceil((new Date(2026,10,3)-new Date().setHours(0,0,0,0))/864e5))} days to Election Day: check your registration`, d:"Make sure you're registered, find your polling place and make a plan to vote on Nov 3.", href:"#act", meta:"Vote Save America", cta:"Check registration", art:{bg:"#E5383B",fg:"#FFF3F3"}, mark:"Nov 3"},
   {k:"Crooked Con", t:"Nov 5–7 in Washington, DC. Tickets on sale now", d:"Two days after the midterms. Bigger stages, more panels and more people who think America is worth fighting for.", href:"#takeover", con:true, meta:"Early-bird ends Oct 6", cta:"Open countdown", art:{bg:"#4C8DEB",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_0.3,h_0.7,c_crop,g_north_east/w_300,h_300,c_fill/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png"}, mark:"Crooked Con"},
   {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"#act", meta:"Membership", cta:"Become a Friend", art:{bg:"#FFD43B",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_fill,g_auto/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png"}, mark:"Friends of the Pod"},
@@ -621,6 +649,10 @@ const crawlItems = [
   {k:"Newsletter", t:"What A Day lands in your inbox every weekday evening", d:"What happened today and what you can do about it, in one email.", href:"#newsletters", meta:"Free · weekdays", cta:"Sign up", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"What A Day"},
   {k:"Store", t:"New fall merch for your favorite pods", d:"Tees, hats and gifts for every Crooked fan.", href:"#store", meta:"Crooked Store", cta:"Shop now", art:{bg:"#F28C28",fg:"#2A1300"}, mark:"Shop"}
 ];
+// interleave: two episodes, then a promo
+{ const eps=crawlItems.filter(c=>c.play!==undefined), promos=crawlItems.filter(c=>c.play===undefined), mixed=[];
+  while(eps.length||promos.length){ mixed.push(...eps.splice(0,2)); if(promos.length) mixed.push(promos.shift()); }
+  crawlItems.splice(0,crawlItems.length,...mixed); }
 const crawlHTML = crawlItems.map((c,i)=>`<a href="${c.href||"#top"}" data-ci="${i}"${c.play!==undefined?` data-play="${c.play}"`:""}><span class="k">${c.k}</span><span>${c.t}</span></a>`).join("");
 document.getElementById("crawl").innerHTML = crawlHTML + crawlHTML.replace(/<a /g,'<a tabindex="-1" aria-hidden="true" ');
 document.getElementById("crawl").addEventListener("click",e=>{ if(e.target.closest("[data-play]")) e.preventDefault(); });
@@ -642,6 +674,7 @@ function showPreview(a){
   document.getElementById("cpvD").textContent=c.d;
   document.getElementById("cpvM").textContent=c.meta;
   cpvGo.textContent=c.cta; cpvGo.href=c.href||"#top";
+  syncActs();
   const r=a.getBoundingClientRect(), w=cpv.offsetWidth, chyTop=chyron.getBoundingClientRect().top;
   const left=Math.min(Math.max(16, r.left + 20 - 40), window.innerWidth - w - 16);
   cpv.style.left=left+"px";
@@ -667,6 +700,61 @@ cpvGo.addEventListener("click",e=>{
   cpv.classList.remove("show"); chyron.classList.remove("paused");
 });
 
+// library: up next queue, saved items, followed shows (kept in this browser only)
+const lib={up:[],saved:[],follow:[]};
+try{ Object.assign(lib, JSON.parse(localStorage.getItem("crookedLib")||"{}")); }catch(e){}
+const persist=()=>{ try{ localStorage.setItem("crookedLib",JSON.stringify(lib)); }catch(e){} };
+const keyOf=c=>c.play!==undefined?"ep:"+c.play:"ci:"+c.k;
+const showOf=c=>c.play!==undefined?(shows.find(s=>episodes[c.play].show.startsWith(s.name))||{name:episodes[c.play].show}).name:null;
+function nextIndex(){ if(lib.up.length){ const n=lib.up.shift(); persist(); return n; } return (cur+1)%episodes.length; }
+const toastEl=document.getElementById("toast"); let toastT;
+function toast(msg){ toastEl.textContent=msg; toastEl.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove("show"),1800); }
+const qBtn=document.getElementById("qBtn"), qpanel=document.getElementById("qpanel"), cpvQueue=document.getElementById("cpvQueue"), cpvSave=document.getElementById("cpvSave"), cpvFollow=document.getElementById("cpvFollow");
+function syncActs(){
+  const c=activeItem; if(!c) return;
+  const isEp=c.play!==undefined;
+  cpvQueue.hidden=!isEp; cpvFollow.hidden=!isEp;
+  const queued=isEp && lib.up.includes(c.play);
+  cpvQueue.setAttribute("aria-pressed",queued); cpvQueue.querySelector("span").textContent=queued?"Queued":"Up next";
+  const saved=lib.saved.includes(keyOf(c));
+  cpvSave.setAttribute("aria-pressed",saved); cpvSave.querySelector("span").textContent=saved?"Saved":"Save";
+  if(isEp){ const f=lib.follow.includes(showOf(c)); cpvFollow.setAttribute("aria-pressed",f); cpvFollow.querySelector("span").textContent=f?"Following":"Follow"; }
+}
+const esc=t=>String(t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+function row(name,label,title,btns){ return `<li>${thumb(name,"qa")}<div style="min-width:0"><div class="qs">${esc(label)}</div><div class="qt">${esc(title)}</div></div><div>${btns}</div></li>`; }
+function renderLib(){
+  document.getElementById("qBadge").textContent=lib.up.length||"";
+  document.getElementById("qUp").innerHTML = lib.up.length ? lib.up.map((i,n)=>row(episodes[i].show,episodes[i].show,episodes[i].title,`<button data-qplay="${i}" aria-label="Play now">Play</button><button data-qrm="${n}" aria-label="Remove from up next">✕</button>`)).join("") : `<p class="qempty">Nothing queued. Hover over an episode in the ticker and choose Up next.</p>`;
+  const savedItems=lib.saved.map(k=>crawlItems.find(c=>keyOf(c)===k)).filter(Boolean);
+  document.getElementById("qSaved").innerHTML = savedItems.length ? savedItems.map(c=>row(c.play!==undefined?episodes[c.play].show:"",c.k,c.t,`${c.play!==undefined?`<button data-qplay="${c.play}">Play</button>`:`<button data-qgo="${esc(c.href)}">Open</button>`}<button data-qunsave="${esc(keyOf(c))}" aria-label="Remove from saved">✕</button>`)).join("") : `<p class="qempty">Save episodes, events and offers from the ticker to find them here.</p>`;
+  document.getElementById("qFollow").innerHTML = lib.follow.length ? lib.follow.map(n=>row(n,"Show",n,`<button data-qunfollow="${esc(n)}">Unfollow</button>`)).join("") : `<p class="qempty">Follow a show to see its new episodes first.</p>`;
+}
+function setQ(open){
+  qpanel.hidden=!open; qBtn.setAttribute("aria-expanded",open);
+  if(open){ const d=document.querySelector(".dock").getBoundingClientRect(); qpanel.style.bottom=(window.innerHeight-d.top+10)+"px"; }
+}
+qBtn.addEventListener("click",()=>setQ(qpanel.hidden));
+qpanel.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.qplay!==undefined){ const i=+b.dataset.qplay; lib.up=lib.up.filter(x=>x!==i); cur=i; t=0; setPlaying(true); }
+  if(b.dataset.qrm!==undefined) lib.up.splice(+b.dataset.qrm,1);
+  if(b.dataset.qunsave) lib.saved=lib.saved.filter(k=>k!==b.dataset.qunsave);
+  if(b.dataset.qunfollow) lib.follow=lib.follow.filter(n=>n!==b.dataset.qunfollow);
+  if(b.dataset.qgo){ setQ(false); if(b.dataset.qgo==="#takeover") setTakeover(true); else location.hash=b.dataset.qgo; }
+  persist(); renderLib(); syncActs();
+});
+document.addEventListener("click",e=>{ if(!qpanel.hidden && !qpanel.contains(e.target) && !qBtn.contains(e.target)) setQ(false); });
+cpvQueue.addEventListener("click",()=>{ const c=activeItem; if(!c||c.play===undefined) return;
+  if(lib.up.includes(c.play)){ lib.up=lib.up.filter(x=>x!==c.play); toast("Removed from Up next"); }
+  else { lib.up.push(c.play); toast(`Added to Up next · ${lib.up.length} queued`); }
+  persist(); renderLib(); syncActs(); });
+cpvSave.addEventListener("click",()=>{ const c=activeItem; if(!c) return; const k=keyOf(c);
+  if(lib.saved.includes(k)){ lib.saved=lib.saved.filter(x=>x!==k); toast("Removed from Saved"); } else { lib.saved.push(k); toast("Saved for later"); }
+  persist(); renderLib(); syncActs(); });
+cpvFollow.addEventListener("click",()=>{ const c=activeItem; const n=c&&showOf(c); if(!n) return;
+  if(lib.follow.includes(n)){ lib.follow=lib.follow.filter(x=>x!==n); toast(`Unfollowed ${n}`); } else { lib.follow.push(n); toast(`Following ${n}`); }
+  persist(); renderLib(); syncActs(); });
+
 // filters
 document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
   document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", x===c));
@@ -685,19 +773,19 @@ function render(){
   document.getElementById("ptime").textContent=`${fmt(t)} / ${fmt(dur)}`;
   pb.style.width=(t/dur*100)+"%";
   pp.innerHTML=playing?PAUSE:PLAY; pp.setAttribute("aria-label",playing?"Pause":"Play");
-  document.querySelector(".player").classList.toggle("on", playing);
+  document.getElementById("player").classList.toggle("on", playing);
   document.getElementById("pstateTxt").textContent = playing ? "Now playing" : (t>0 ? "Paused" : "Featured");
   document.querySelectorAll(".ep").forEach(el=>el.classList.toggle("playing", playing && +el.dataset.i===cur));
-  document.querySelectorAll("[data-play]").forEach(b=>{ if(b.classList.contains("btn")) return;
+  document.querySelectorAll("button[data-play]").forEach(b=>{ if(b.classList.contains("btn")) return;
     b.innerHTML = playing && +b.dataset.play===cur ? PAUSE : PLAY; });
 }
 function setPlaying(p){
   playing=p; clearInterval(timer);
-  if(p) timer=setInterval(()=>{ t+=speed*4; if(t>=episodes[cur].min*60){ t=0; cur=(cur+1)%episodes.length; } render(); },250);
+  if(p) timer=setInterval(()=>{ t+=speed*4; if(t>=episodes[cur].min*60){ t=0; cur=nextIndex(); renderLib(); } render(); },250);
   render();
 }
 pp.addEventListener("click",()=>setPlaying(!playing));
-document.getElementById("pnext").addEventListener("click",()=>{ cur=(cur+1)%episodes.length; t=0; setPlaying(true); });
+document.getElementById("pnext").addEventListener("click",()=>{ cur=nextIndex(); t=0; renderLib(); setPlaying(true); });
 document.addEventListener("click",ev=>{
   const b=ev.target.closest("[data-play]"); if(!b) return;
   const i=+b.dataset.play;
@@ -709,10 +797,8 @@ document.getElementById("spd").addEventListener("click",e=>{
   speed = speed>=2 ? 1 : speed+0.5; e.target.textContent=speed+"×";
 });
 
-// countdown + date
-const now=new Date(), elec=new Date(2026,10,3);
-const days=Math.max(0,Math.ceil((elec-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5));
-document.getElementById("days").textContent=days;
+// date
+const now=new Date();
 document.getElementById("today").textContent=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
 
 // search: icon opens a panel under the header
@@ -769,7 +855,7 @@ document.getElementById("nl").addEventListener("submit",e=>{
   e.preventDefault();
   document.getElementById("nlok").textContent="Demo only: no email was sent or stored.";
 });
-render();
+render(); renderLib();
 </script>
 </body>
 </html>
