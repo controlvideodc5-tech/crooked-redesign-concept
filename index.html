@@ -135,7 +135,9 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .sw.swoop .sw-eagle{opacity:1;transform:none;transition:transform 2.4s cubic-bezier(.16,.8,.24,1),opacity .3s}
 .sw.poster .sw-sky,.sw.poster .sw-poster-img{opacity:1}
 .sw.depart .sw-eagle{opacity:0;transform:translate(-110%,-120%) rotate(14deg) scale(.55);transition:transform 2s cubic-bezier(.5,0,.8,.4),opacity .5s 1.5s}
-.sw-tilt{z-index:3}
+.sw-tilt{z-index:3;transition:opacity 1s}
+.sw.swoop .sw-tilt{opacity:0}
+.sw.depart .sw-tilt{opacity:1}
 @keyframes roll{from{top:100%}to{top:var(--roll-end,-1600px)}}
 .sw-ep{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
 .sw-title{font:900 clamp(40px,4.4vw,64px)/.9 var(--f-display);text-transform:uppercase;margin:0}
@@ -1098,14 +1100,21 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
   const sw=document.getElementById("sw"), roll=document.getElementById("swRoll");
   const still=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const wait=ms=>new Promise(r=>setTimeout(r,ms));
-  roll.addEventListener("animationend",async e=>{
-    if(e.animationName!=="roll"||still) return;
-    sw.classList.add("swoop"); await wait(2500);       // eagle lands on its spot
+  // start the finale as soon as the last line rises into the upper half of the stage (not when the roll fully ends)
+  const endLine=roll.querySelector(".sw-end"); let busy=false;
+  setInterval(()=>{
+    if(busy||still||!endLine) return;
+    const a=sw.getBoundingClientRect(), b=endLine.getBoundingClientRect();
+    if(a.height && b.bottom < a.top + a.height*0.5) finale();
+  },200);
+  async function finale(){
+    busy=true;
+    sw.classList.add("swoop"); await wait(2500);       // eagle lands on its spot; leftover credits fade
     sw.classList.add("poster"); await wait(1500+9000); // sky + poster resolve, then hold
     sw.classList.remove("poster"); sw.classList.add("depart"); await wait(1200);
     roll.style.animation="none"; void roll.offsetWidth; roll.style.animation="";   // roll starts again as the eagle leaves
-    await wait(1400); sw.classList.remove("swoop","depart");
-  });
+    await wait(1400); sw.classList.remove("swoop","depart"); busy=false;
+  }
 }
 function setTakeover(open){
   con.dataset.state = open ? "open" : "closed";
