@@ -136,6 +136,13 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .con-art{align-self:stretch;position:relative;min-height:440px;display:grid}
 /* credits roll: names recede into the distance, Star Wars style */
 .sw{position:absolute;inset:0;overflow:hidden;perspective:360px}
+/* desktop: the credits stage climbs the full height of the banner, aligned to its column */
+@media (min-width:901px){
+  .con > .wrap{position:static}
+  .con-bar,.con-body > div:first-child{position:relative;z-index:2}
+  .con-art{position:static}
+  .con .sw{top:0;bottom:0;right:auto;z-index:1}
+}
 .sw-tilt{position:absolute;left:0;right:0;bottom:0;top:-120%;transform-origin:50% 100%;transform:rotateX(28deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 22%);mask-image:linear-gradient(to bottom,transparent 0%,#000 22%)}
 .sw-roll{position:absolute;left:0;right:0;top:100%;text-align:center;color:var(--butter);text-shadow:0 1px 0 rgba(10,26,68,.25);}
 .sw.running .sw-roll{animation:roll var(--roll-dur,70s) linear 1 forwards}
@@ -1141,6 +1148,18 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
     raf=requestAnimationFrame(watch);
   }
   replay.addEventListener("click",start);
+  sw.appendChild(replay);
+  // keep the full-height stage lined up with its column on desktop
+  const conEl=document.getElementById("takeover"), art=sw.parentNode;
+  function placeStage(){
+    if(window.matchMedia("(min-width:901px)").matches && art.offsetWidth){
+      const a=art.getBoundingClientRect(), c=conEl.getBoundingClientRect();
+      sw.style.left=(a.left-c.left)+"px"; sw.style.width=a.width+"px";
+    } else { sw.style.left=""; sw.style.width=""; }
+    sizeRoll();
+  }
+  placeStage(); window.addEventListener("resize",placeStage);
+  document.getElementById("conToggle").addEventListener("click",()=>requestAnimationFrame(placeStage));
   // intro: the eagle swoops in and stays; the credits begin once it has landed
   const sky=document.querySelector(".con-sky");
   if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
