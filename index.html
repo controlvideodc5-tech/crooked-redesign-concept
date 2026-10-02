@@ -844,7 +844,7 @@ document.getElementById("showgrid").innerHTML = shows.map(s=>`
 
 // chyron: episodes are playable, the rest jump to their section. Duplicated once for a seamless loop.
 const crawlItems = [
-  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, meta:`${e.date} · ${e.min} min`, cta:"Play now", art:artFor(e.show), mark:e.show})),
+  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, href:e.page, meta:`${e.date} · ${e.min} min`, cta:"Play now", art:artFor(e.show), mark:e.show})),
   {k:"Midterms", t:`${Math.max(0,Math.ceil((new Date(2026,10,3)-new Date().setHours(0,0,0,0))/864e5))} days to Election Day: check your registration`, d:"Make sure you're registered, find your polling place and make a plan to vote on Nov 3.", href:"https://votesaveamerica.com/be-a-voter/", meta:"Vote Save America", cta:"Check registration", art:{bg:"#E5383B",fg:"#FFF3F3"}, mark:"Nov 3"},
   {k:"Crooked Con", t:"Nov 5–7 in Washington, DC. Tickets on sale now", d:"Two days after the midterms. Bigger stages, more panels and more people who think America is worth fighting for.", href:"#takeover", con:true, meta:"Early-bird ends Oct 6", cta:"Open countdown", art:{bg:"#4C8DEB",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_0.3,h_0.7,c_crop,g_north_east/w_300,h_300,c_fill/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png"}, mark:"Crooked Con"},
   {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"https://crooked.supercast.com/", meta:"Membership", cta:"Become a Friend", art:{bg:"#FFD43B",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_fill,g_auto/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png"}, mark:"Friends of the Pod"},
@@ -858,7 +858,7 @@ const crawlItems = [
   crawlItems.splice(0,crawlItems.length,...mixed); }
 const crawlHTML = crawlItems.map((c,i)=>`<a class="oc-card" href="${c.href||"#top"}" data-ci="${i}"${c.play!==undefined?` data-play="${c.play}"`:""}><span class="oc-art" style="background:${c.art.bg};color:${c.art.fg}">${esc(c.mark)}${c.art.img?`<img src="${c.art.img}" alt="" loading="lazy" onerror="this.remove()">`:""}</span><span style="min-width:0"><span class="oc-k">${esc(c.k)}</span><span class="oc-t">${esc(c.t)}</span></span></a>`).join("");
 document.getElementById("crawl").innerHTML = crawlHTML + crawlHTML.replace(/<a /g,'<a tabindex="-1" aria-hidden="true" ');
-document.getElementById("crawl").addEventListener("click",e=>{ if(e.target.closest("[data-play]")) e.preventDefault(); });
+document.getElementById("crawl").addEventListener("click",e=>{ if(e.target.closest("[data-play]") && !(e.metaKey||e.ctrlKey||e.shiftKey)) e.preventDefault(); else if(e.target.closest("[data-play]")) e.stopImmediatePropagation(); },true);
 
 // chyron preview: hover or focus an item to pause the crawl and preview it; the card stays while the pointer is on it
 const chyron=document.querySelector(".oncrooked"), cpv=document.getElementById("cpv"), cpvGo=document.getElementById("cpvGo");
