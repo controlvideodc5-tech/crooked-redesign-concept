@@ -14,3 +14,7 @@ It is not affiliated with, endorsed by or connected to Crooked Media. All names 
 - Search behind an icon, newsletter sign-up (demo only, stores nothing), dark mode and a phone layout
 
 It's a single `index.html` with no build step. Show artwork and brand graphics are referenced from Crooked Media's public image CDN and belong to Crooked Media.
+
+## Credits
+- Eagle: "Bald eagle landing" by David Menke, U.S. Fish & Wildlife Service — public domain ([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bald_eagle_landing.jpg)). Background removed with Adobe Photoshop's API; toned in the browser.
+- Episode audio streams from each show's official public podcast feed.
