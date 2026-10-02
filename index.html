@@ -54,7 +54,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;l
 header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);color:var(--on-ink);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
 .nav{display:flex;align-items:center;gap:24px;height:64px}
 .logo{font:900 30px/1 var(--f-display);letter-spacing:.02em;text-decoration:none;color:var(--signal)}
-.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:600;font-size:15px}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:600;font-size:14px}
 .nav ul a{text-decoration:none;opacity:.88}
 .nav ul a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
 .nav .spacer{flex:1}
@@ -62,6 +62,12 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .search-btn:hover,.search-btn[aria-expanded="true"]{background:var(--chrome-2);color:var(--signal)}
 .search-btn .i-close,.search-btn[aria-expanded="true"] .i-search{display:none}
 .search-btn[aria-expanded="true"] .i-close{display:block}
+.mobile-menu{background:var(--chrome-2);border-top:1px solid var(--chrome-line)}
+.mobile-menu .wrap{display:grid;padding-block:8px 16px}
+.mobile-menu a{color:#fff;text-decoration:none;font:900 26px/1 var(--f-display);text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--chrome-line)}
+.mobile-menu a:hover{color:var(--signal)}
+.mobile-menu .mm-cta{color:var(--signal);border-bottom:0}
+@media (min-width:1101px){.mobile-menu{display:none!important}}
 .search-panel{background:var(--chrome-2);border-top:1px solid var(--chrome-line);box-shadow:0 18px 40px rgba(5,10,30,.35)}
 .search-panel .wrap{padding-block:22px 26px;display:grid;gap:12px}
 .search-panel .eyebrow{color:#9A9FAD}
@@ -442,18 +448,31 @@ footer .logo{font-size:40px}
       <li><a href="https://crooked.com/news/">Daily News</a></li>
       <li><a href="https://crooked.com/newsletter-signup/">Newsletters</a></li>
       <li><a href="https://crooked.com/events/">Events</a></li>
-      <li><a href="https://votesaveamerica.com/">Vote Save America</a></li>
+      <li><a href="https://crooked.com/crookedmediareads/">Crooked Media Reads</a></li>
       <li><a href="https://store.crooked.com/">Shop</a></li>
+      <li><a href="https://votesaveamerica.com/">Vote Save America</a></li>
     </ul>
     <span class="spacer"></span>
     <button class="search-btn" id="searchBtn" aria-label="Search" aria-expanded="false" aria-controls="searchPanel">
       <svg class="i-search" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
       <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
-    <a class="btn btn-signal join" href="https://crooked.supercast.com/">Join <span class="long">Friends of the Pod</span></a>
-    <button class="icon-btn" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="btn btn-signal join" href="https://crooked.com/friends-of-the-pod-subscription/">Join <span class="long">Friends of the Pod</span></a>
+    <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
-  <div class="search-panel"  <div class="search-panel" id="searchPanel" hidden>
+  <div class="search-panel"  <nav class="mobile-menu" id="mobileMenu" aria-label="Main" hidden>
+    <div class="wrap">
+      <a href="https://crooked.com/podcasts/">Podcasts</a>
+      <a href="https://crooked.com/news/">Daily News</a>
+      <a href="https://crooked.com/newsletter-signup/">Newsletters</a>
+      <a href="https://crooked.com/events/">Events</a>
+      <a href="https://crooked.com/crookedmediareads/">Crooked Media Reads</a>
+      <a href="https://store.crooked.com/">Shop</a>
+      <a href="https://votesaveamerica.com/">Vote Save America</a>
+      <a class="mm-cta" href="https://crooked.com/friends-of-the-pod-subscription/">Join Friends of the Pod</a>
+    </div>
+  </nav>
+  <div class="search-panel" id="searchPanel" hidden>
     <div class="wrap">
       <label for="q" class="eyebrow">Search shows & episodes</label>
       <input id="q" type="search" placeholder="Try “Strict Scrutiny” or “midterms”" autocomplete="off">
@@ -576,7 +595,7 @@ footer .logo{font-size:40px}
           <h1>Your favorite pods.<br><em>Ad-free.</em></h1>
           <p class="lede">Subscribe for ad-free episodes of every Crooked show, bonus content and early access to event tickets. Your membership keeps Crooked independent and out of Big Tech's pocket.</p>
           <div class="ctas">
-            <a class="btn btn-signal" href="https://crooked.supercast.com/">Join Friends of the Pod</a>
+            <a class="btn btn-signal" href="https://crooked.com/friends-of-the-pod-subscription/">Join Friends of the Pod</a>
             <a class="btn btn-ghost" href="https://crooked.com/friends-of-the-pod-subscription/">See what's included</a>
           </div>
         </div>
@@ -659,7 +678,7 @@ footer .logo{font-size:40px}
             <li>Bonus and members-only content</li>
             <li>Early access to event tickets</li>
           </ul>
-          <a class="btn" href="https://crooked.supercast.com/">Become a Friend</a>
+          <a class="btn" href="https://crooked.com/friends-of-the-pod-subscription/">Become a Friend</a>
         </div>
         <div class="panel p-con">
           <img class="panel-img con-img" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_700/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork" loading="lazy" onerror="this.remove()">
@@ -725,7 +744,7 @@ footer .logo{font-size:40px}
     </div>
     <div style="display:grid;gap:6px">
       <nav class="foot-links" aria-label="Footer">
-        <a href="https://crooked.com/podcasts/">Podcasts</a><a href="https://crooked.com/newsletter-signup/">Newsletters</a><a href="https://crooked.com/events/">Events</a><a href="https://crooked.com/network/">Network</a>
+        <a href="https://crooked.com/podcasts/">Podcasts</a><a href="https://crooked.com/newsletter-signup/">Newsletters</a><a href="https://crooked.com/events/">Events</a><a href="https://crooked.com/crookedmediareads/">Crooked Media Reads</a><a href="https://crooked.com/network/">Network</a>
         <a href="https://votesaveamerica.com/">Vote Save America</a><a href="https://store.crooked.com/">Store</a><a href="https://crooked.com/friends-of-the-pod-subscription/">Friends of the Pod</a><a href="https://crooked.com/crooked-careers/">Careers</a>
         <a href="https://crooked.com/privacy/">Privacy</a><a href="https://crooked.com/terms/">Terms</a><a href="https://crooked.com/contact/">Contact</a>
       </nav>
@@ -847,7 +866,7 @@ const crawlItems = [
   ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, href:e.page, meta:`${e.date} · ${e.min} min`, cta:"Play now", art:artFor(e.show), mark:e.show})),
   {k:"Midterms", t:`${Math.max(0,Math.ceil((new Date(2026,10,3)-new Date().setHours(0,0,0,0))/864e5))} days to Election Day: check your registration`, d:"Make sure you're registered, find your polling place and make a plan to vote on Nov 3.", href:"https://votesaveamerica.com/be-a-voter/", meta:"Vote Save America", cta:"Check registration", art:{bg:"#E5383B",fg:"#FFF3F3"}, mark:"Nov 3"},
   {k:"Crooked Con", t:"Nov 5–7 in Washington, DC. Tickets on sale now", d:"Two days after the midterms. Bigger stages, more panels and more people who think America is worth fighting for.", href:"#takeover", con:true, meta:"Early-bird ends Oct 6", cta:"Open countdown", art:{bg:"#4C8DEB",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_0.3,h_0.7,c_crop,g_north_east/w_300,h_300,c_fill/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png"}, mark:"Crooked Con"},
-  {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"https://crooked.supercast.com/", meta:"Membership", cta:"Become a Friend", art:{bg:"#FFD43B",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_fill,g_auto/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png"}, mark:"Friends of the Pod"},
+  {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"https://crooked.com/friends-of-the-pod-subscription/", meta:"Membership", cta:"Become a Friend", art:{bg:"#FFD43B",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_fill,g_auto/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png"}, mark:"Friends of the Pod"},
   {k:"Vote Save America", t:"Find a phone bank or canvass shift near you", d:"Put your energy into the races that decide the next two years.", href:"https://votesaveamerica.com/action-hub/", meta:"Take action", cta:"Find an action", art:{bg:"#E8E8E8",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_pad,b_rgb:e8e8e8/f_auto,q_auto/v1776896890/crooked/VSA-Logo-1480x1040-2_410566532f/VSA-Logo-1480x1040-2_410566532f.png"}, mark:"VSA"},
   {k:"Newsletter", t:"What A Day lands in your inbox every weekday evening", d:"What happened today and what you can do about it, in one email.", href:"https://crooked.com/newsletter-signup/", meta:"Free · weekdays", cta:"Sign up", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"What A Day"},
   {k:"Store", t:"New fall merch for your favorite pods", d:"Tees, hats and gifts for every Crooked fan.", href:"https://store.crooked.com/", meta:"Crooked Store", cta:"Shop now", art:{bg:"#F28C28",fg:"#2A1300"}, mark:"Shop"}
@@ -1099,6 +1118,14 @@ document.getElementById("spd").addEventListener("click",e=>{
 const now=new Date();
 document.getElementById("today").textContent=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
 
+// phone menu
+{
+  const mb=document.getElementById("menuBtn"), mm=document.getElementById("mobileMenu");
+  const setM=o=>{ mm.hidden=!o; mb.setAttribute("aria-expanded",o); mb.setAttribute("aria-label",o?"Close menu":"Open menu"); };
+  mb.addEventListener("click",()=>{ setM(mm.hidden); if(!mm.hidden) setSearch(false); });
+  mm.addEventListener("click",e=>{ if(e.target.closest("a")) setM(false); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !mm.hidden){ setM(false); mb.focus(); } });
+}
 // search: icon opens a panel under the header
 const sBtn=document.getElementById("searchBtn"), sPanel=document.getElementById("searchPanel"), q=document.getElementById("q"), res=document.getElementById("results");
 const index=[
@@ -1109,7 +1136,8 @@ const index=[
   {k:"Action", t:"Vote Save America", d:"volunteer phone bank canvass midterms", href:"https://votesaveamerica.com/action-hub/"},
   {k:"Newsletter", t:"What A Day newsletter", d:"daily email", href:"https://crooked.com/newsletter-signup/"},
   {k:"Store", t:"Crooked Store", d:"merch shop tees hats coffee", href:"https://store.crooked.com/"},
-  {k:"Events", t:"Live shows and events", d:"tickets tour live", href:"https://crooked.com/events/"}
+  {k:"Events", t:"Live shows and events", d:"tickets tour live", href:"https://crooked.com/events/"},
+  {k:"Books", t:"Crooked Media Reads", d:"books publishing reads", href:"https://crooked.com/crookedmediareads/"}
 ];
 document.getElementById("suggest").innerHTML=["Pod Save America","Strict Scrutiny","Midterms","Crooked Con"].map(s=>`<button type="button">${s}</button>`).join("");
 document.getElementById("suggest").addEventListener("click",e=>{const b=e.target.closest("button"); if(b){q.value=b.textContent; runSearch();}});
