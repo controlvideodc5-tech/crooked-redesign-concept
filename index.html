@@ -225,7 +225,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .play:hover{transform:scale(1.06)}
 .play svg{width:16px;height:16px}
 .ep .show{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC}
-.ep .title{font-weight:700;font-size:16px;line-height:1.3;margin-top:5px;color:#fff}
+.ep .title{display:block;text-decoration:none;font-weight:700;font-size:16px;line-height:1.3;margin-top:5px;color:#fff}
 .ep .len{font:500 12px/1 var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums}
 .ep.playing .title{color:var(--signal)}
 
@@ -291,6 +291,7 @@ section.block{padding-block:64px}
 .latest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 @media (max-width:900px){.latest{grid-template-columns:1fr}}
 .latest article{border-top:3px solid var(--fg);padding-top:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.latest h3 a{text-decoration:none}.latest h3 a:hover,.ep .title:hover{text-decoration:underline;text-underline-offset:3px}
 .latest h3{font:700 20px/1.25 var(--f-body);text-transform:none}
 .latest p{margin:0;color:var(--muted);font-size:15px}
 .latest .row{display:flex;align-items:center;gap:12px;margin-top:4px}
@@ -309,6 +310,9 @@ section.block{padding-block:64px}
 .store h3{font-size:44px}
 .store p{margin:0;color:var(--muted)}
 
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 16px;max-width:30em}
+.foot-links a{color:#D4DAF0;text-decoration:none}
+.foot-links a:hover{color:var(--signal);text-decoration:underline;text-underline-offset:3px}
 footer{background:var(--ink);color:#AEB8DC;padding-block:40px;font-size:14px;margin-top:64px}
 footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 footer .logo{font-size:40px}
@@ -410,6 +414,7 @@ footer .logo{font-size:40px}
 .cpv-t{font-weight:700;line-height:1.3}
 .cpv-d{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
 .cpv-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 14px 8px;background:var(--paper);border-top:1px solid var(--line)}
+.cpv-meta a{color:inherit}
 .cpv-meta{font:500 11px var(--f-mono);color:var(--muted);padding:0 14px 10px;background:var(--paper)}
 .cpv-acts{display:flex;gap:4px}
 .cpv-act{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:600}
@@ -433,19 +438,19 @@ footer .logo{font-size:40px}
   <div class="wrap nav">
     <a class="logo" href="#top">CROOKED</a>
     <ul>
-      <li><a href="#shows">Podcasts</a></li>
-      <li><a href="#latest">Daily News</a></li>
-      <li><a href="#newsletters">Newsletters</a></li>
-      <li><a href="#act">Events</a></li>
-      <li><a href="#act">Vote Save America</a></li>
-      <li><a href="#store">Shop</a></li>
+      <li><a href="https://crooked.com/podcasts/">Podcasts</a></li>
+      <li><a href="https://crooked.com/news/">Daily News</a></li>
+      <li><a href="https://crooked.com/newsletter-signup/">Newsletters</a></li>
+      <li><a href="https://crooked.com/events/">Events</a></li>
+      <li><a href="https://votesaveamerica.com/">Vote Save America</a></li>
+      <li><a href="https://store.crooked.com/">Shop</a></li>
     </ul>
     <span class="spacer"></span>
     <button class="search-btn" id="searchBtn" aria-label="Search" aria-expanded="false" aria-controls="searchPanel">
       <svg class="i-search" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
       <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
-    <a class="btn btn-signal join" href="#act">Join <span class="long">Friends of the Pod</span></a>
+    <a class="btn btn-signal join" href="https://crooked.supercast.com/">Join <span class="long">Friends of the Pod</span></a>
     <button class="icon-btn" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   <div class="search-panel"  <div class="search-panel" id="searchPanel" hidden>
@@ -474,7 +479,7 @@ footer .logo{font-size:40px}
       </div>
       <div class="con-when">Nov 5–7 · Washington, DC</div>
       <div class="con-actions">
-        <a class="btn btn-ink btn-sm" href="#act">Get tickets</a>
+        <a class="btn btn-ink btn-sm" href="https://www.crookedcon.com/tickets">Get tickets</a>
         <button class="con-toggle" id="conToggle" aria-expanded="true" aria-controls="conBody"><span id="conToggleTxt">Collapse</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
       </div>
@@ -489,8 +494,8 @@ footer .logo{font-size:40px}
           <div><span id="cd-s">00</span><small>Sec</small></div>
         </div>
         <div class="con-cta">
-          <a class="btn btn-ink" href="#act">Get tickets</a>
-          <a class="btn btn-ghost" href="#act">See the lineup</a>
+          <a class="btn btn-ink" href="https://www.crookedcon.com/tickets">Get tickets</a>
+          <a class="btn btn-ghost" href="https://www.crookedcon.com/lineup">See the lineup</a>
           <span class="con-note"><b>Early-bird ends Oct 6</b></span>
         </div>
       </div>
@@ -571,8 +576,8 @@ footer .logo{font-size:40px}
           <h1>Your favorite pods.<br><em>Ad-free.</em></h1>
           <p class="lede">Subscribe for ad-free episodes of every Crooked show, bonus content and early access to event tickets. Your membership keeps Crooked independent and out of Big Tech's pocket.</p>
           <div class="ctas">
-            <a class="btn btn-signal" href="#act">Join Friends of the Pod</a>
-            <a class="btn btn-ghost" href="#act">See what's included</a>
+            <a class="btn btn-signal" href="https://crooked.supercast.com/">Join Friends of the Pod</a>
+            <a class="btn btn-ghost" href="https://crooked.com/friends-of-the-pod-subscription/">See what's included</a>
           </div>
         </div>
         <div class="fan" aria-label="Ad-free shows">
@@ -592,7 +597,7 @@ footer .logo{font-size:40px}
           <h1>Late-night politics.<br><em>Live in LA.</em></h1>
           <p class="lede">Watch Jon Lovett tape America's number one late-night political gay live comedy podcast. Shows every Tuesday and Thursday at 5pm.</p>
           <div class="ctas">
-            <a class="btn btn-signal" href="#act">Get tickets</a>
+            <a class="btn btn-signal" href="https://crooked.com/events/">Get tickets</a>
             <button class="btn btn-ghost" data-play="5"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg> Play the latest episode</button>
           </div>
         </div>
@@ -622,7 +627,7 @@ footer .logo{font-size:40px}
           <div class="eyebrow">The network</div>
           <h2>Find your show</h2>
         </div>
-        <a href="#shows">View all podcasts →</a>
+        <a href="https://crooked.com/podcasts/">View all podcasts →</a>
       </div>
       <div class="chips" role="group" aria-label="Filter shows">
         <button class="chip" aria-pressed="true" data-f="all">All</button>
@@ -654,7 +659,7 @@ footer .logo{font-size:40px}
             <li>Bonus and members-only content</li>
             <li>Early access to event tickets</li>
           </ul>
-          <a class="btn" href="#act">Become a Friend</a>
+          <a class="btn" href="https://crooked.supercast.com/">Become a Friend</a>
         </div>
         <div class="panel p-con">
           <img class="panel-img con-img" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.71,y_0.04,w_0.29,h_0.66/w_700/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="Crooked Con 2026 artwork" loading="lazy" onerror="this.remove()">
@@ -662,14 +667,14 @@ footer .logo{font-size:40px}
           <h3>Crooked Con is back</h3>
           <div class="when">NOV 5–7 · WASHINGTON, DC</div>
           <p>Two days after the midterms and heading into a presidential election. Bigger stages, more panels and more people who think America is worth fighting for.</p>
-          <a class="btn btn-signal" href="#act">Get tickets</a>
+          <a class="btn btn-signal" href="https://www.crookedcon.com/tickets">Get tickets</a>
         </div>
         <div class="panel p-vsa">
           <div class="vsa-logo"><img src="https://res.cloudinary.com/crooked-media/images/w_500/f_auto,q_auto/v1776896890/crooked/VSA-Logo-1480x1040-2_410566532f/VSA-Logo-1480x1040-2_410566532f.png" alt="Vote Save America" loading="lazy" onerror="this.parentNode.remove()"></div>
           <div class="eyebrow">Vote Save America</div>
           <h3>Down, not out</h3>
           <p>Put your energy into the races that decide the next two years. Find a shift, a donation match or a phone bank that fits your week.</p>
-          <a class="btn btn-ghost" href="#act">Find an action near you</a>
+          <a class="btn btn-ghost" href="https://votesaveamerica.com/action-hub/">Find an action near you</a>
         </div>
       </div>
     </div>
@@ -682,7 +687,7 @@ footer .logo{font-size:40px}
           <div class="eyebrow">Fresh from the feed</div>
           <h2>Latest episodes</h2>
         </div>
-        <a href="#latest">See every episode →</a>
+        <a href="https://crooked.com/podcasts/">See every episode →</a>
       </div>
       <div class="latest" id="latestlist"></div>
     </div>
@@ -706,7 +711,7 @@ footer .logo{font-size:40px}
         <div class="eyebrow">Crooked Store</div>
         <h3>Progressive values look good on you</h3>
         <p>Merch for your favorite pods and the causes you care about. Find a tee for the next protest or a gift for the Hysteria fan in your life.</p>
-        <a class="btn btn-ghost" href="#store" style="align-self:flex-start">Shop the store</a>
+        <a class="btn btn-ghost" href="https://store.crooked.com/" style="align-self:flex-start">Shop the store</a>
       </div>
     </div>
   </section>
@@ -719,9 +724,11 @@ footer .logo{font-size:40px}
       <p style="max-width:32em">A media network for stories, voices and activism that inform, entertain and inspire action.</p>
     </div>
     <div style="display:grid;gap:6px">
-      <span>Podcasts · Newsletters · Events</span>
-      <span>Vote Save America · Store · Careers</span>
-      <span>Privacy · Accessibility · Contact</span>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="https://crooked.com/podcasts/">Podcasts</a><a href="https://crooked.com/newsletter-signup/">Newsletters</a><a href="https://crooked.com/events/">Events</a><a href="https://crooked.com/network/">Network</a>
+        <a href="https://votesaveamerica.com/">Vote Save America</a><a href="https://store.crooked.com/">Store</a><a href="https://crooked.com/friends-of-the-pod-subscription/">Friends of the Pod</a><a href="https://crooked.com/crooked-careers/">Careers</a>
+        <a href="https://crooked.com/privacy/">Privacy</a><a href="https://crooked.com/terms/">Terms</a><a href="https://crooked.com/contact/">Contact</a>
+      </nav>
       <span style="font:500 11px/1.5 var(--f-mono);opacity:.7">Redesign concept, not affiliated with Crooked Media. Episode audio streams from each show's public feed.</span>
     </div>
   </div>
@@ -782,25 +789,25 @@ const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6
 // Episodes, running times and audio come from each show's official podcast feed (Oct 1, 2026).
 // The first three are today's lineup.
 const episodes = [
-  {show:"What A Day", date:"Oct 1", title:"Are Democrats Saying The Right Things To Win?", min:27, secs:1641, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959601.mp3?source=rss", blurb:"The daily news podcast checks the party's closing message with five weeks to go."},
-  {show:"Strict Scrutiny", date:"Oct 1", title:"We Need to Talk About Ethics Reform", min:47, secs:2800, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959130.mp3?source=rss", blurb:"The hosts make the case for binding ethics rules at the Supreme Court."},
-  {show:"Runaway Country with Alex Wagner", date:"Oct 1", title:"Trump's Crisis of Dignity", min:69, secs:4117, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959195.mp3?source=rss", blurb:"Alex Wagner on what the presidency has lost, and who notices."},
-  {show:"Hysteria", date:"Oct 1", title:"The Cornell 57 w. Marisa Lagos & Kathryn Anne Edwards", min:117, secs:7005, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959209.mp3?source=rss", blurb:"The newest episode of Hysteria, with guests Marisa Lagos and Kathryn Anne Edwards."},
-  {show:"Pod Save the World", date:"Sep 30", title:"Soccer Scandal & Idiot Ambassadors", min:99, secs:5949, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8958638.mp3?source=rss", blurb:"The newest episode of Pod Save the World."},
-  {show:"Lovett or Leave It", date:"Sep 30", title:"Schmitt for Brains", min:65, secs:3887, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959135.mp3?source=rss", blurb:"The newest episode of Lovett or Leave It."},
-  {show:"Pod Save America", date:"Sep 29", title:"Impeach Pete Hegseth?", min:58, secs:3482, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8958173.mp3?source=rss", blurb:"The newest episode of Pod Save America."},
-  {show:"Offline", date:"Sep 26", title:"Bunkers Won't Save the Billionaires", min:62, secs:3719, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8957397.mp3?source=rss", blurb:"The newest episode of Offline with Jon Favreau."}
+  {show:"What A Day", date:"Oct 1", title:"Are Democrats Saying The Right Things To Win?", page:"https://crooked.com/podcast/are-democrats-saying-the-right-things-to-win/", min:27, secs:1641, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959601.mp3?source=rss", blurb:"The daily news podcast checks the party's closing message with five weeks to go."},
+  {show:"Strict Scrutiny", date:"Oct 1", title:"We Need to Talk About Ethics Reform", page:"https://crooked.com/podcast/we-need-to-talk-about-ethics-reform/", min:47, secs:2800, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959130.mp3?source=rss", blurb:"The hosts make the case for binding ethics rules at the Supreme Court."},
+  {show:"Runaway Country with Alex Wagner", date:"Oct 1", title:"Trump's Crisis of Dignity", page:"https://crooked.com/podcast/trumps-crisis-of-dignity/", min:69, secs:4117, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959195.mp3?source=rss", blurb:"Alex Wagner on what the presidency has lost, and who notices."},
+  {show:"Hysteria", date:"Oct 1", title:"The Cornell 57 w. Marisa Lagos & Kathryn Anne Edwards", page:"https://crooked.com/podcast/the-cornell-57-w-marisa-lagos-kathryn-anne-edwards/", min:117, secs:7005, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959209.mp3?source=rss", blurb:"The newest episode of Hysteria, with guests Marisa Lagos and Kathryn Anne Edwards."},
+  {show:"Pod Save the World", date:"Sep 30", title:"Soccer Scandal & Idiot Ambassadors", page:"https://crooked.com/podcast/soccer-scandal-idiot-ambassadors/", min:99, secs:5949, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8958638.mp3?source=rss", blurb:"The newest episode of Pod Save the World."},
+  {show:"Lovett or Leave It", date:"Sep 30", title:"Schmitt for Brains", page:"https://crooked.com/podcast/schmitt-for-brains/", min:65, secs:3887, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8959135.mp3?source=rss", blurb:"The newest episode of Lovett or Leave It."},
+  {show:"Pod Save America", date:"Sep 29", title:"Impeach Pete Hegseth?", page:"https://crooked.com/podcast/impeach-pete-hegseth/", min:58, secs:3482, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8958173.mp3?source=rss", blurb:"The newest episode of Pod Save America."},
+  {show:"Offline", date:"Sep 26", title:"Bunkers Won't Save the Billionaires", page:"https://crooked.com/podcast/bunkers-wont-save-the-billionaires/", min:62, secs:3719, audio:"https://clrtpod.com/m/pscrb.fm/rss/p/mgln.ai/e/284/dts.podtrac.com/redirect.mp3/audioboom.com/posts/8957397.mp3?source=rss", blurb:"The newest episode of Offline with Jon Favreau."}
 ];
 
 const shows = [
-  {name:"Pod Save America", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1596222459/crooked/pod-save-america-100-days-pod-logo-220312-IxpLePOF/pod-save-america-100-days-pod-logo-220312-IxpLePOF.png", f:"politics", bg:"#0A1A44", fg:"#FFD43B", tag:"Twice weekly", d:"Jon, Jon, Tommy and Dan on the news, the campaigns and the fight ahead.", n:"1,176 episodes"},
-  {name:"What A Day", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1725731596/crooked/WAD_KeyArt/WAD_KeyArt.png", f:"daily", bg:"#FFD43B", fg:"#0A1A44", tag:"Weekdays", d:"The news you need in about 20 minutes, every weekday.", n:"1,695 episodes"},
-  {name:"Strict Scrutiny", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1649286621/crooked/final-pod-logo-strict-scrutiny-302020-TdZ5dVMo/final-pod-logo-strict-scrutiny-302020-TdZ5dVMo.png", f:"law", bg:"#7A1F3D", fg:"#FFE7EE", tag:"Weekly", d:"The Supreme Court and the legal culture around it, from three law professors."},
-  {name:"Offline", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1789769967/crooked/Offline-Key-Art-1_42541c31d6/Offline-Key-Art-1_42541c31d6.png", f:"culture", bg:"#1F6F5C", fg:"#E2FFF6", tag:"Weekly", d:"Jon Favreau on how the internet is changing politics and our lives.", n:"243 episodes"},
-  {name:"Runaway Country", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1760474576/crooked/Runaway-Country_11500px_38917ef8c4/Runaway-Country_11500px_38917ef8c4.png", f:"politics", bg:"#E5383B", fg:"#FFF3F3", tag:"Weekly", d:"Alex Wagner on a country moving faster than anyone can track.", n:"47 episodes"},
-  {name:"Pod Save the World", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1596222771/crooked/pod-save-the-world-pod-logo-575518-PPkGvOKI/pod-save-the-world-pod-logo-575518-PPkGvOKI.jpg", f:"politics", bg:"#2E5AAC", fg:"#EAF1FF", tag:"Weekly", d:"Foreign policy and global news, from former Obama officials."},
-  {name:"Lovett or Leave It", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1737483792/crooked/LOLI-Key-Art-2/LOLI-Key-Art-2.png", f:"culture", bg:"#F28C28", fg:"#2A1300", tag:"Weekly", d:"A live comedy show about the week's news, hosted by Jon Lovett."},
-  {name:"Hysteria", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1647997081/crooked/hysteria-cover-art-030822-web-172537-EK63BzSg/hysteria-cover-art-030822-web-172537-EK63BzSg.jpg", f:"culture", bg:"#6B3FA0", fg:"#F4ECFF", tag:"Weekly", d:"Politics and culture through a feminist lens, with zero apologies."}
+  {name:"Pod Save America", url:"https://crooked.com/podcast-series/pod-save-america/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1596222459/crooked/pod-save-america-100-days-pod-logo-220312-IxpLePOF/pod-save-america-100-days-pod-logo-220312-IxpLePOF.png", f:"politics", bg:"#0A1A44", fg:"#FFD43B", tag:"Twice weekly", d:"Jon, Jon, Tommy and Dan on the news, the campaigns and the fight ahead.", n:"1,176 episodes"},
+  {name:"What A Day", url:"https://crooked.com/podcast-series/what-a-day/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1725731596/crooked/WAD_KeyArt/WAD_KeyArt.png", f:"daily", bg:"#FFD43B", fg:"#0A1A44", tag:"Weekdays", d:"The news you need in about 20 minutes, every weekday.", n:"1,695 episodes"},
+  {name:"Strict Scrutiny", url:"https://crooked.com/podcast-series/strict-scrutiny/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1649286621/crooked/final-pod-logo-strict-scrutiny-302020-TdZ5dVMo/final-pod-logo-strict-scrutiny-302020-TdZ5dVMo.png", f:"law", bg:"#7A1F3D", fg:"#FFE7EE", tag:"Weekly", d:"The Supreme Court and the legal culture around it, from three law professors."},
+  {name:"Offline", url:"https://crooked.com/podcast-series/offline/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1789769967/crooked/Offline-Key-Art-1_42541c31d6/Offline-Key-Art-1_42541c31d6.png", f:"culture", bg:"#1F6F5C", fg:"#E2FFF6", tag:"Weekly", d:"Jon Favreau on how the internet is changing politics and our lives.", n:"243 episodes"},
+  {name:"Runaway Country", url:"https://crooked.com/podcast-series/runaway-country-with-alex-wagner/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1760474576/crooked/Runaway-Country_11500px_38917ef8c4/Runaway-Country_11500px_38917ef8c4.png", f:"politics", bg:"#E5383B", fg:"#FFF3F3", tag:"Weekly", d:"Alex Wagner on a country moving faster than anyone can track.", n:"47 episodes"},
+  {name:"Pod Save the World", url:"https://crooked.com/podcast-series/pod-save-the-world/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1596222771/crooked/pod-save-the-world-pod-logo-575518-PPkGvOKI/pod-save-the-world-pod-logo-575518-PPkGvOKI.jpg", f:"politics", bg:"#2E5AAC", fg:"#EAF1FF", tag:"Weekly", d:"Foreign policy and global news, from former Obama officials."},
+  {name:"Lovett or Leave It", url:"https://crooked.com/podcast-series/lovett-or-leave-it/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1737483792/crooked/LOLI-Key-Art-2/LOLI-Key-Art-2.png", f:"culture", bg:"#F28C28", fg:"#2A1300", tag:"Weekly", d:"A live comedy show about the week's news, hosted by Jon Lovett."},
+  {name:"Hysteria", url:"https://crooked.com/podcast-series/hysteria/", img:"https://res.cloudinary.com/crooked-media/images/w_480,h_480,c_fill,g_auto/f_auto,q_auto/v1647997081/crooked/hysteria-cover-art-030822-web-172537-EK63BzSg/hysteria-cover-art-030822-web-172537-EK63BzSg.jpg", f:"culture", bg:"#6B3FA0", fg:"#F4ECFF", tag:"Weekly", d:"Politics and culture through a feminist lens, with zero apologies."}
 ];
 
 const artFor = name => shows.find(s=>name.startsWith(s.name)) || {bg:"#0A1A44",fg:"#FFD43B"};
@@ -812,20 +819,20 @@ document.getElementById("lineup").innerHTML = episodes.slice(0,3).map((e,i)=>`
   <div class="ep" data-i="${i}">
     <button class="play" data-play="${i}" aria-label="Play ${e.title}">${PLAY}</button>
     ${thumb(e.show,"ep-art")}
-    <div style="min-width:0"><div class="show">${e.show}</div><div class="title">${e.title}</div></div>
+    <div style="min-width:0"><div class="show">${e.show}</div><a class="title" href="${e.page}">${e.title}</a></div>
     <span class="len">${e.min} min</span>
   </div>`).join("");
 
 document.getElementById("latestlist").innerHTML = episodes.slice(0,3).map((e,i)=>`
   <article>
     <div class="lt-head">${thumb(e.show,"lt-art")}<div class="eyebrow">${e.show} · Oct 1</div></div>
-    <h3>${e.title}</h3>
+    <h3><a href="${e.page}">${e.title}</a></h3>
     <p>${e.blurb}</p>
     <div class="row"><button class="mini-play" data-play="${i}" aria-label="Play ${e.title}">${PLAY}</button><span class="eyebrow">${e.min} min</span></div>
   </article>`).join("");
 
 document.getElementById("showgrid").innerHTML = shows.map(s=>`
-  <a class="show-card" href="#shows" data-f="${s.f}">
+  <a class="show-card" href="${s.url}" data-f="${s.f}">
     <div class="art" style="background:${s.bg};color:${s.fg}">
       <span class="tag">${s.tag}</span>
       <span class="mark">${s.name}</span>
@@ -838,12 +845,12 @@ document.getElementById("showgrid").innerHTML = shows.map(s=>`
 // chyron: episodes are playable, the rest jump to their section. Duplicated once for a seamless loop.
 const crawlItems = [
   ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, meta:`${e.date} · ${e.min} min`, cta:"Play now", art:artFor(e.show), mark:e.show})),
-  {k:"Midterms", t:`${Math.max(0,Math.ceil((new Date(2026,10,3)-new Date().setHours(0,0,0,0))/864e5))} days to Election Day: check your registration`, d:"Make sure you're registered, find your polling place and make a plan to vote on Nov 3.", href:"#act", meta:"Vote Save America", cta:"Check registration", art:{bg:"#E5383B",fg:"#FFF3F3"}, mark:"Nov 3"},
+  {k:"Midterms", t:`${Math.max(0,Math.ceil((new Date(2026,10,3)-new Date().setHours(0,0,0,0))/864e5))} days to Election Day: check your registration`, d:"Make sure you're registered, find your polling place and make a plan to vote on Nov 3.", href:"https://votesaveamerica.com/be-a-voter/", meta:"Vote Save America", cta:"Check registration", art:{bg:"#E5383B",fg:"#FFF3F3"}, mark:"Nov 3"},
   {k:"Crooked Con", t:"Nov 5–7 in Washington, DC. Tickets on sale now", d:"Two days after the midterms. Bigger stages, more panels and more people who think America is worth fighting for.", href:"#takeover", con:true, meta:"Early-bird ends Oct 6", cta:"Open countdown", art:{bg:"#4C8DEB",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_0.3,h_0.7,c_crop,g_north_east/w_300,h_300,c_fill/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png"}, mark:"Crooked Con"},
-  {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"#act", meta:"Membership", cta:"Become a Friend", art:{bg:"#FFD43B",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_fill,g_auto/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png"}, mark:"Friends of the Pod"},
-  {k:"Vote Save America", t:"Find a phone bank or canvass shift near you", d:"Put your energy into the races that decide the next two years.", href:"#act", meta:"Take action", cta:"Find an action", art:{bg:"#E8E8E8",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_pad,b_rgb:e8e8e8/f_auto,q_auto/v1776896890/crooked/VSA-Logo-1480x1040-2_410566532f/VSA-Logo-1480x1040-2_410566532f.png"}, mark:"VSA"},
-  {k:"Newsletter", t:"What A Day lands in your inbox every weekday evening", d:"What happened today and what you can do about it, in one email.", href:"#newsletters", meta:"Free · weekdays", cta:"Sign up", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"What A Day"},
-  {k:"Store", t:"New fall merch for your favorite pods", d:"Tees, hats and gifts for every Crooked fan.", href:"#store", meta:"Crooked Store", cta:"Shop now", art:{bg:"#F28C28",fg:"#2A1300"}, mark:"Shop"}
+  {k:"Friends of the Pod", t:"Ad-free episodes and bonus content for members", d:"Subscribe to support independent media and get every show ad-free.", href:"https://crooked.supercast.com/", meta:"Membership", cta:"Become a Friend", art:{bg:"#FFD43B",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_fill,g_auto/f_auto,q_auto/v1772487161/crooked/FOTP_home-page_module_403519fd73/FOTP_home-page_module_403519fd73.png"}, mark:"Friends of the Pod"},
+  {k:"Vote Save America", t:"Find a phone bank or canvass shift near you", d:"Put your energy into the races that decide the next two years.", href:"https://votesaveamerica.com/action-hub/", meta:"Take action", cta:"Find an action", art:{bg:"#E8E8E8",fg:"#0A1A44",img:"https://res.cloudinary.com/crooked-media/images/w_300,h_300,c_pad,b_rgb:e8e8e8/f_auto,q_auto/v1776896890/crooked/VSA-Logo-1480x1040-2_410566532f/VSA-Logo-1480x1040-2_410566532f.png"}, mark:"VSA"},
+  {k:"Newsletter", t:"What A Day lands in your inbox every weekday evening", d:"What happened today and what you can do about it, in one email.", href:"https://crooked.com/newsletter-signup/", meta:"Free · weekdays", cta:"Sign up", art:{bg:"#FFD43B",fg:"#0A1A44"}, mark:"What A Day"},
+  {k:"Store", t:"New fall merch for your favorite pods", d:"Tees, hats and gifts for every Crooked fan.", href:"https://store.crooked.com/", meta:"Crooked Store", cta:"Shop now", art:{bg:"#F28C28",fg:"#2A1300"}, mark:"Shop"}
 ];
 // interleave: two episodes, then a promo
 { const eps=crawlItems.filter(c=>c.play!==undefined), promos=crawlItems.filter(c=>c.play===undefined), mixed=[];
@@ -868,8 +875,9 @@ function showPreview(a){
   document.getElementById("cpvK").textContent=c.k;
   document.getElementById("cpvT").textContent=c.t;
   document.getElementById("cpvD").textContent=c.d;
-  document.getElementById("cpvM").textContent=c.meta;
+  document.getElementById("cpvM").innerHTML=esc(c.meta)+(c.play!==undefined?` · <a href="${episodes[c.play].page}" target="_blank" rel="noopener">Episode page ↗</a>`:"");
   cpvGo.textContent=c.cta; cpvGo.href=c.href||"#top";
+  if(/^https?:/.test(cpvGo.href) && !cpvGo.href.startsWith(location.origin)){ cpvGo.target="_blank"; cpvGo.rel="noopener"; } else { cpvGo.removeAttribute("target"); }
   syncActs();
   const r=a.getBoundingClientRect(), w=cpv.offsetWidth, h=cpv.offsetHeight;
   const left=Math.min(Math.max(16, r.left + 20 - 40), window.innerWidth - w - 16);
@@ -972,7 +980,7 @@ qpanel.addEventListener("click",e=>{
   if(b.dataset.qrm!==undefined) lib.up.splice(+b.dataset.qrm,1);
   if(b.dataset.qunsave) lib.saved=lib.saved.filter(k=>k!==b.dataset.qunsave);
   if(b.dataset.qunfollow) lib.follow=lib.follow.filter(n=>n!==b.dataset.qunfollow);
-  if(b.dataset.qgo){ setQ(false); if(b.dataset.qgo==="#takeover") setTakeover(true); else location.hash=b.dataset.qgo; }
+  if(b.dataset.qgo){ setQ(false); const g=b.dataset.qgo; if(g==="#takeover") setTakeover(true); else if(/^https?:/.test(g)) window.open(g,"_blank","noopener"); else location.hash=g; }
   persist(); renderLib(); syncActs();
 });
 document.addEventListener("click",e=>{ if(!qpanel.hidden && !qpanel.contains(e.target) && !qBtn.contains(e.target)) setQ(false); });
@@ -1094,12 +1102,14 @@ document.getElementById("today").textContent=now.toLocaleDateString("en-US",{wee
 // search: icon opens a panel under the header
 const sBtn=document.getElementById("searchBtn"), sPanel=document.getElementById("searchPanel"), q=document.getElementById("q"), res=document.getElementById("results");
 const index=[
-  ...shows.map(s=>({k:"Show", t:s.name, d:s.d, href:"#shows"})),
+  ...shows.map(s=>({k:"Show", t:s.name, d:s.d, href:s.url})),
   ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i})),
   {k:"Event", t:"Crooked Con 2026", d:"Washington DC, Nov 5–7 midterms", href:"#takeover"},
-  {k:"Membership", t:"Friends of the Pod", d:"ad-free bonus subscribe", href:"#act"},
-  {k:"Action", t:"Vote Save America", d:"volunteer phone bank canvass midterms", href:"#act"},
-  {k:"Newsletter", t:"What A Day newsletter", d:"daily email", href:"#newsletters"}
+  {k:"Membership", t:"Friends of the Pod", d:"ad-free bonus subscribe", href:"https://crooked.com/friends-of-the-pod-subscription/"},
+  {k:"Action", t:"Vote Save America", d:"volunteer phone bank canvass midterms", href:"https://votesaveamerica.com/action-hub/"},
+  {k:"Newsletter", t:"What A Day newsletter", d:"daily email", href:"https://crooked.com/newsletter-signup/"},
+  {k:"Store", t:"Crooked Store", d:"merch shop tees hats coffee", href:"https://store.crooked.com/"},
+  {k:"Events", t:"Live shows and events", d:"tickets tour live", href:"https://crooked.com/events/"}
 ];
 document.getElementById("suggest").innerHTML=["Pod Save America","Strict Scrutiny","Midterms","Crooked Con"].map(s=>`<button type="button">${s}</button>`).join("");
 document.getElementById("suggest").addEventListener("click",e=>{const b=e.target.closest("button"); if(b){q.value=b.textContent; runSearch();}});
@@ -1219,9 +1229,12 @@ conToggle.addEventListener("click",()=>setTakeover(con.dataset.state!=="open"));
 
 document.getElementById("nl").addEventListener("submit",e=>{
   e.preventDefault();
-  document.getElementById("nlok").textContent="Demo only: no email was sent or stored.";
+  document.getElementById("nlok").innerHTML='This concept doesn\'t collect emails. <a href="https://crooked.com/newsletter-signup/" target="_blank" rel="noopener" style="color:inherit">Finish signing up on crooked.com ↗</a>';
 });
 render(); renderLib();
+// every off-site link opens in a new tab so the player keeps going
+function externalize(root=document){ root.querySelectorAll('a[href^="http"]').forEach(a=>{ if(!a.href.startsWith(location.origin)){ a.target="_blank"; a.rel="noopener"; } }); }
+externalize(); new MutationObserver(()=>externalize()).observe(document.body,{childList:true,subtree:true});
 </script>
 </body>
 </html>
