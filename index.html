@@ -1202,11 +1202,11 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
   }
   placeStage(); window.addEventListener("resize",placeStage);
   document.getElementById("conToggle").addEventListener("click",()=>requestAnimationFrame(placeStage));
-  // intro: the eagle swoops in and stays; the credits begin once it has landed
+  // intro: the eagle swoops in and stays; the credits start rolling with the swoop
   const sky=document.querySelector(".con-sky");
   if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-    setTimeout(()=>sky.classList.add("landed"),400);
-    setTimeout(()=>{ sky.classList.add("settled"); start(); },400+2500);
+    setTimeout(()=>{ sky.classList.add("landed"); start(); },400);   // credits begin as the eagle swoops in
+    setTimeout(()=>sky.classList.add("settled"),400+2500);
   } else { sky.classList.add("landed","settled"); }
 }
 function setTakeover(open){
