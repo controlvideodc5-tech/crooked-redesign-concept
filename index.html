@@ -101,7 +101,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .c3{left:18%;bottom:-18%;width:30%;animation-duration:46s}
 .c4{right:-2%;bottom:-22%;width:34%;animation-duration:58s}
 @keyframes drift-cloud{to{transform:translateX(3%)}}
-.con-eagle{position:absolute;right:1%;top:4%;height:92%;width:auto;aspect-ratio:1/1;max-width:none;transform-origin:60% 30%;filter:drop-shadow(0 18px 24px rgba(10,26,68,.25));opacity:0;transform:translate(70%,-85%) rotate(-22deg) scale(.55)}
+.con-eagle{position:absolute;right:-3%;top:-6%;height:118%;width:auto;aspect-ratio:600/853;max-width:none;transform-origin:80% 20%;opacity:0;transform:translate(70%,-85%) rotate(-22deg) scale(.55)}
 .con-sky.landed .con-eagle{opacity:1;transform:none;transition:transform 2.4s cubic-bezier(.16,.8,.24,1),opacity .35s}
 .con-sky.settled .con-eagle{animation:hover-eagle 6s ease-in-out infinite alternate}
 @keyframes hover-eagle{to{transform:translateY(10px) rotate(-1.5deg)}}
@@ -122,7 +122,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 /* state switches */
 .con[data-state="open"] .mini,.con[data-state="open"] .con-bar .btn-ink{display:none}
 .con[data-state="closed"] .con-body{display:none}
-.con-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,50%);gap:28px;align-items:center;padding-right:clamp(0px,21vw,330px);padding-block:4px 28px}
+.con-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,50%);gap:28px;align-items:center;padding-right:clamp(0px,13vw,240px);padding-block:4px 28px}
 .con-body h2{font-size:clamp(30px,3.4vw,46px);margin-bottom:16px;color:var(--cream)}
 .clock{display:flex;align-items:flex-start;gap:clamp(4px,1vw,12px);font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums;max-width:100%}
 .clock div{display:flex;flex-direction:column;align-items:center;gap:6px}
@@ -168,7 +168,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 @media (prefers-reduced-motion:reduce){.cloud,.con-eagle{animation:none!important;opacity:1!important;transform:none!important}.sw-tilt{transform:none;-webkit-mask-image:none;mask-image:none;overflow:auto}.sw-roll{position:static;animation:none;padding:24px 0}}
 @media (max-width:900px){
   .con-body{grid-template-columns:1fr;padding-right:0}.con-art{min-height:340px}
-  .con-eagle{height:260px;top:auto;bottom:10px;right:-24px}
+  .con-eagle{height:320px;top:auto;bottom:-20px;right:-70px}
   .c4{width:70%}.c1{width:60%}
   .con-when{display:none}
 }
@@ -464,7 +464,7 @@ footer .logo{font-size:40px}
     <img class="cloud c2" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.5,y_0.02,w_0.2,h_0.13/w_600/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="">
     <img class="cloud c3" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.2,y_0.76,w_0.27,h_0.24/w_800/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="">
     <img class="cloud c4" src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.7,y_0.62,w_0.3,h_0.38/w_900/f_auto,q_auto/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png" alt="">
-    <canvas class="con-eagle" id="swEagle" data-src="assets/eagle.png" role="img" aria-label="A bald eagle swooping in to land"></canvas>
+    <canvas class="con-eagle" id="swEagle" data-src="https://res.cloudinary.com/crooked-media/images/c_crop,x_0.8,y_0.04,w_0.2,h_0.52/w_600/f_png/v1790092283/crooked/Desktop_4256565894/Desktop_4256565894.png"></canvas>
   </div>
   <div class="wrap">
     <div class="con-bar">
@@ -722,7 +722,7 @@ footer .logo{font-size:40px}
       <span>Podcasts · Newsletters · Events</span>
       <span>Vote Save America · Store · Careers</span>
       <span>Privacy · Accessibility · Contact</span>
-      <span style="font:500 11px/1.5 var(--f-mono);opacity:.7">Redesign concept, not affiliated with Crooked Media. Episode audio streams from each show's public feed. Eagle photo: David Menke, USFWS (public domain).</span>
+      <span style="font:500 11px/1.5 var(--f-mono);opacity:.7">Redesign concept, not affiliated with Crooked Media. Audio player is a demo.</span>
     </div>
   </div>
 </footer>
@@ -1138,28 +1138,34 @@ function sizeRoll(){ const r=document.getElementById("swRoll"); if(!r||!r.offset
   r.style.setProperty("--roll-dur", Math.round((r.offsetHeight+r.parentNode.offsetHeight)/26)+"s"); }
 sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && document.fonts.ready.then(sizeRoll);
 
-// eagle: public-domain photo (USFWS / David Menke), background removed; here it is trimmed,
-// flipped to face the content and toned in the Crooked Con poster's olive-to-butter duotone
+// eagle cut-out: key out the blue sky (and the pale logo letters beside it), keep the bird and its talons
 {
   const cv=document.getElementById("swEagle"), img=new Image();
+  img.crossOrigin="anonymous";
   img.onload=()=>{
-    const MAX=1100, k=Math.min(1,MAX/Math.max(img.naturalWidth,img.naturalHeight));
-    const w=Math.round(img.naturalWidth*k), h=Math.round(img.naturalHeight*k);
-    const tmp=document.createElement("canvas"); tmp.width=w; tmp.height=h;
-    const tx=tmp.getContext("2d"); tx.translate(w,0); tx.scale(-1,1); tx.drawImage(img,0,0,w,h);
-    const data=tx.getImageData(0,0,w,h), d=data.data;
-    let x0=w,y0=h,x1=0,y1=0;
-    const dark=[74,58,18], light=[246,236,142];          // poster olive → butter
-    for(let y=0;y<h;y++) for(let x=0;x<w;x++){
-      const i=(y*w+x)*4; if(d[i+3]<8) continue;
-      if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y;
-      const L=Math.pow((0.299*d[i]+0.587*d[i+1]+0.114*d[i+2])/255,0.8);
-      for(let c=0;c<3;c++) d[i+c]=Math.round(dark[c]+(light[c]-dark[c])*L);
+    cv.width=img.naturalWidth; cv.height=img.naturalHeight;
+    const ctx=cv.getContext("2d"); ctx.drawImage(img,0,0);
+    let data; try{ data=ctx.getImageData(0,0,cv.width,cv.height); }catch(e){ cv.remove(); return; }
+    const d=data.data, W=cv.width, k=W/500;            // rules below are in 500px-wide reference units
+    for(let y=0;y<cv.height;y++) for(let x=0;x<W;x++){
+      const i=(y*W+x)*4, r=d[i], g=d[i+1], b=d[i+2], rx=x/k, ry=y/k;
+      const blue=b-Math.max(r,g);
+      if(blue>40){ d[i+3]=0; continue; }
+      if(blue>8){ d[i+3]=Math.round(255*(1-(blue-8)/32)); d[i+2]=Math.max(r,g); }
+      // logo column left of the bird: "Washington, DC", "2026" and "Content for All" are cream-white,
+      // "CROOKED" is pale yellow. Beak and talons are yellow/olive, so remove by colour, not by area alone.
+      if(rx<224 && ry>350){
+        const white = r>195 && g>195 && b>180;
+        const paleYellow = r>170 && g>160 && ry>381 && ry<505;   // only the CROOKED band; talons start below it
+        if(white || paleYellow || blue>-25) d[i+3]=0;
+      }
+      if(rx<70 && ry>290 && ry<=400) d[i+3]=0;                   // the ★ between the date and "Washington"
+      // the poster crops the bird flat on the right and bottom: feather those edges so the wing fades out of frame
+      const fx=(W-1-x)/(W*0.12), fy=(cv.height-1-y)/(cv.height*0.08);
+      const f=Math.min(1,fx,fy);
+      if(f<1) d[i+3]=Math.round(d[i+3]*Math.max(0,f)*Math.max(0,f));
     }
-    tx.putImageData(data,0,0);
-    cv.width=x1-x0+1; cv.height=y1-y0+1;
-    cv.getContext("2d").drawImage(tmp,x0,y0,cv.width,cv.height,0,0,cv.width,cv.height);
-    cv.style.aspectRatio=cv.width+"/"+cv.height;
+    ctx.putImageData(data,0,0);
   };
   img.src=cv.dataset.src;
 }
