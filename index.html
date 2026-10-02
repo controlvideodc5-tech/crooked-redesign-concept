@@ -807,6 +807,12 @@ footer .logo{font-size:40px}
 </div>
 
 <script>
+// always open at the top of the home page with Crooked Con showing: no restored scroll, no leftover #section jump
+if("scrollRestoration" in history) history.scrollRestoration="manual";
+if(location.hash) history.replaceState(null,"",location.pathname+location.search);
+window.scrollTo(0,0);
+addEventListener("load",()=>window.scrollTo(0,0));
+addEventListener("pageshow",e=>{ if(e.persisted) window.scrollTo(0,0); });
 const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg>';
 const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
 
