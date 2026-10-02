@@ -161,7 +161,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 @media (prefers-reduced-motion:reduce){.cloud,.con-eagle{animation:none!important;opacity:1!important;transform:none!important}.sw-tilt{transform:none;-webkit-mask-image:none;mask-image:none;overflow:auto}.sw-roll{position:static;animation:none;padding:24px 0}}
 @media (max-width:900px){
   .con-body{grid-template-columns:1fr;padding-right:0}.con-art{min-height:340px}
-  .con-eagle{height:300px;top:-30px;right:-40px;opacity:.9}
+  .con-eagle{height:320px;top:auto;bottom:-20px;right:-70px}
   .c4{width:70%}.c1{width:60%}
   .con-when{display:none}
 }
@@ -1110,7 +1110,7 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
         const paleYellow = r>170 && g>160 && ry>381 && ry<505;   // only the CROOKED band; talons start below it
         if(white || paleYellow || blue>-25) d[i+3]=0;
       }
-      if(rx<90 && ry>290 && ry<=350) d[i+3]=0;                   // the ★ between the date and "Washington"
+      if(rx<70 && ry>290 && ry<=400) d[i+3]=0;                   // the ★ between the date and "Washington"
       // the poster crops the bird flat on the right and bottom: feather those edges so the wing fades out of frame
       const fx=(W-1-x)/(W*0.12), fy=(cv.height-1-y)/(cv.height*0.08);
       const f=Math.min(1,fx,fy);
