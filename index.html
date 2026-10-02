@@ -1110,6 +1110,7 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
         const paleYellow = r>170 && g>160 && ry>381 && ry<505;   // only the CROOKED band; talons start below it
         if(white || paleYellow || blue>-25) d[i+3]=0;
       }
+      if(rx<90 && ry>290 && ry<=350) d[i+3]=0;                   // the ★ between the date and "Washington"
     }
     ctx.putImageData(data,0,0);
   };
