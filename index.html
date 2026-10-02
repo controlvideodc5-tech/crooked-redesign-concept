@@ -92,7 +92,8 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .nav ul li{white-space:nowrap}
 @media (max-width:1100px){.nav ul{display:none}.icon-btn{display:inline-flex}}
 .nav{gap:20px}
-.nav ul{gap:clamp(14px,1.8vw,26px)}
+.nav ul{gap:clamp(14px,1.8vw,26px);flex:1;justify-content:space-evenly;padding-inline:clamp(8px,2vw,32px)}
+@media (min-width:1101px){.nav .spacer{display:none}}
 
 
 /* Crooked Con countdown: one component, two states. Closed = slim bar with mini clock; open = bar + art + big clock */
