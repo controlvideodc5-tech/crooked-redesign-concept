@@ -222,7 +222,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .loli-tag{position:absolute;left:14px;bottom:14px;background:#fff;color:#0A1A44;font:700 13px/1 var(--f-body);padding:8px 12px;border-radius:999px}
 @media (prefers-reduced-motion:reduce){.slide{transition:none}}
 
-.lineup{background:var(--ink-2);border:1px solid #2C4180;border-radius:14px;padding:18px 18px 8px}
+.lineup{background:var(--ink-2);border:1px solid #2C4180;border-radius:14px;padding:18px 18px 0}
 .lineup-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
 .lineup-head h2{font-size:28px;color:var(--signal)}
 .ep{display:grid;grid-template-columns:auto auto 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid #2C4180}
@@ -233,6 +233,10 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .ep .show{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#AEB8DC}
 .ep .title{display:block;text-decoration:none;font-weight:700;font-size:16px;line-height:1.3;margin-top:5px;color:#fff}
 .ep .len{font:500 12px/1 var(--f-mono);color:#AEB8DC;font-variant-numeric:tabular-nums}
+.lineup-join{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:6px -18px 0;padding:14px 18px;border-top:1px solid #2C4180;text-decoration:none;color:#D4DAF0;font-size:14px;border-radius:0 0 14px 14px;transition:background .15s}
+.lineup-join b{color:var(--signal);font-weight:700;white-space:nowrap}
+.lineup-join:hover{background:rgba(255,212,59,.08)}
+.lineup-join:hover b{text-decoration:underline;text-underline-offset:3px}
 .ep.playing .title{color:var(--signal)}
 
 /* sections */
@@ -457,7 +461,6 @@ footer .logo{font-size:40px}
       <svg class="i-search" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
       <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
-    <a class="btn btn-signal join" href="https://crooked.com/friends-of-the-pod-subscription/">Join <span class="long">Friends of the Pod</span></a>
     <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Main" hidden>
@@ -579,6 +582,7 @@ footer .logo{font-size:40px}
           <span class="eyebrow" style="color:#AEB8DC">3 new</span>
         </div>
         <div id="lineup"></div>
+        <a class="lineup-join" href="https://crooked.com/friends-of-the-pod-subscription/"><span>Hear every episode ad-free</span><b>Join Friends of the Pod →</b></a>
       </div>
       <div class="oncrooked" aria-label="More on Crooked">
         <div class="oc-head"><span class="oc-bug"><span class="dot"></span>On Crooked</span><span class="oc-hint">Hover a card to preview</span></div>
