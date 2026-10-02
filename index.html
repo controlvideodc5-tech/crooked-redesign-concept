@@ -1130,7 +1130,7 @@ document.getElementById("today").textContent=now.toLocaleDateString("en-US",{wee
 const sBtn=document.getElementById("searchBtn"), sPanel=document.getElementById("searchPanel"), q=document.getElementById("q"), res=document.getElementById("results");
 const index=[
   ...shows.map(s=>({k:"Show", t:s.name, d:s.d, href:s.url})),
-  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i})),
+  ...episodes.map((e,i)=>({k:e.show, t:e.title, d:e.blurb, play:i, href:e.page})),
   {k:"Event", t:"Crooked Con 2026", d:"Washington DC, Nov 5–7 midterms", href:"#takeover"},
   {k:"Membership", t:"Friends of the Pod", d:"ad-free bonus subscribe", href:"https://crooked.com/friends-of-the-pod-subscription/"},
   {k:"Action", t:"Vote Save America", d:"volunteer phone bank canvass midterms", href:"https://votesaveamerica.com/action-hub/"},
