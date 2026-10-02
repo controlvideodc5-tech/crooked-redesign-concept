@@ -101,7 +101,7 @@ header.site{background:var(--chrome);border-bottom:1px solid var(--chrome-line);
 .c3{left:18%;bottom:-18%;width:30%;animation-duration:46s}
 .c4{right:-2%;bottom:-22%;width:34%;animation-duration:58s}
 @keyframes drift-cloud{to{transform:translateX(3%)}}
-.con-eagle{position:absolute;right:0;top:-6%;height:118%;width:auto;aspect-ratio:600/853;max-width:none;transform-origin:80% 20%;opacity:0;transform:translate(70%,-85%) rotate(-22deg) scale(.55)}
+.con-eagle{position:absolute;right:-3%;top:-6%;height:118%;width:auto;aspect-ratio:600/853;max-width:none;transform-origin:80% 20%;opacity:0;transform:translate(70%,-85%) rotate(-22deg) scale(.55)}
 .con-sky.landed .con-eagle{opacity:1;transform:none;transition:transform 2.4s cubic-bezier(.16,.8,.24,1),opacity .35s}
 .con-sky.settled .con-eagle{animation:hover-eagle 6s ease-in-out infinite alternate}
 @keyframes hover-eagle{to{transform:translateY(10px) rotate(-1.5deg)}}
@@ -1111,6 +1111,10 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
         if(white || paleYellow || blue>-25) d[i+3]=0;
       }
       if(rx<90 && ry>290 && ry<=350) d[i+3]=0;                   // the ★ between the date and "Washington"
+      // the poster crops the bird flat on the right and bottom: feather those edges so the wing fades out of frame
+      const fx=(W-1-x)/(W*0.12), fy=(cv.height-1-y)/(cv.height*0.08);
+      const f=Math.min(1,fx,fy);
+      if(f<1) d[i+3]=Math.round(d[i+3]*Math.max(0,f)*Math.max(0,f));
     }
     ctx.putImageData(data,0,0);
   };
