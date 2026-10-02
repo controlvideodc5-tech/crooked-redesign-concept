@@ -1114,9 +1114,13 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
   // the roll stops when "See you in Washington" reaches the middle of the stage; then the rest fades and Replay appears
   const sw=document.getElementById("sw"), roll=document.getElementById("swRoll"), endLine=document.getElementById("swEnd"), replay=document.getElementById("swReplay");
   let raf=0;
+  // measure on the tilted plane itself: a point u px above the plane's bottom edge projects to the stage's
+  // vertical centre when u·cos(28°) = stage height / 2 (the plane is hinged at the stage bottom)
+  const tilt=roll.parentNode, COS=Math.cos(28*Math.PI/180);
   function watch(){
-    const a=sw.getBoundingClientRect(), b=endLine.getBoundingClientRect();
-    if(a.height && (b.top+b.bottom)/2 <= a.top + a.height*0.5){
+    const H=sw.offsetHeight, Ht=tilt.offsetHeight, top=parseFloat(getComputedStyle(roll).top);
+    const y=top + endLine.offsetTop + endLine.offsetHeight/2;
+    if(H && y <= Ht - H/(2*COS)){
       roll.style.animationPlayState="paused"; sw.classList.add("ended"); replay.hidden=false; return;
     }
     raf=requestAnimationFrame(watch);
