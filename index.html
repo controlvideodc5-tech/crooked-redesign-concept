@@ -1103,8 +1103,13 @@ sizeRoll(); window.addEventListener("resize",sizeRoll); document.fonts && docume
       const blue=b-Math.max(r,g);
       if(blue>40){ d[i+3]=0; continue; }
       if(blue>8){ d[i+3]=Math.round(255*(1-(blue-8)/32)); d[i+2]=Math.max(r,g); }
-      const textZone=(rx<218&&ry>381)||(rx<185&&ry>350);
-      if(textZone && (r>170&&g>160 || blue>-25)) d[i+3]=0;   // logo letters + their blue fringe; dark talons stay
+      // logo column left of the bird: "Washington, DC", "2026" and "Content for All" are cream-white,
+      // "CROOKED" is pale yellow. Beak and talons are yellow/olive, so remove by colour, not by area alone.
+      if(rx<224 && ry>350){
+        const white = r>195 && g>195 && b>180;
+        const paleYellow = r>170 && g>160 && ry>381 && ry<505;   // only the CROOKED band; talons start below it
+        if(white || paleYellow || blue>-25) d[i+3]=0;
+      }
     }
     ctx.putImageData(data,0,0);
   };
