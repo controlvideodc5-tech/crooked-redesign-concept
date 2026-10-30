@@ -13,8 +13,10 @@
 .mg b{font:900 17px/1 var(--font-display);text-transform:uppercase;letter-spacing:.01em}
 .mg span{font:500 11px/1.3 var(--font-mono);color:var(--fg-muted)}
 .mg em{font:500 10px/1 var(--font-mono);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);opacity:.8;margin-top:2px}
-@media (max-width:900px){.mg{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:600px){.mk{padding:var(--space-4)}.mg{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}.mg b{font-size:15px}.mg span{font-size:10px}}
+@media (max-width:900px){.mg{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}}
+@media (max-width:540px){.mk{padding:var(--space-4) 0;gap:var(--space-4)}.mh{font-size:30px;margin-top:var(--space-6)}.mh span{font-size:13px}
+.mg{grid-template-columns:1fr;gap:var(--space-5)}.mg figure{border-radius:var(--radius-xl)}
+.mg figcaption{padding:14px 16px 16px;gap:5px}.mg b{font-size:22px}.mg span{font-size:13px}.mg em{font-size:11px}}
 </style></head>
 <body>
 <div class="mk">
