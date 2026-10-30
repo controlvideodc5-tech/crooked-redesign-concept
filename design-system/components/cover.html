@@ -1,0 +1,47 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head><link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="../bundle.css">
+<meta charset="utf-8">
+<title>Crooked Concept</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--bg-page); color:var(--fg-default); font-family:var(--font-body); overflow:hidden; }
+  .cover { position:relative; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .slab { fill:var(--bg-inverse-raised); rx:var(--radius-2xl); }
+  .sig { fill:var(--c-yellow-500); rx:var(--radius-2xl); }
+  .live { fill:var(--c-red-500); }
+  .pink { fill:var(--c-pink-300); }
+  .halo { fill:none; stroke:var(--c-yellow-500); stroke-width:3; opacity:.55; }
+  .words { position:absolute; left:var(--space-8); bottom:var(--space-8); max-width:440px; }
+  .name { margin:0; font-family:var(--font-display); font-weight:900; font-size:100px; line-height:.92; text-transform:uppercase; letter-spacing:.005em; color:var(--fg-default); }
+  .tag { margin:var(--space-2) 0 0 2px; font-size:14px; line-height:20px; color:var(--fg-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      bg-inverse-raised slab 256x272 bled off the top (navy carries the brand) · c-yellow-500 224x160 bleeding off the right (yellow does the work) · c-red-500 pill 96x40 (live, fills only, kept small) · c-pink-300 disc r24 (collateral relief) — about 40% of 960x288
+  arrangement one tall navy slab with satellites, bottoms on one line space-8 above the edge, space-4 gutters
+  pattern     the halo: "the only decorative pattern", concentric yellow rings on navy, seven arcs at a space-8 pitch from the slab's bottom-left corner, clipped to the slab
+  scales      sides in space-4 multiples; gutter space-4; pitch space-8; corners radius-2xl (panels); pill rx = half of 40
+-->
+<defs><clipPath id="slabclip"><rect x="0" y="-16" width="256" height="272" rx="16"/></clipPath></defs>
+<rect class="slab" x="0" y="-16" width="256" height="272" rx="16"/>
+<g clip-path="url(#slabclip)"><circle class="halo" cx="0" cy="256" r="48"/><circle class="halo" cx="0" cy="256" r="80"/><circle class="halo" cx="0" cy="256" r="112"/><circle class="halo" cx="0" cy="256" r="144"/><circle class="halo" cx="0" cy="256" r="176"/><circle class="halo" cx="0" cy="256" r="208"/><circle class="halo" cx="0" cy="256" r="240"/></g>
+<rect class="live" x="272" y="40" width="96" height="40" rx="20"/>
+<circle class="pink" cx="408" cy="60" r="24"/>
+<rect class="sig" x="272" y="96" width="224" height="160" rx="16"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Crooked Concept</h1>
+<p class="tag">Less doom. More doing. Unofficial redesign concept.</p>
+</div>
+</div>
+</body>
+</html>
