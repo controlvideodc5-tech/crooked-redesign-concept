@@ -1,6 +1,6 @@
 # MerchLine
 
-How a slogan becomes product: garment color, ink, and one line. The preview shows the actual mockups from the merch PDFs from Merch Round 2; see also **MerchLookbook** and **HatSeries**.
+How a slogan becomes product: garment color, ink, and one line. The preview shows the actual mockups from the merch PDFs from Merch Round 2; see also **MerchLookbook** and **MerchHats**.
 
 **Provide:** the line (from the voice section), the garment and its color, the print method and ink colors, and a placement. Mockup cards caption as **PRODUCT NAME** in display caps over a mono spec line ("Navy twill · yellow embroidery").
 
