@@ -22,7 +22,14 @@ for n in os.listdir(SRC+'/components'):
     r=f'{SRC}/components/{n}/README.md'; d=re.sub(r'<h1>.*?</h1>','',markdown.markdown(open(r).read(),extensions=['tables']),count=1) if os.path.exists(r) else ''
     comps.append((order.index(g) if g in order else 9,n,g,d))
 comps.sort()
-cmp=''.join(f'<section class="cmp"><span class="eyebrow">Components · {g}</span><h2>{n}</h2><img src="shots/{n}.jpg" alt="{n}"><div class="doc">{d}</div></section>' for _,n,g,d in comps)
+def vis(n):
+    if n=='MerchLine':
+        h=open(SRC+'/components/MerchLine/preview.html').read()
+        body=h[h.index('<div class="mk">'):h.rindex('</div>')+6]
+        parts=body.split('<h3 class="mh">'); body=parts[0]+''.join('<div class="cat"><h3 class="mh">'+x.replace('</div>\n</div>','</div></div>\n</div>') if x.rstrip().endswith('</div>\n</div>') or x.endswith('</div>\n</div>') else '<div class="cat"><h3 class="mh">'+x+'</div>' for x in parts[1:])
+        return '<div class="merchbook">'+h[h.index('<style>'):h.index('</style>')+8]+body+'</div>'
+    return f'<img src="shots/{n}.jpg" alt="{n}">'
+cmp=''.join(f'<section class="cmp"><span class="eyebrow">Components · {g}</span><h2>{n}</h2><div class="doc">{d}</div>{vis(n)}</section>' if n=='MerchLine' else f'<section class="cmp"><span class="eyebrow">Components · {g}</span><h2>{n}</h2><img src="shots/{n}.jpg" alt="{n}"><div class="doc">{d}</div></section>' for _,n,g,d in comps)
 groups=['Merch Round 2','Merch Lookbook','Everybody In Hats','Round 2 Posters']
 ast=''.join(f'<section class="gal"><span class="eyebrow">Concept collateral</span><h2>{g}</h2><div class="ag">'+''.join(f'<img src="site/assets/{g}/{f}">' for f in sorted(os.listdir(f'{SRC}/assets/{g}')) if f.endswith('.webp'))+'</div></section>' for g in groups)
 toc=''.join(f'<li><span>{i+1:02d}</span>{a}<em>{b}</em></li>' for i,(a,b,_) in enumerate(secs))+'<li><span>05</span>Tokens<em>Color, type, space, shape</em></li><li><span>06</span>Components<em>UI and collateral, with rules</em></li><li><span>07</span>Concept collateral<em>Posters, merch and hats from the rounds</em></li>'
