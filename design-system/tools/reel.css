@@ -4,9 +4,13 @@
 .ck-reel-eyebrow{font:500 12px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--c-slate-300);margin:0 0 14px}
 .ck-reel-line{font:900 1em/.92 var(--font-display);text-transform:uppercase;margin:0;text-wrap:balance;min-height:1.84em}
 .ck-reel-line b{color:var(--c-yellow-500);font-weight:900}
-.ck-reel-line.in span{animation:ck-up 500ms cubic-bezier(.16,.8,.24,1) both}
-.ck-reel-line.in b{animation:ck-up 500ms cubic-bezier(.16,.8,.24,1) 180ms both}
-@keyframes ck-up{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
+.ck-reel-line span,.ck-reel-line b,.ck-reel-eyebrow{transition:opacity 600ms ease,transform 600ms ease}
+.ck-reel-line.in span{animation:ck-in 1000ms cubic-bezier(.16,.8,.24,1) both}
+.ck-reel-line.in b{animation:ck-in 1000ms cubic-bezier(.16,.8,.24,1) 700ms both}
+.ck-reel-stage.in .ck-reel-eyebrow{animation:ck-fade 800ms ease both}
+.ck-reel-stage.out .ck-reel-eyebrow,.ck-reel-stage.out .ck-reel-line span,.ck-reel-stage.out .ck-reel-line b{opacity:0;transform:translateY(-.12em)}
+@keyframes ck-in{from{opacity:0;transform:translateY(.25em)}to{opacity:1;transform:none}}
+@keyframes ck-fade{from{opacity:0}to{opacity:1}}
 .ck-reel-line span,.ck-reel-line b{display:inline-block}
 .ck-reel-bar{display:flex;align-items:center;gap:14px;margin-top:22px;position:relative;z-index:1}
 .ck-reel-pause{width:38px;height:38px;border-radius:50%;border:0;background:var(--c-yellow-500);color:var(--c-navy-900);display:grid;place-items:center;cursor:pointer;flex:none}

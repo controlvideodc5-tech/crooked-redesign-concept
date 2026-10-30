@@ -30,19 +30,20 @@ E=root.querySelector('[data-eyebrow]'), P=root.querySelector('[data-prog]'), D=r
 L=root.querySelector('[data-list]'), btn=root.querySelector('.ck-reel-pause'), line=root.querySelector('.ck-reel-line');
 H.forEach(function(h,i){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Headline '+(i+1));d.onclick=function(){go(i,true)};D.appendChild(d);
 var li=document.createElement('li');li.innerHTML='<span>'+h[1]+'</span> <b>'+h[2]+'</b>';L.appendChild(li)});
-var i=0,dwell=3200,t0=performance.now(),paused=false,hover=false,raf;
+var i=0,dwell=6500,FADE=650,busy=false,stage=root.querySelector('.ck-reel-stage'),t0=performance.now(),paused=false,hover=false,raf;
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(reduce){root.classList.add('is-static');return}
-function show(n){var h=H[n];E.textContent=h[0];A.textContent=h[1];B.textContent=h[2];
+function paint(n){var h=H[n];E.textContent=h[0];A.textContent=h[1];B.textContent=h[2];
 [].forEach.call(D.children,function(d,k){d.setAttribute('aria-current',k===n?'true':'false')});
-line.classList.remove('in');void line.offsetWidth;line.classList.add('in')}
-function go(n,user){i=(n+H.length)%H.length;show(i);t0=performance.now();if(user){paused=true;sync()}}
+stage.classList.remove('out');line.classList.remove('in');stage.classList.remove('in');void line.offsetWidth;line.classList.add('in');stage.classList.add('in')}
+function show(n,first){if(first){paint(n);return}busy=true;stage.classList.add('out');setTimeout(function(){paint(n);busy=false;t0=performance.now()},FADE)}
+function go(n,user){i=(n+H.length)%H.length;show(i);t0=performance.now()+FADE;if(user){paused=true;sync()}}
 function sync(){btn.setAttribute('aria-pressed',paused?'true':'false');btn.setAttribute('aria-label',paused?'Play headlines':'Pause headlines');root.classList.toggle('is-paused',paused)}
 btn.onclick=function(){paused=!paused;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell;sync()};
 root.addEventListener('mouseenter',function(){hover=true});root.addEventListener('mouseleave',function(){hover=false;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell});
 root.addEventListener('focusin',function(){hover=true});root.addEventListener('focusout',function(){hover=false});
-function tick(now){if(!paused&&!hover){var f=(now-t0)/dwell;if(f>=1){go(i+1);f=0}P.style.width=(f*100)+'%'}raf=requestAnimationFrame(tick)}
-show(0);raf=requestAnimationFrame(tick);
+function tick(now){if(!paused&&!hover&&!busy){var f=Math.max(0,(now-t0)/dwell);if(f>=1){go(i+1);f=0}P.style.width=(f*100)+'%'}raf=requestAnimationFrame(tick)}
+show(0,true);raf=requestAnimationFrame(tick);
 })();
 </script>
 <p>Voice, tone, color, type, tokens, components and collateral for the Crooked redesign concept, in one place.</p><p class="cta"><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf" download>Download the brand book (PDF, 10 MB)</a><a class="ck-btn ck-btn-ghost" href="Crooked-Concept-Brand-Book.pdf" target="_blank" rel="noopener">Open in browser</a></p><p class="note">Unofficial design exploration. Not affiliated with, endorsed by or connected to Crooked Media. Names, show art and marks belong to their owners; the wordmark here is a typeset stand-in.</p></div></header>
@@ -649,7 +650,7 @@ show(0);raf=requestAnimationFrame(tick);
 </ul></div></article><article class="cmp" id="c-HeadlineReel"><header><span class="eyebrow">Motion</span><h3>HeadlineReel</h3><p class=muted>Animated headline rotator</p></header><iframe src="components/headlinereel.html" title="HeadlineReel preview" style="height:420px"></iframe><div class="doc"><p>An animated rotator that cycles the campaign headlines, two beats at a time: the first beat in paper, the turn in yellow.</p>
 <p><strong>Provide:</strong> a list of headlines as <code>[eyebrow, first beat, second beat]</code>. Keep each beat to six words or fewer, and keep the brand line ("Less doom. More doing.") first.</p>
 <ul>
-<li>Motion follows the broadcast rules: each headline dwells 3.2s, the first beat slides up over 500ms on <code>cubic-bezier(.16, .8, .24, 1)</code>, and the yellow turn follows 180ms later. A yellow progress bar shows the dwell.</li>
+<li>Pace is slow on purpose so each line lands: the current headline fades out over 650ms, the next one's first beat fades up over 1s on <code>cubic-bezier(.16, .8, .24, 1)</code>, the yellow turn follows 700ms later, and the headline holds for 6.5s. A yellow progress bar shows the hold.</li>
 <li>Always ship the pause button and the dots. The reel also pauses on hover and while anything inside has keyboard focus. Picking a dot pauses it on that headline.</li>
 <li>Under <code>prefers-reduced-motion</code> nothing moves: the reel renders as a static list of every headline.</li>
 <li>Navy ground (<code>c-navy-900</code>) with the halo pattern; eyebrow in <code>c-slate-300</code> mono caps; second beat <code>c-yellow-500</code>. Never more than one reel per page, and it doesn't play under the Crooked Con band.</li>

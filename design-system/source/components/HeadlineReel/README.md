@@ -4,7 +4,7 @@ An animated rotator that cycles the campaign headlines, two beats at a time: the
 
 **Provide:** a list of headlines as `[eyebrow, first beat, second beat]`. Keep each beat to six words or fewer, and keep the brand line ("Less doom. More doing.") first.
 
-- Motion follows the broadcast rules: each headline dwells 3.2s, the first beat slides up over 500ms on `cubic-bezier(.16, .8, .24, 1)`, and the yellow turn follows 180ms later. A yellow progress bar shows the dwell.
+- Pace is slow on purpose so each line lands: the current headline fades out over 650ms, the next one's first beat fades up over 1s on `cubic-bezier(.16, .8, .24, 1)`, the yellow turn follows 700ms later, and the headline holds for 6.5s. A yellow progress bar shows the hold.
 - Always ship the pause button and the dots. The reel also pauses on hover and while anything inside has keyboard focus. Picking a dot pauses it on that headline.
 - Under `prefers-reduced-motion` nothing moves: the reel renders as a static list of every headline.
 - Navy ground (`c-navy-900`) with the halo pattern; eyebrow in `c-slate-300` mono caps; second beat `c-yellow-500`. Never more than one reel per page, and it doesn't play under the Crooked Con band.
