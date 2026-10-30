@@ -8,6 +8,10 @@ def label_tables(h):
             return '<tr>'+''.join(f'<td{a} data-label="{html.escape(heads[i]) if i<len(heads) else ""}">{c}</td>' for i,(a,c) in enumerate(cells))+'</tr>'
         return '<div class="tw">'+re.sub(r'<tr>(?:(?!</tr>).)*?<td.*?</tr>',row,tb,flags=re.S)+'</div>'
     return re.sub(r'<table>.*?</table>',fix,h,flags=re.S)
+import datetime,zoneinfo
+NOW=datetime.datetime.now(zoneinfo.ZoneInfo('America/New_York'))
+BUILD=NOW.strftime('%Y%m%d%H%M%S')
+STAMP=NOW.strftime('%b %-d, %Y · %-I:%M %p ET')
 SRC=sys.argv[1]; OUT=sys.argv[2]
 shutil.rmtree(OUT,ignore_errors=True); os.makedirs(OUT+'/components'); 
 shutil.copytree(SRC+'/fonts',OUT+'/fonts'); shutil.copytree(SRC+'/assets',OUT+'/assets',ignore=shutil.ignore_patterns('README.md'))
@@ -57,23 +61,24 @@ sw=''.join(f'<figure class="sw"><div class="chip"><i style="background:{hexof(c,
 ty=''.join(f'<div class="ty"><code>{s["name"]}<br>{s["fontSize"]} / {s["lineHeight"]} · {s["fontWeight"]}</code><span class="{s["name"]}" style="font-size:min({s["fontSize"]},14vw)">{html.escape(s.get("sample",""))}</span></div>' for g in t['type']['groups'] for s in g['styles'])
 def rows(fam): return ''.join(f'<tr><td data-label="Token"><code>{c["name"]}</code></td><td class="num" data-label="Value">{html.escape(c["value"])}</td><td data-label="Use">{html.escape(c.get("usage",""))}</td></tr>' for c in t[fam]['tokens'])
 tok=f'<h2>Color</h2><p class="muted">Left half light theme, right half dark.</p><div class="sws">{sw}</div><h2>Type</h2><div class="tys">{ty}</div>'+''.join(f'<h2>{n}</h2><div class="tbl tw"><table><thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead><tbody>{rows(f)}</tbody></table></div>' for n,f in [('Spacing','spacing'),('Radius','radius'),('Shadow','shadow'),('Sizes','size'),('Z-index','zIndex')])
-cmp=''.join(f'<article class="cmp" id="c-{n}"><header><span class="eyebrow">{html.escape(m.get("group",""))}</span><h3>{n}</h3>{f"<p class=muted>{html.escape(m.get(chr(115)+chr(117)+chr(98)+chr(116)+chr(105)+chr(116)+chr(108)+chr(101),''))}</p>" if m.get("subtitle") else ""}</header><div class="frame"><iframe src="components/{n.lower()}.html" title="{n} preview" loading="lazy" style="height:{m.get("height","200")}px"></iframe></div><details class="doc" open><summary>Guidelines</summary>{d}</details></article>' for n,m,d in comps)
+cmp=''.join(f'<article class="cmp" id="c-{n}"><header><span class="eyebrow">{html.escape(m.get("group",""))}</span><h3>{n}</h3>{f"<p class=muted>{html.escape(m.get(chr(115)+chr(117)+chr(98)+chr(116)+chr(105)+chr(116)+chr(108)+chr(101),''))}</p>" if m.get("subtitle") else ""}</header><div class="frame"><iframe src="components/{n.lower()}.html?v={BUILD}" title="{n} preview" loading="lazy" style="height:{m.get("height","200")}px"></iframe></div><details class="doc" open><summary>Guidelines</summary>{d}</details></article>' for n,m,d in comps)
 groups=['Merch Round 2','Merch Lookbook','Everybody In Hats','Round 2 Posters']
 ast=''.join(f'<h2>{g}</h2><div class="ag">'+''.join(f'<a href="assets/{g}/{f}" target="_blank"><img src="assets/{g}/{f}" alt="{f[:-5].replace("-"," ")}" loading="lazy" decoding="async"></a>' for f in sorted(os.listdir(f'{SRC}/assets/{g}')) if f.endswith('.webp'))+'</div>' for g in groups)
-nav=''.join(f'<a href="#{a}">{b}</a>' for a,b,_ in secs)+'<a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#assets">Assets</a><a href="Crooked-Concept-Brand-Book.pdf" download>Download PDF</a>'
+nav=''.join(f'<a href="#{a}">{b}</a>' for a,b,_ in secs)+'<a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#assets">Assets</a><a href="Crooked-Concept-Brand-Book.pdf?v={BUILD}" download>Download PDF</a>'
 REEL=open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'reel.html')).read()
 page=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Crooked Concept Design System</title><meta name="theme-color" content="#0A1A44"><meta name="claude:viewport-fit-sides" content="cover"><meta name="robots" content="noindex">
-<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="bundle.css"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="reel.css"></head><body>
-<header class="top" id="top"><div class="wrap"><span class="eyebrow">Crooked homepage concept · Design system</span><h1 class="sr-only">Crooked Concept design system</h1>{REEL}<p>Voice, tone, color, type, tokens, components and collateral for the Crooked redesign concept, in one place.</p><p class="cta"><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf" download>Download the brand book (PDF, 10 MB)</a><a class="ck-btn ck-btn-ghost" href="Crooked-Concept-Brand-Book.pdf" target="_blank" rel="noopener">Open in browser</a></p><p class="note">Unofficial design exploration. Not affiliated with, endorsed by or connected to Crooked Media. Names, show art and marks belong to their owners; the wordmark here is a typeset stand-in.</p></div></header>
+<title>Crooked Concept Design System</title><meta name="theme-color" content="#0A1A44"><meta name="build" content="{BUILD}"><meta name="claude:viewport-fit-sides" content="cover"><meta name="robots" content="noindex">
+<link rel="stylesheet" href="tokens.css?v={BUILD}"><link rel="stylesheet" href="bundle.css?v={BUILD}"><link rel="stylesheet" href="site.css?v={BUILD}"><link rel="stylesheet" href="reel.css?v={BUILD}"></head><body>
+<header class="top" id="top"><div class="wrap"><span class="eyebrow">Crooked homepage concept · Design system · Updated {STAMP}</span><h1 class="sr-only">Crooked Concept design system</h1>{REEL}<p>Voice, tone, color, type, tokens, components and collateral for the Crooked redesign concept, in one place.</p><p class="cta"><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf?v={BUILD}" download>Download the brand book (PDF, 10 MB)</a><a class="ck-btn ck-btn-ghost" href="Crooked-Concept-Brand-Book.pdf?v={BUILD}" target="_blank" rel="noopener">Open in browser</a></p><p class="note">Unofficial design exploration. Not affiliated with, endorsed by or connected to Crooked Media. Names, show art and marks belong to their owners; the wordmark here is a typeset stand-in.</p></div></header>
 <nav class="toc"><div class="wrap">{nav}</div></nav><main class="wrap">
 {''.join(f'<section id="{a}" class="prose"><span class="eyebrow">{b}</span><h2 class="sec">{b}</h2>{c}</section>' for a,b,c in secs)}
-<section id="tokens"><span class="eyebrow">Tokens</span><h2 class="sec">Tokens</h2><p class="muted">Source of truth: <a href="tokens.json">tokens.json</a>. Compiled CSS: <a href="tokens.css">tokens.css</a>. Component styles: <a href="bundle.css">bundle.css</a>.</p>{tok}</section>
+<section id="tokens"><span class="eyebrow">Tokens</span><h2 class="sec">Tokens</h2><p class="muted">Source of truth: <a href="tokens.json">tokens.json</a>. Compiled CSS: <a href="tokens.css?v={BUILD}">tokens.css</a>. Component styles: <a href="bundle.css?v={BUILD}">bundle.css</a>.</p>{tok}</section>
 <section id="components"><span class="eyebrow">Components</span><h2 class="sec">Components and collateral</h2>{cmp}</section>
 <section id="assets"><span class="eyebrow">Assets</span><h2 class="sec">Mockups from the PDFs</h2>{ast}</section>
-</main><footer><div class="wrap"><p><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf" download>Download the brand book (PDF)</a></p>Crooked homepage concept · Design system · Unofficial concept, not affiliated with Crooked Media.</div></footer>
-<a class="totop" href="#top" aria-label="Back to top">↑</a><script src="site.js" defer></script>
+</main><footer><div class="wrap"><p><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf?v={BUILD}" download>Download the brand book (PDF)</a></p>Crooked homepage concept · Design system · Unofficial concept, not affiliated with Crooked Media.</div></footer>
+<a class="totop" href="#top" aria-label="Back to top">↑</a><script src="site.js?v={BUILD}" defer></script>
 </body></html>'''
 open(OUT+'/index.html','w').write(page)
+json.dump({'v':BUILD,'updated':STAMP},open(OUT+'/version.json','w'))
 shutil.copy(SRC+'/tokens.json',OUT+'/tokens.json')
 print(len(comps),'components')
