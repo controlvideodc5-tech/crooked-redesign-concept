@@ -49,3 +49,6 @@ footer{margin-top:var(--space-16);background:var(--bg-inverse);color:var(--fg-on
 header.top .cta{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px}
 header.top .cta a,footer a.ck-btn{text-decoration:none}
 footer p{margin:0 0 16px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header.top .ck-reel{background:none;padding:0;margin:14px 0 18px;overflow:visible;position:relative;z-index:1}
+header.top .ck-reel::after{display:none}

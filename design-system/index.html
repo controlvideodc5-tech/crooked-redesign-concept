@@ -1,7 +1,51 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Crooked Concept Design System</title><meta name="robots" content="noindex">
-<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="site.css"></head><body>
-<header class="top"><div class="wrap"><span class="eyebrow">Crooked homepage concept · Design system</span><h1>Less doom.<br>More doing.</h1><p>Voice, tone, color, type, tokens, components and collateral for the Crooked redesign concept, in one place.</p><p class="cta"><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf" download>Download the brand book (PDF, 10 MB)</a><a class="ck-btn ck-btn-ghost" href="Crooked-Concept-Brand-Book.pdf" target="_blank" rel="noopener">Open in browser</a></p><p class="note">Unofficial design exploration. Not affiliated with, endorsed by or connected to Crooked Media. Names, show art and marks belong to their owners; the wordmark here is a typeset stand-in.</p></div></header>
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="bundle.css"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="reel.css"></head><body>
+<header class="top"><div class="wrap"><span class="eyebrow">Crooked homepage concept · Design system</span><h1 class="sr-only">Crooked Concept design system</h1><div class="ck-reel" role="region" aria-roledescription="carousel" aria-label="Crooked headlines">
+<div class="ck-reel-stage" aria-live="polite">
+<p class="ck-reel-eyebrow" data-eyebrow>Less doom. More doing.</p>
+<h2 class="ck-reel-line"><span data-a>Less doom.</span> <b data-b>More doing.</b></h2>
+</div>
+<div class="ck-reel-bar">
+<button class="ck-reel-pause" type="button" aria-pressed="false" aria-label="Pause headlines"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="p" d="M4 2h3v12H4zM9 2h3v12H9z"/><path class="g" d="M4 2l10 6-10 6z"/></svg></button>
+<div class="ck-reel-dots" data-dots></div>
+<div class="ck-reel-progress"><i data-prog></i></div>
+</div>
+<ol class="ck-reel-list" data-list></ol>
+</div>
+<script>
+(function(){
+var H=[
+["Brand line","Less doom.","More doing."],
+["Gold-plated priorities","Huge portions.","Tiny priorities."],
+["Cost of everything","The price","is wrong."],
+["1600 Pennsylvania Ave","Check,","please."],
+["Nov 3 · Midterms","Don't let the midterms","be mid."],
+["Working people","Billionaires don't","clip coupons."],
+["Grift watch","Drain the swamp?","They put in a hot tub."],
+["Cost of everything","Groceries cost a fortune.","Voting's still free."],
+["Nov 3 · Midterms","Midterms Tuesday.","Make it a short term."]];
+var root=document.currentScript.previousElementSibling, A=root.querySelector('[data-a]'), B=root.querySelector('[data-b]'),
+E=root.querySelector('[data-eyebrow]'), P=root.querySelector('[data-prog]'), D=root.querySelector('[data-dots]'),
+L=root.querySelector('[data-list]'), btn=root.querySelector('.ck-reel-pause'), line=root.querySelector('.ck-reel-line');
+H.forEach(function(h,i){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Headline '+(i+1));d.onclick=function(){go(i,true)};D.appendChild(d);
+var li=document.createElement('li');li.innerHTML='<span>'+h[1]+'</span> <b>'+h[2]+'</b>';L.appendChild(li)});
+var i=0,dwell=3200,t0=performance.now(),paused=false,hover=false,raf;
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce){root.classList.add('is-static');return}
+function show(n){var h=H[n];E.textContent=h[0];A.textContent=h[1];B.textContent=h[2];
+[].forEach.call(D.children,function(d,k){d.setAttribute('aria-current',k===n?'true':'false')});
+line.classList.remove('in');void line.offsetWidth;line.classList.add('in')}
+function go(n,user){i=(n+H.length)%H.length;show(i);t0=performance.now();if(user){paused=true;sync()}}
+function sync(){btn.setAttribute('aria-pressed',paused?'true':'false');btn.setAttribute('aria-label',paused?'Play headlines':'Pause headlines');root.classList.toggle('is-paused',paused)}
+btn.onclick=function(){paused=!paused;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell;sync()};
+root.addEventListener('mouseenter',function(){hover=true});root.addEventListener('mouseleave',function(){hover=false;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell});
+root.addEventListener('focusin',function(){hover=true});root.addEventListener('focusout',function(){hover=false});
+function tick(now){if(!paused&&!hover){var f=(now-t0)/dwell;if(f>=1){go(i+1);f=0}P.style.width=(f*100)+'%'}raf=requestAnimationFrame(tick)}
+show(0);raf=requestAnimationFrame(tick);
+})();
+</script>
+<p>Voice, tone, color, type, tokens, components and collateral for the Crooked redesign concept, in one place.</p><p class="cta"><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf" download>Download the brand book (PDF, 10 MB)</a><a class="ck-btn ck-btn-ghost" href="Crooked-Concept-Brand-Book.pdf" target="_blank" rel="noopener">Open in browser</a></p><p class="note">Unofficial design exploration. Not affiliated with, endorsed by or connected to Crooked Media. Names, show art and marks belong to their owners; the wordmark here is a typeset stand-in.</p></div></header>
 <nav class="toc"><div class="wrap"><a href="#overview">Overview</a><a href="#voice">Voice and tone</a><a href="#practice">Putting it into practice</a><a href="#midterms">Midterm messaging</a><a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#assets">Assets</a><a href="Crooked-Concept-Brand-Book.pdf" download>Download PDF</a></div></nav><main class="wrap">
 <section id="overview" class="prose"><span class="eyebrow">Overview</span><h2 class="sec">Overview</h2><p><strong>Less doom. More doing.</strong> This system covers the Crooked homepage redesign concept and everything made from it: the site, posters, socials, the newsletter header, stickers and merch. It is an unofficial design exploration, not affiliated with or endorsed by Crooked Media. Show names, show art and marks belong to their owners. Every piece carries the <code>UnofficialMark</code>.</p>
 <p>Read in this order: this page for the visual rules, <strong>Voice and tone</strong> for how it sounds, <strong>Putting it into practice</strong> for how a brief becomes a poster, a post or a product.</p>
@@ -327,7 +371,7 @@
 </tbody>
 </table>
 <h2>House lines</h2>
-<p>Lines already written in this voice, cleared for reuse across pieces: Less doom. More doing. · Doom is not a strategy. · Down, not out. · The news, minus the panic. · Listen. Show up. Organize. · Hope is a verb. · Phone bank &gt; fear bank. · Turn out, not off. · Ad-free. Fear-free. · Democracy is a group project. · Democracy is not a spectator sport. · Touch grass. Then protect it. · Ballot first. Brunch after. · Hot takes. Cool planet. · There is no planet B-side. · Everybody in. · Raise the floor. · Build it here.</p>
+<p>Lines already written in this voice, cleared for reuse across pieces: Less doom. More doing. · Doom is not a strategy. · Down, not out. · The news, minus the panic. · Listen. Show up. Organize. · Hope is a verb. · Phone bank &gt; fear bank. · Turn out, not off. · Ad-free. Fear-free. · Democracy is a group project. · Democracy is not a spectator sport. · Touch grass. Then protect it. · Ballot first. Brunch after. · Hot takes. Cool planet. · There is no planet B-side. · Everybody in. · Raise the floor. · Build it here. · Ad-free. Spin-free. · Listen like it matters. Vote like it does. · Politics, minus the doom. · Merch that shows up.</p>
 <h2>What the voice never does</h2>
 <ul>
 <li>Fearmonger, all-caps-shout or count down to doom.</li>
@@ -477,6 +521,36 @@
 <li>The polls close. We don't.</li>
 <li>Democracy is a group project. Your part is due Nov 3.</li>
 </ul>
+<h2>Round 2 lines</h2>
+<p>Built into <strong>MidtermSet</strong> (round 2 row) and rotating in <strong>HeadlineReel</strong>.</p>
+<p><strong>Cost of everything</strong>
+- Groceries cost a fortune. Voting's still free.
+- The price is wrong. <em>(Price tag: "Coming down" struck, "Still up".)</em>
+- Inflation isn't a vibe. It's a receipt.
+- Eggs are a luxury good now. Vote like it.
+- Tariffs: a tax with better PR.
+- "Prices are coming down," they said. So is our patience.</p>
+<p><strong>Check, please</strong>
+- Huge portions. Tiny priorities.
+- The menu's 20 pages long. None of them say "child care."
+- All that gold and still no plan for groceries.
+- Gilded Age? We've seen the sequel.</p>
+<p><strong>For sale</strong>
+- The art of the steal. <em>(Pair it with a sourced example, like the donor-funded ballroom.)</em>
+- The only thing trickling down is the bill.
+- Draining the swamp, one family business at a time.
+- Self-dealing isn't a jobs program.
+- Make America Grift Again. <em>(Parodies a trademarked slogan: editorial and social only, never merch.)</em></p>
+<p><strong>Working people</strong>
+- Billionaires don't clip coupons. <em>(You do. Vote like it.)</em>
+- Work hard. Pay more. That's not the deal.
+- The middle class isn't a talking point. It's your Tuesday.</p>
+<p><strong>Make it a short term</strong>
+- Don't let the midterms be mid.
+- Midterms: no extensions.
+- Doomscrolling isn't voting.
+- Pick a polling place, not a fight.
+- Your vote is the one receipt they can't lose.</p>
 <h2>Rules for this round</h2>
 <ul>
 <li><strong>Facts first, then the joke.</strong> Every number is sourced and dated in the piece's notes: the $4.20 gas figure is the AAA national average for Oct 30, 2026. When a number moves, the line moves with it.</li>
@@ -484,6 +558,7 @@
 <li><strong>Punch at conduct, not people.</strong> Mock the gold, the ballroom, the receipts, the self-dealing. No name-calling, no jokes about anyone's body, family or voters.</li>
 <li><strong>Grift, not crimes.</strong> Say grift, self-dealing, for sale, donor's choice. Don't call anything a crime unless a charge or conviction says so.</li>
 <li><strong>The Cheesecake Factory is the punchline, not the target.</strong> The chain and its diners are fine. The joke is the decor in the White House. No logos, no menu art, no trade dress.</li>
+<li><strong>Merch at the polls.</strong> Some states restrict political clothing at polling places. Never promote merch as something to wear to vote.</li>
 <li><strong>Every piece ends with an action</strong>: Vote Nov 3, make a plan, bring three friends, find a shift. Polling hours and rules vary by state; never print a single nationwide opening or closing time.</li>
 <li>Grounds follow the system: navy for cost of living, yellow for Check, please and turnout, red for who pays, chrome for grift, paper for receipts and other borrowed formats.</li>
 </ul></section>
@@ -571,6 +646,15 @@
 <li>Buttons on sky are ink, never yellow.</li>
 <li>Sky colors never leave Con placements. Use the official event art for the eagle and clouds.</li>
 <li>Keep ticket copy current: the concept's "Early-bird ends Oct 6" line is past due.</li>
+</ul></div></article><article class="cmp" id="c-HeadlineReel"><header><span class="eyebrow">Motion</span><h3>HeadlineReel</h3><p class=muted>Animated headline rotator</p></header><iframe src="components/headlinereel.html" title="HeadlineReel preview" style="height:420px"></iframe><div class="doc"><p>An animated rotator that cycles the campaign headlines, two beats at a time: the first beat in paper, the turn in yellow.</p>
+<p><strong>Provide:</strong> a list of headlines as <code>[eyebrow, first beat, second beat]</code>. Keep each beat to six words or fewer, and keep the brand line ("Less doom. More doing.") first.</p>
+<ul>
+<li>Motion follows the broadcast rules: each headline dwells 3.2s, the first beat slides up over 500ms on <code>cubic-bezier(.16, .8, .24, 1)</code>, and the yellow turn follows 180ms later. A yellow progress bar shows the dwell.</li>
+<li>Always ship the pause button and the dots. The reel also pauses on hover and while anything inside has keyboard focus. Picking a dot pauses it on that headline.</li>
+<li>Under <code>prefers-reduced-motion</code> nothing moves: the reel renders as a static list of every headline.</li>
+<li>Navy ground (<code>c-navy-900</code>) with the halo pattern; eyebrow in <code>c-slate-300</code> mono caps; second beat <code>c-yellow-500</code>. Never more than one reel per page, and it doesn't play under the Crooked Con band.</li>
+<li>The live screen reader region announces the current headline; the pause button's label switches between "Pause headlines" and "Play headlines".</li>
+<li>Current set: Less doom. More doing. · Huge portions. Tiny priorities. · The price is wrong. · Check, please. · Don't let the midterms be mid. · Billionaires don't clip coupons. · Drain the swamp? They put in a hot tub. · Groceries cost a fortune. Voting's still free. · Midterms Tuesday. Make it a short term. Retire the midterm lines after Nov 3.</li>
 </ul></div></article><article class="cmp" id="c-EmailBanner"><header><span class="eyebrow">Collateral</span><h3>EmailBanner</h3><p class=muted>1200×600 newsletter header</p></header><iframe src="components/emailbanner.html" title="EmailBanner preview" style="height:380px"></iframe><div class="doc"><p>Newsletter header, 1200×600 (2:1), shown at 50%.</p>
 <p><strong>Provide:</strong> the newsletter name and moment as the eyebrow, a two-beat count headline in yellow, one sentence that promises exactly what's inside, and a single object on the right (calendar, ticket, receipt) that carries the date or number.</p>
 <ul>
@@ -592,7 +676,7 @@
 <li>Mockups are flat garment silhouettes on paper (<code>c-slate-100</code>) with the unofficial mark in the corner. No models, no photo comps of real people.</li>
 <li>Group like items together when showing the line (store page, lookbook, line sheet): all tees, then outerwear, then headwear, then drinkware, then bags. Each tile names its round so the source stays traceable.</li>
 <li>Source images: asset groups <strong>Merch Round 2</strong>, <strong>Merch Lookbook</strong> and <strong>Everybody In Hats</strong>, rendered from the merch PDFs. The Everybody In 3:1 series banner is in <strong>Everybody In Hats</strong> for store and email headers.</li>
-</ul></div></article><article class="cmp" id="c-MidtermSet"><header><span class="eyebrow">Collateral</span><h3>MidtermSet</h3><p class=muted>Nov 2026 midterm set</p></header><iframe src="components/midtermset.html" title="MidtermSet preview" style="height:1040px"></iframe><div class="doc"><p>The Nov 2026 midterm push: one menu poster and six feed squares across the four lanes in <strong>Midterm messaging</strong>.</p>
+</ul></div></article><article class="cmp" id="c-MidtermSet"><header><span class="eyebrow">Collateral</span><h3>MidtermSet</h3><p class=muted>Nov 2026 midterm set</p></header><iframe src="components/midtermset.html" title="MidtermSet preview" style="height:1960px"></iframe><div class="doc"><p>The Nov 2026 midterm push: one menu poster and six feed squares across the four lanes in <strong>Midterm messaging</strong>.</p>
 <p><strong>Provide:</strong> a lane, one line from that lane, a ground from the system, and a footer action that names Nov 3 or a concrete next step.</p>
 <table>
 <thead>
@@ -645,6 +729,42 @@
 <td>Turnout</td>
 <td>Yellow</td>
 <td>None</td>
+</tr>
+<tr>
+<td>The price is wrong.</td>
+<td>Cost of everything</td>
+<td>Navy poster</td>
+<td>Price tag: "Coming down" struck in red, "Still up" in red 700</td>
+</tr>
+<tr>
+<td>Huge portions. Tiny priorities.</td>
+<td>Gold-plated White House</td>
+<td>Navy</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Don't let the midterms be mid.</td>
+<td>Turnout</td>
+<td>Yellow</td>
+<td>None</td>
+</tr>
+<tr>
+<td>The menu's 20 pages. None say child care.</td>
+<td>Gold-plated White House</td>
+<td>Paper</td>
+<td>Short menu, child care "not on the menu"</td>
+</tr>
+<tr>
+<td>Billionaires don't clip coupons.</td>
+<td>Working people</td>
+<td>Red</td>
+<td>Display only</td>
+</tr>
+<tr>
+<td>The art of the steal.</td>
+<td>Grift</td>
+<td>Chrome</td>
+<td>Footer names the donor-funded ballroom</td>
 </tr>
 </tbody>
 </table>

@@ -78,7 +78,7 @@ Where the default voice sits on each axis (0 = left word, 100 = right word).
 
 ## House lines
 
-Lines already written in this voice, cleared for reuse across pieces: Less doom. More doing. · Doom is not a strategy. · Down, not out. · The news, minus the panic. · Listen. Show up. Organize. · Hope is a verb. · Phone bank > fear bank. · Turn out, not off. · Ad-free. Fear-free. · Democracy is a group project. · Democracy is not a spectator sport. · Touch grass. Then protect it. · Ballot first. Brunch after. · Hot takes. Cool planet. · There is no planet B-side. · Everybody in. · Raise the floor. · Build it here.
+Lines already written in this voice, cleared for reuse across pieces: Less doom. More doing. · Doom is not a strategy. · Down, not out. · The news, minus the panic. · Listen. Show up. Organize. · Hope is a verb. · Phone bank > fear bank. · Turn out, not off. · Ad-free. Fear-free. · Democracy is a group project. · Democracy is not a spectator sport. · Touch grass. Then protect it. · Ballot first. Brunch after. · Hot takes. Cool planet. · There is no planet B-side. · Everybody in. · Raise the floor. · Build it here. · Ad-free. Spin-free. · Listen like it matters. Vote like it does. · Politics, minus the doom. · Merch that shows up.
 
 ## What the voice never does
 

@@ -1,0 +1,24 @@
+.ck-reel{background:var(--c-navy-900);color:var(--c-slate-50);border-radius:var(--radius-2xl);padding:var(--space-8);position:relative;overflow:hidden}
+.ck-reel::after{content:"";position:absolute;right:-120px;bottom:-220px;width:460px;height:460px;border-radius:50%;background:repeating-radial-gradient(circle,rgba(255,212,59,.10) 0 2px,transparent 2px 22px);pointer-events:none}
+.ck-reel-stage{min-height:2.2em;position:relative;z-index:1;font-size:clamp(44px,8vw,112px)}
+.ck-reel-eyebrow{font:500 12px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--c-slate-300);margin:0 0 14px}
+.ck-reel-line{font:900 1em/.92 var(--font-display);text-transform:uppercase;margin:0;text-wrap:balance;min-height:1.84em}
+.ck-reel-line b{color:var(--c-yellow-500);font-weight:900}
+.ck-reel-line.in span{animation:ck-up 500ms cubic-bezier(.16,.8,.24,1) both}
+.ck-reel-line.in b{animation:ck-up 500ms cubic-bezier(.16,.8,.24,1) 180ms both}
+@keyframes ck-up{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
+.ck-reel-line span,.ck-reel-line b{display:inline-block}
+.ck-reel-bar{display:flex;align-items:center;gap:14px;margin-top:22px;position:relative;z-index:1}
+.ck-reel-pause{width:38px;height:38px;border-radius:50%;border:0;background:var(--c-yellow-500);color:var(--c-navy-900);display:grid;place-items:center;cursor:pointer;flex:none}
+.ck-reel-pause svg{width:14px;height:14px;fill:currentColor}.ck-reel-pause .g{display:none}
+.ck-reel.is-paused .ck-reel-pause .p{display:none}.ck-reel.is-paused .ck-reel-pause .g{display:block}
+.ck-reel-dots{display:flex;gap:6px;flex-wrap:wrap}
+.ck-reel-dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:var(--c-navy-400);cursor:pointer}
+.ck-reel-dots button[aria-current="true"]{background:var(--c-yellow-500)}
+.ck-reel-progress{flex:1;min-width:60px;height:4px;border-radius:2px;background:var(--c-navy-600);overflow:hidden}
+.ck-reel-progress i{display:block;height:100%;width:0;background:var(--c-yellow-500)}
+.ck-reel :focus-visible{outline:3px solid var(--c-yellow-500);outline-offset:2px;box-shadow:0 0 0 2px var(--c-navy-900)}
+.ck-reel-list{display:none;margin:0;padding:0;list-style:none;position:relative;z-index:1}
+.ck-reel.is-static .ck-reel-stage,.ck-reel.is-static .ck-reel-bar{display:none}
+.ck-reel.is-static .ck-reel-list{display:grid;gap:10px;font:900 clamp(28px,4vw,46px)/.95 var(--font-display);text-transform:uppercase}
+.ck-reel.is-static .ck-reel-list b{color:var(--c-yellow-500)}

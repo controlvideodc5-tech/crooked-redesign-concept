@@ -37,7 +37,7 @@ for name in sorted(os.listdir(SRC+'/components')):
     md=open(rd).read() if os.path.exists(rd) else ''
     md=re.sub(r'^# .*\n','',md)
     comps.append((name,meta,markdown.markdown(md,extensions=['tables'])))
-order=['Actions','Status','Media','Crooked Con','Collateral']
+order=['Actions','Status','Media','Crooked Con','Motion','Collateral']
 comps=[c for c in comps if c[0]!='Cover']
 comps.sort(key=lambda c:(order.index(c[1].get('group','Collateral')) if c[1].get('group') in order else 9))
 def md(path):
@@ -53,10 +53,11 @@ cmp=''.join(f'<article class="cmp" id="c-{n}"><header><span class="eyebrow">{htm
 groups=['Merch Round 2','Merch Lookbook','Everybody In Hats','Round 2 Posters']
 ast=''.join(f'<h2>{g}</h2><div class="ag">'+''.join(f'<a href="assets/{g}/{f}" target="_blank"><img src="assets/{g}/{f}" alt="{f[:-5].replace("-"," ")}"></a>' for f in sorted(os.listdir(f'{SRC}/assets/{g}')) if f.endswith('.webp'))+'</div>' for g in groups)
 nav=''.join(f'<a href="#{a}">{b}</a>' for a,b,_ in secs)+'<a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#assets">Assets</a><a href="Crooked-Concept-Brand-Book.pdf" download>Download PDF</a>'
+REEL=open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'reel.html')).read()
 page=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Crooked Concept Design System</title><meta name="robots" content="noindex">
-<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="site.css"></head><body>
-<header class="top"><div class="wrap"><span class="eyebrow">Crooked homepage concept · Design system</span><h1>Less doom.<br>More doing.</h1><p>Voice, tone, color, type, tokens, components and collateral for the Crooked redesign concept, in one place.</p><p class="cta"><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf" download>Download the brand book (PDF, 10 MB)</a><a class="ck-btn ck-btn-ghost" href="Crooked-Concept-Brand-Book.pdf" target="_blank" rel="noopener">Open in browser</a></p><p class="note">Unofficial design exploration. Not affiliated with, endorsed by or connected to Crooked Media. Names, show art and marks belong to their owners; the wordmark here is a typeset stand-in.</p></div></header>
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="bundle.css"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="reel.css"></head><body>
+<header class="top"><div class="wrap"><span class="eyebrow">Crooked homepage concept · Design system</span><h1 class="sr-only">Crooked Concept design system</h1>{REEL}<p>Voice, tone, color, type, tokens, components and collateral for the Crooked redesign concept, in one place.</p><p class="cta"><a class="ck-btn ck-btn-primary" href="Crooked-Concept-Brand-Book.pdf" download>Download the brand book (PDF, 10 MB)</a><a class="ck-btn ck-btn-ghost" href="Crooked-Concept-Brand-Book.pdf" target="_blank" rel="noopener">Open in browser</a></p><p class="note">Unofficial design exploration. Not affiliated with, endorsed by or connected to Crooked Media. Names, show art and marks belong to their owners; the wordmark here is a typeset stand-in.</p></div></header>
 <nav class="toc"><div class="wrap">{nav}</div></nav><main class="wrap">
 {''.join(f'<section id="{a}" class="prose"><span class="eyebrow">{b}</span><h2 class="sec">{b}</h2>{c}</section>' for a,b,c in secs)}
 <section id="tokens"><span class="eyebrow">Tokens</span><h2 class="sec">Tokens</h2><p class="muted">Source of truth: <a href="tokens.json">tokens.json</a>. Compiled CSS: <a href="tokens.css">tokens.css</a>. Component styles: <a href="bundle.css">bundle.css</a>.</p>{tok}</section>

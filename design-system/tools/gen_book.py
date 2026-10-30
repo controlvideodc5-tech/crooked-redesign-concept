@@ -13,7 +13,7 @@ sw=''.join(f'<div class="sw"><i style="background:{hexof(c,"light")}"></i><div><
 semrows=''.join(f'<tr><td><code>{c["name"]}</code></td><td><span class="dot" style="background:{hexof(c,"light")}"></span>{hexof(c,"light")}</td><td><span class="dot" style="background:{hexof(c,"dark")}"></span>{hexof(c,"dark")}</td><td>{html.escape(c["usage"])}</td></tr>' for c in sem)
 ty=''.join(f'<div class="ty"><code>{s["name"]} · {s["fontSize"]}/{s["lineHeight"]} · {s["fontWeight"]}</code><div class="{s["name"]}" style="font-size:min({s["fontSize"]},72px)">{html.escape(s.get("sample",""))}</div></div>' for g in t['type']['groups'] for s in g['styles'])
 def rows(f): return ''.join(f'<tr><td><code>{c["name"]}</code></td><td><code>{html.escape(c["value"])}</code></td><td>{html.escape(c.get("usage",""))}</td></tr>' for c in t[f]['tokens'])
-order=['Actions','Status','Media','Crooked Con','Collateral']
+order=['Actions','Status','Media','Crooked Con','Motion','Collateral']
 comps=[]
 for n in os.listdir(SRC+'/components'):
     p=f'{SRC}/components/{n}/preview.html'
