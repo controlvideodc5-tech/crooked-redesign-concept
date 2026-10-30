@@ -1,6 +1,6 @@
 # HatSeries
 
-Everybody In: six hats, one idea, plus a 3:1 series banner.
+Everybody In: six hats, one idea, shown as the 3:1 series banner. The individual hat mockups are in the asset group **Everybody In Hats**.
 
 **Provide:** one shared idea, one line per hat that restates it, a hat style per line (cap, trucker, beanie), and a twill or knit color with one embroidery or patch color.
 
