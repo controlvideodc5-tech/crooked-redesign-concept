@@ -13,12 +13,14 @@
 @keyframes ck-fade{from{opacity:0}to{opacity:1}}
 .ck-reel-line span,.ck-reel-line b{display:inline-block}
 .ck-reel-bar{display:flex;align-items:center;gap:14px;margin-top:22px;position:relative;z-index:1}
-.ck-reel-pause{width:38px;height:38px;border-radius:50%;border:0;background:var(--c-yellow-500);color:var(--c-navy-900);display:grid;place-items:center;cursor:pointer;flex:none}
+.ck-reel-pause{width:44px;height:44px;border-radius:50%;border:0;background:var(--c-yellow-500);color:var(--c-navy-900);display:grid;place-items:center;cursor:pointer;flex:none}
 .ck-reel-pause svg{width:14px;height:14px;fill:currentColor}.ck-reel-pause .g{display:none}
 .ck-reel.is-paused .ck-reel-pause .p{display:none}.ck-reel.is-paused .ck-reel-pause .g{display:block}
 .ck-reel-dots{display:flex;gap:6px;flex-wrap:wrap}
-.ck-reel-dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:var(--c-navy-400);cursor:pointer}
-.ck-reel-dots button[aria-current="true"]{background:var(--c-yellow-500)}
+.ck-reel-dots button{width:24px;height:24px;border:0;padding:0;background:none;cursor:pointer;display:grid;place-items:center}
+.ck-reel-dots button::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--c-navy-400)}
+.ck-reel-dots button[aria-current="true"]::after{background:var(--c-yellow-500)}
+.ck-reel-dots{gap:2px}
 .ck-reel-progress{flex:1;min-width:60px;height:4px;border-radius:2px;background:var(--c-navy-600);overflow:hidden}
 .ck-reel-progress i{display:block;height:100%;width:0;background:var(--c-yellow-500)}
 .ck-reel :focus-visible{outline:3px solid var(--c-yellow-500);outline-offset:2px;box-shadow:0 0 0 2px var(--c-navy-900)}
@@ -26,3 +28,11 @@
 .ck-reel.is-static .ck-reel-stage,.ck-reel.is-static .ck-reel-bar{display:none}
 .ck-reel.is-static .ck-reel-list{display:grid;gap:10px;font:900 clamp(28px,4vw,46px)/.95 var(--font-display);text-transform:uppercase}
 .ck-reel.is-static .ck-reel-list b{color:var(--c-yellow-500)}
+@media (max-width:700px){
+.ck-reel{padding:var(--space-6)}
+.ck-reel-stage{font-size:clamp(38px,11vw,64px)}
+.ck-reel-line{min-height:3.7em;display:flex;flex-direction:column;justify-content:flex-start}
+.ck-reel-line span,.ck-reel-line b{display:block}
+.ck-reel-bar{flex-wrap:wrap;gap:10px}
+.ck-reel-progress{flex-basis:100%;order:3}
+}
