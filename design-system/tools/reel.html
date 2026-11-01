@@ -1,0 +1,45 @@
+<div class="ck-reel" role="region" aria-roledescription="carousel" aria-label="Crooked headlines">
+<div class="ck-reel-stage" aria-live="polite">
+<p class="ck-reel-eyebrow" data-eyebrow>Less doom. More doing.</p>
+<h2 class="ck-reel-line"><span data-a>Less doom.</span> <b data-b>More doing.</b></h2>
+</div>
+<div class="ck-reel-bar">
+<button class="ck-reel-pause" type="button" aria-pressed="false" aria-label="Pause headlines"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="p" d="M4 2h3v12H4zM9 2h3v12H9z"/><path class="g" d="M4 2l10 6-10 6z"/></svg></button>
+<div class="ck-reel-dots" data-dots></div>
+<div class="ck-reel-progress"><i data-prog></i></div>
+</div>
+<ol class="ck-reel-list" data-list></ol>
+</div>
+<script>
+(function(){
+var H=[
+["Brand line","Less doom.","More doing."],
+["Gold-plated priorities","Huge portions.","Tiny priorities."],
+["Cost of everything","The price","is wrong."],
+["1600 Pennsylvania Ave","Check,","please."],
+["Nov 3 · Midterms","Don't let the midterms","be mid."],
+["Working people","Billionaires don't","clip coupons."],
+["Grift watch","Drain the swamp?","They put in a hot tub."],
+["Cost of everything","Groceries cost a fortune.","Voting's still free."],
+["Nov 3 · Midterms","Midterms Tuesday.","Make it a short term."]];
+var root=document.currentScript.previousElementSibling, A=root.querySelector('[data-a]'), B=root.querySelector('[data-b]'),
+E=root.querySelector('[data-eyebrow]'), P=root.querySelector('[data-prog]'), D=root.querySelector('[data-dots]'),
+L=root.querySelector('[data-list]'), btn=root.querySelector('.ck-reel-pause'), line=root.querySelector('.ck-reel-line');
+H.forEach(function(h,i){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Headline '+(i+1));d.onclick=function(){go(i,true)};D.appendChild(d);
+var li=document.createElement('li');li.innerHTML='<span>'+h[1]+'</span> <b>'+h[2]+'</b>';L.appendChild(li)});
+var i=0,dwell=6500,FADE=650,busy=false,stage=root.querySelector('.ck-reel-stage'),t0=performance.now(),paused=false,hover=false,raf;
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce){root.classList.add('is-static');return}
+function paint(n){var h=H[n];E.textContent=h[0];A.textContent=h[1];B.textContent=h[2];
+[].forEach.call(D.children,function(d,k){d.setAttribute('aria-current',k===n?'true':'false')});
+stage.classList.remove('out');line.classList.remove('in');stage.classList.remove('in');void line.offsetWidth;line.classList.add('in');stage.classList.add('in')}
+function show(n,first){if(first){paint(n);return}busy=true;stage.classList.add('out');setTimeout(function(){paint(n);busy=false;t0=performance.now()},FADE)}
+function go(n,user){i=(n+H.length)%H.length;show(i);t0=performance.now()+FADE;if(user){paused=true;sync()}}
+function sync(){btn.setAttribute('aria-pressed',paused?'true':'false');btn.setAttribute('aria-label',paused?'Play headlines':'Pause headlines');root.classList.toggle('is-paused',paused)}
+btn.onclick=function(){paused=!paused;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell;sync()};
+root.addEventListener('mouseenter',function(){hover=true});root.addEventListener('mouseleave',function(){hover=false;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell});
+root.addEventListener('focusin',function(){hover=true});root.addEventListener('focusout',function(){hover=false});
+function tick(now){if(!paused&&!hover&&!busy){var f=Math.max(0,(now-t0)/dwell);if(f>=1){go(i+1);f=0}P.style.width=(f*100)+'%'}raf=requestAnimationFrame(tick)}
+show(0,true);raf=requestAnimationFrame(tick);
+})();
+</script>

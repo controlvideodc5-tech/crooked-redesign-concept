@@ -1,0 +1,81 @@
+<!-- @dsCard group="Motion" height=420 subtitle="Animated headline rotator" -->
+<!doctype html>
+<html lang="en">
+<head><link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="../bundle.css"><meta charset="utf-8"><title>HeadlineReel</title><style>
+.ck-reel{background:var(--c-navy-900);color:var(--c-slate-50);border-radius:var(--radius-2xl);padding:var(--space-8);position:relative;overflow:hidden}
+.ck-reel::after{content:"";position:absolute;right:-120px;bottom:-220px;width:460px;height:460px;border-radius:50%;background:repeating-radial-gradient(circle,rgba(255,212,59,.10) 0 2px,transparent 2px 22px);pointer-events:none}
+.ck-reel-stage{min-height:2.2em;position:relative;z-index:1;font-size:clamp(44px,8vw,112px)}
+.ck-reel-eyebrow{font:500 12px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--c-slate-300);margin:0 0 14px}
+.ck-reel-line{font:900 1em/.92 var(--font-display);text-transform:uppercase;margin:0;text-wrap:balance;min-height:1.84em}
+.ck-reel-line b{color:var(--c-yellow-500);font-weight:900}
+.ck-reel-line span,.ck-reel-line b,.ck-reel-eyebrow{transition:opacity 600ms ease,transform 600ms ease}
+.ck-reel-line.in span{animation:ck-in 1000ms cubic-bezier(.16,.8,.24,1) both}
+.ck-reel-line.in b{animation:ck-in 1000ms cubic-bezier(.16,.8,.24,1) 700ms both}
+.ck-reel-stage.in .ck-reel-eyebrow{animation:ck-fade 800ms ease both}
+.ck-reel-stage.out .ck-reel-eyebrow,.ck-reel-stage.out .ck-reel-line span,.ck-reel-stage.out .ck-reel-line b{opacity:0;transform:translateY(-.12em)}
+@keyframes ck-in{from{opacity:0;transform:translateY(.25em)}to{opacity:1;transform:none}}
+@keyframes ck-fade{from{opacity:0}to{opacity:1}}
+.ck-reel-line span,.ck-reel-line b{display:inline-block}
+.ck-reel-bar{display:flex;align-items:center;gap:14px;margin-top:22px;position:relative;z-index:1}
+.ck-reel-pause{width:38px;height:38px;border-radius:50%;border:0;background:var(--c-yellow-500);color:var(--c-navy-900);display:grid;place-items:center;cursor:pointer;flex:none}
+.ck-reel-pause svg{width:14px;height:14px;fill:currentColor}.ck-reel-pause .g{display:none}
+.ck-reel.is-paused .ck-reel-pause .p{display:none}.ck-reel.is-paused .ck-reel-pause .g{display:block}
+.ck-reel-dots{display:flex;gap:6px;flex-wrap:wrap}
+.ck-reel-dots button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:var(--c-navy-400);cursor:pointer}
+.ck-reel-dots button[aria-current="true"]{background:var(--c-yellow-500)}
+.ck-reel-progress{flex:1;min-width:60px;height:4px;border-radius:2px;background:var(--c-navy-600);overflow:hidden}
+.ck-reel-progress i{display:block;height:100%;width:0;background:var(--c-yellow-500)}
+.ck-reel :focus-visible{outline:3px solid var(--c-yellow-500);outline-offset:2px;box-shadow:0 0 0 2px var(--c-navy-900)}
+.ck-reel-list{display:none;margin:0;padding:0;list-style:none;position:relative;z-index:1}
+.ck-reel.is-static .ck-reel-stage,.ck-reel.is-static .ck-reel-bar{display:none}
+.ck-reel.is-static .ck-reel-list{display:grid;gap:10px;font:900 clamp(28px,4vw,46px)/.95 var(--font-display);text-transform:uppercase}
+.ck-reel.is-static .ck-reel-list b{color:var(--c-yellow-500)}
+body{margin:0;padding:var(--space-6);background:var(--bg-page)}</style></head>
+<body>
+<div class="ck-reel" role="region" aria-roledescription="carousel" aria-label="Crooked headlines">
+<div class="ck-reel-stage" aria-live="polite">
+<p class="ck-reel-eyebrow" data-eyebrow>Less doom. More doing.</p>
+<h2 class="ck-reel-line"><span data-a>Less doom.</span> <b data-b>More doing.</b></h2>
+</div>
+<div class="ck-reel-bar">
+<button class="ck-reel-pause" type="button" aria-pressed="false" aria-label="Pause headlines"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="p" d="M4 2h3v12H4zM9 2h3v12H9z"/><path class="g" d="M4 2l10 6-10 6z"/></svg></button>
+<div class="ck-reel-dots" data-dots></div>
+<div class="ck-reel-progress"><i data-prog></i></div>
+</div>
+<ol class="ck-reel-list" data-list></ol>
+</div>
+<script>
+(function(){
+var H=[
+["Brand line","Less doom.","More doing."],
+["Gold-plated priorities","Huge portions.","Tiny priorities."],
+["Cost of everything","The price","is wrong."],
+["1600 Pennsylvania Ave","Check,","please."],
+["Nov 3 · Midterms","Don't let the midterms","be mid."],
+["Working people","Billionaires don't","clip coupons."],
+["Grift watch","Drain the swamp?","They put in a hot tub."],
+["Cost of everything","Groceries cost a fortune.","Voting's still free."],
+["Nov 3 · Midterms","Midterms Tuesday.","Make it a short term."]];
+var root=document.currentScript.previousElementSibling, A=root.querySelector('[data-a]'), B=root.querySelector('[data-b]'),
+E=root.querySelector('[data-eyebrow]'), P=root.querySelector('[data-prog]'), D=root.querySelector('[data-dots]'),
+L=root.querySelector('[data-list]'), btn=root.querySelector('.ck-reel-pause'), line=root.querySelector('.ck-reel-line');
+H.forEach(function(h,i){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Headline '+(i+1));d.onclick=function(){go(i,true)};D.appendChild(d);
+var li=document.createElement('li');li.innerHTML='<span>'+h[1]+'</span> <b>'+h[2]+'</b>';L.appendChild(li)});
+var i=0,dwell=6500,FADE=650,busy=false,stage=root.querySelector('.ck-reel-stage'),t0=performance.now(),paused=false,hover=false,raf;
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce){root.classList.add('is-static');return}
+function paint(n){var h=H[n];E.textContent=h[0];A.textContent=h[1];B.textContent=h[2];
+[].forEach.call(D.children,function(d,k){d.setAttribute('aria-current',k===n?'true':'false')});
+stage.classList.remove('out');line.classList.remove('in');stage.classList.remove('in');void line.offsetWidth;line.classList.add('in');stage.classList.add('in')}
+function show(n,first){if(first){paint(n);return}busy=true;stage.classList.add('out');setTimeout(function(){paint(n);busy=false;t0=performance.now()},FADE)}
+function go(n,user){i=(n+H.length)%H.length;show(i);t0=performance.now()+FADE;if(user){paused=true;sync()}}
+function sync(){btn.setAttribute('aria-pressed',paused?'true':'false');btn.setAttribute('aria-label',paused?'Play headlines':'Pause headlines');root.classList.toggle('is-paused',paused)}
+btn.onclick=function(){paused=!paused;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell;sync()};
+root.addEventListener('mouseenter',function(){hover=true});root.addEventListener('mouseleave',function(){hover=false;t0=performance.now()-(parseFloat(P.style.width)||0)/100*dwell});
+root.addEventListener('focusin',function(){hover=true});root.addEventListener('focusout',function(){hover=false});
+function tick(now){if(!paused&&!hover&&!busy){var f=Math.max(0,(now-t0)/dwell);if(f>=1){go(i+1);f=0}P.style.width=(f*100)+'%'}raf=requestAnimationFrame(tick)}
+show(0,true);raf=requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

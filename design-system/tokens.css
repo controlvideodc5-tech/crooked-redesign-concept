@@ -1,0 +1,135 @@
+/* Crooked Concept — generated from tokens.json */
+@font-face{font-family:'Big Shoulders Display';src:url(fonts/BigShouldersDisplay-Variable.ttf) format('truetype');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Public Sans';src:url(fonts/PublicSans-Variable.ttf) format('truetype');font-weight:100 900;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url(fonts/IBMPlexMono-Medium.ttf) format('truetype');font-weight:500;font-display:swap}
+:root{
+  --c-navy-950:#070F2A;
+  --c-navy-900:#0A1A44;
+  --c-navy-800:#0F1C45;
+  --c-navy-700:#14255A;
+  --c-navy-600:#1C2F66;
+  --c-navy-500:#24356E;
+  --c-navy-400:#2C4180;
+  --c-navy-300:#3A4F8F;
+  --c-slate-600:#56618A;
+  --c-slate-400:#98A3C8;
+  --c-slate-300:#AEB8DC;
+  --c-slate-200:#D4DAF0;
+  --c-slate-150:#D5DBEA;
+  --c-slate-100:#EEF1F9;
+  --c-slate-50:#F2F4F9;
+  --c-yellow-500:#FFD43B;
+  --c-yellow-300:#FFE278;
+  --c-red-300:#FF6B6B;
+  --c-red-500:#E5383B;
+  --c-red-700:#B3261E;
+  --c-chrome-950:#0D0F14;
+  --c-chrome-900:#1A1D25;
+  --c-chrome-800:#2A2E39;
+  --c-chrome-500:#6B7080;
+  --c-chrome-400:#9A9FAD;
+  --c-sky-700:#1A5EF3;
+  --c-sky-600:#2C70F3;
+  --c-sky-500:#2A6FF3;
+  --c-sky-300:#5C97F1;
+  --c-sky-200:#4C8DEB;
+  --c-cream-100:#FFF5D6;
+  --c-butter-300:#F6EC8E;
+  --c-pink-300:#F7B6D2;
+  --c-white:#FFFFFF;
+  --bg-page:var(--c-slate-50);
+  --bg-surface:var(--c-white);
+  --bg-inverse:var(--c-navy-900);
+  --bg-inverse-raised:var(--c-navy-600);
+  --bg-chrome:var(--c-chrome-950);
+  --bg-chrome-raised:var(--c-chrome-900);
+  --fg-default:var(--c-navy-900);
+  --fg-muted:var(--c-slate-600);
+  --fg-on-inverse:var(--c-slate-50);
+  --fg-on-inverse-muted:var(--c-slate-300);
+  --fg-on-inverse-soft:var(--c-slate-200);
+  --fg-on-chrome-muted:var(--c-chrome-400);
+  --fg-on-accent:var(--c-navy-900);
+  --border-default:var(--c-slate-150);
+  --border-inverse:var(--c-navy-400);
+  --border-chrome:var(--c-chrome-800);
+  --border-strong:var(--c-navy-900);
+  --accent-default:var(--c-yellow-500);
+  --accent-hover:var(--c-yellow-300);
+  --status-live:var(--c-red-500);
+  --status-live-text:var(--c-red-700);
+  --focus-ring:var(--c-yellow-500);
+  --con-sky-top:var(--c-sky-700);
+  --con-sky-mid:var(--c-sky-600);
+  --con-sky-low:var(--c-sky-300);
+  --con-headline:var(--c-cream-100);
+  --con-display:var(--c-butter-300);
+  --con-clock-bg:var(--c-navy-900);
+  --con-clock-fg:var(--c-yellow-500);
+  --con-rule:var(--c-navy-900);
+  --button-primary-bg:var(--accent-default);
+  --button-primary-fg:var(--fg-on-accent);
+  --button-primary-bg-hover:var(--accent-hover);
+  --button-ink-bg:var(--c-navy-900);
+  --button-ink-fg:var(--accent-default);
+  --play-bg:var(--accent-default);
+  --play-fg:var(--fg-on-accent);
+  --chip-selected-bg:var(--bg-inverse);
+  --chip-selected-fg:var(--accent-default);
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-7:28px;
+  --space-8:32px;
+  --space-10:40px;
+  --space-12:48px;
+  --space-16:64px;
+  --radius-xs:4px;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:12px;
+  --radius-xl:14px;
+  --radius-2xl:16px;
+  --radius-pill:999px;
+  --shadow-card:0 18px 40px rgba(5, 10, 30, .35);
+  --shadow-lift:0 24px 60px rgba(5, 10, 30, .5);
+  --shadow-art:0 18px 40px rgba(0, 0, 0, .4);
+  --layout-max:1240px;
+  --layout-gutter:clamp(16px, 4vw, 48px);
+  --layout-nav-height:64px;
+  --play-size:44px;
+  --play-size-compact:38px;
+  --button-padding:10px 18px;
+  --f-size-display-xl:clamp(52px, 8vw, 112px);
+  --f-size-display-l:clamp(40px, 5vw, 64px);
+  --f-size-display-m:clamp(34px, 3.6vw, 46px);
+  --f-lh-display:.92;
+  --f-track-label:.08em;
+  --f-track-label-wide:.12em;
+  --z-header:20;
+  --z-dock:30;
+  --z-popover:40;
+  --z-panel:41;
+  --z-toast:50;
+  --font-display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --font-body:"Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg-page:var(--c-navy-950);--bg-surface:var(--c-navy-800);--bg-inverse-raised:var(--c-navy-700);--fg-default:var(--c-slate-100);--fg-muted:var(--c-slate-400);--border-default:var(--c-navy-500);--border-strong:var(--c-slate-300);--status-live-text:var(--c-red-300);--chip-selected-bg:var(--c-slate-100);--chip-selected-fg:var(--c-navy-900);color-scheme:dark}}
+:root[data-theme="dark"]{--bg-page:var(--c-navy-950);--bg-surface:var(--c-navy-800);--bg-inverse-raised:var(--c-navy-700);--fg-default:var(--c-slate-100);--fg-muted:var(--c-slate-400);--border-default:var(--c-navy-500);--border-strong:var(--c-slate-300);--status-live-text:var(--c-red-300);--chip-selected-bg:var(--c-slate-100);--chip-selected-fg:var(--c-navy-900);color-scheme:dark}
+.display-xl{font-family:var(--font-display);font-size:112px;line-height:0.92;font-weight:900;letter-spacing:0.005em;text-transform:uppercase;}
+.display-l{font-family:var(--font-display);font-size:64px;line-height:0.92;font-weight:900;}
+.display-m{font-family:var(--font-display);font-size:46px;line-height:0.92;font-weight:900;}
+.display-s{font-family:var(--font-display);font-size:28px;line-height:0.92;font-weight:900;}
+.display-poster{font-family:var(--font-display);font-size:220px;line-height:0.86;font-weight:900;}
+.lede{font-family:var(--font-body);font-size:19px;line-height:1.55;font-weight:400;}
+.title{font-family:var(--font-body);font-size:20px;line-height:1.25;font-weight:700;}
+.body{font-family:var(--font-body);font-size:16px;line-height:1.55;font-weight:400;}
+.body-s{font-family:var(--font-body);font-size:14px;line-height:1.5;font-weight:400;}
+.button{font-family:var(--font-body);font-size:15px;line-height:1.2;font-weight:700;}
+.eyebrow{font-family:var(--font-mono);font-size:12px;line-height:1;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;}
+.label-s{font-family:var(--font-mono);font-size:11px;line-height:1;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;}
