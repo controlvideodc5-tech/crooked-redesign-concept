@@ -16,6 +16,7 @@ SRC=sys.argv[1]; OUT=sys.argv[2]
 shutil.rmtree(OUT,ignore_errors=True); os.makedirs(OUT+'/components'); 
 shutil.copytree(SRC+'/fonts',OUT+'/fonts'); shutil.copytree(SRC+'/assets',OUT+'/assets',ignore=shutil.ignore_patterns('README.md'))
 shutil.copy(SRC+'/components/bundle.css',OUT+'/bundle.css')
+for _f in ['site.css','reel.css','site.js','netlify.toml']: shutil.copy(_f,OUT+'/'+_f)
 t=json.load(open(SRC+'/tokens.json'))
 def v(c,th):
     x=c['value'][th] if isinstance(c['value'],dict) else c['value']
