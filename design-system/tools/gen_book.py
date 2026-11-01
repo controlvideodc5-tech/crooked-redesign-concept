@@ -30,7 +30,7 @@ def vis(n):
         return '<div class="merchbook">'+h[h.index('<style>'):h.index('</style>')+8]+body+'</div>'
     return f'<img src="shots/{n}.jpg" alt="{n}">'
 cmp=''.join(f'<section class="cmp"><span class="eyebrow">Components · {g}</span><h2>{n}</h2><div class="doc">{d}</div>{vis(n)}</section>' if n=='MerchLine' else f'<section class="cmp"><span class="eyebrow">Components · {g}</span><h2>{n}</h2><img src="shots/{n}.jpg" alt="{n}"><div class="doc">{d}</div></section>' for _,n,g,d in comps)
-groups=['Merch Round 2','Merch Lookbook','Everybody In Hats','Round 2 Posters']
+groups=['Merch Round 2','Merch Lookbook','Everybody In Hats','Let Them Eat','Round 2 Posters']
 ast=''.join(f'<section class="gal"><span class="eyebrow">Concept collateral</span><h2>{g}</h2><div class="ag">'+''.join(f'<img src="site/assets/{g}/{f}">' for f in sorted(os.listdir(f'{SRC}/assets/{g}')) if f.endswith('.webp'))+'</div></section>' for g in groups)
 toc=''.join(f'<li><span>{i+1:02d}</span>{a}<em>{b}</em></li>' for i,(a,b,_) in enumerate(secs))+'<li><span>05</span>Tokens<em>Color, type, space, shape</em></li><li><span>06</span>Components<em>UI and collateral, with rules</em></li><li><span>07</span>Concept collateral<em>Posters, merch and hats from the rounds</em></li>'
 doc=f'''<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><title>Crooked Concept Brand Book</title>
