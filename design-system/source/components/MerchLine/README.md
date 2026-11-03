@@ -1,6 +1,6 @@
 # MerchLine
 
-The whole merch line in one place: 34 products from Merch Round 2, the lookbook, the Everybody In hats and the Let Them Eat pair, sorted by product type (tees, hoodies and crewnecks, headwear, mugs, bags).
+The whole merch line in one place: 38 products from Merch Round 2, the lookbook, the Everybody In hats, the Let Them Eat pair and the DC Small Business tees, sorted by product type (tees, hoodies and crewnecks, headwear, mugs, bags).
 
 **Provide:** the line (a house line from the voice section), the garment and its color, the print method and ink colors, and a placement. Caption every mockup as **PRODUCT NAME** in display caps over a mono spec line ("Navy twill · yellow embroidery").
 
@@ -10,4 +10,10 @@ The whole merch line in one place: 34 products from Merch Round 2, the lookbook,
 - Mockups are flat garment silhouettes on paper (`c-slate-100`) with the unofficial mark in the corner. No models, no photo comps of real people.
 - Group like items together when showing the line (store page, lookbook, line sheet): all tees, then outerwear, then headwear, then drinkware, then bags. Each tile names its round so the source stays traceable.
 - **Let Them Eat** (Nov 2026): the Marie Antoinette riff on tone-deaf leadership. A pink Let Them Eat Cheesecake tote ("Out of touch since 1789") and a navy Simply Afford It mug with a gilt rim and a receipt (1 slice cake $9.00, 1 dozen eggs $7.49, total: Sorry?). Aim it at the people in charge, never at a named person; the design canvas is the Let Them Eat Merch artifact.
-- Source images: asset groups **Merch Round 2**, **Merch Lookbook**, **Everybody In Hats** and **Let Them Eat**, rendered from the merch PDFs. The Everybody In 3:1 series banner is in **Everybody In Hats** for store and email headers.
+- **DC Small Business** (Nov 2026): four fake contractor brands, each named for a Washington landmark project. *Big Balls Demolition & Remodel* (the East Wing, "Tear it down. Build it better."), *Hard Letters Signage Co.* (the Kennedy Center facade, "Banners · Signs · Wraps"), *Lincoln Blue Pool & Paint* (the Reflecting Pool, "Keep it blue.") and *Triumphal Erection Co.* (the arch and the regilded bridge horses, "Raise the standard.").
+  - Play it straight. The workwear edition is the product: a left-chest logo, a clean back print, one or two inks, a sincere trade tagline. The joke is only the company name, so it reads as a real company shirt until the second look.
+  - Show each shirt beside its landmark. Presentations pair the front and back with a flat illustration of the place it references, so the joke lands before anyone reads the name. No photos.
+  - The cartoon novelty edition (mascots, ribbons, innuendo service lines) is a limited drop, not the line.
+  - Aim at the projects, never at a named person: no names, faces or likenesses. Keep every factual premise true (dates in the presentation captions are checked).
+  - Print notes: Triumphal gold is metallic ink, not a flat yellow. Hi-vis yellow and safety orange are workwear blanks; check the vendor's exact shade.
+- Source images: asset groups **Merch Round 2**, **Merch Lookbook**, **Everybody In Hats**, **Let Them Eat** and **DC Small Business**, rendered from the merch PDFs. The Everybody In 3:1 series banner is in **Everybody In Hats** for store and email headers.

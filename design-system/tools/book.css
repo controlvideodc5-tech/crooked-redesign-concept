@@ -45,3 +45,7 @@ th{font:500 7.5pt/1 var(--font-mono);letter-spacing:.08em;text-transform:upperca
 .merchbook .mg b{font-size:10pt}.merchbook .mg span{font-size:7pt}.merchbook .mg em{font-size:6.5pt}
 .merchbook .mg figcaption{padding:5px 7px 7px}
 .merchbook .cat{display:block;break-inside:avoid;page-break-inside:avoid}.merchbook .cat:first-child{break-before:page}
+
+.dcs .lede{font-size:12pt;max-width:40em}
+.dcs img{width:100%;height:auto;border:1px solid var(--c-slate-150);border-radius:8px;display:block;margin:10px 0 16px;break-inside:avoid}
+.dcs .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dcs .grid2 img{margin:0}
